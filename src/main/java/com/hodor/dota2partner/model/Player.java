@@ -1,12 +1,14 @@
 package com.hodor.dota2partner.model;
 
 import lombok.*;
+import org.hibernate.annotations.SQLDelete;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,6 +21,7 @@ import java.util.List;
 @Setter
 @ToString
 @Table(name = "players")
+@SQLDelete(sql = "UPDATE players SET deleted = true WHERE player_id=?") //safe delete
 public class Player implements UserDetails {
 
     @Id
@@ -33,11 +36,10 @@ public class Player implements UserDetails {
     @Column(name = "steam_id_32")
     private Long steamId32;
 
+    @NotEmpty(message = "Email is mandatory")
+    @Email(message = "Email is not valid")
     @Column(name = "e_mail")
-    /*@Pattern(regexp = "^(?=.*?[@])$",
-            message = "E-Mail must contain @")*/
-    @NotBlank(message = "E-Mail is mandatory")
-    private String eMail;
+    private String email;
 
     @Column(name = "persona_name")
     private String personaName;
