@@ -4,16 +4,20 @@ create table players
     steam_id_64   bigint                          null,
     steam_id_32   bigint                          null,
     persona_name  varchar(50)                     null,
+    e_mail        varchar(125)                    not null,
     password      varchar(100)                    null,
     avatar        varchar(100)                    null,
-    avatar_medium varchar(100)                    null,
     avatar_full   varchar(100)                    null,
+    avatar_medium varchar(100)                    null,
     profile_url   varchar(100)                    null,
-    country_code  varchar(5)                      null,
     creation_date datetime                        null,
+    country_code  varchar(5)                      null,
     contributor   tinyint(1)  default 0           null,
+    verified      tinyint(1)  default 0           null,
     deleted       tinyint(1)  default 0           null,
     role          varchar(15) default 'ROLE_USER' null,
+    constraint players_e_mail_uindex
+        unique (e_mail),
     constraint players_id_uindex
         unique (player_id),
     constraint players_steam_id_32_uindex
@@ -42,4 +46,3 @@ create index player_friend_fk
 
 create index player_friend_fk1
     on friend (friend_player_id);
-
