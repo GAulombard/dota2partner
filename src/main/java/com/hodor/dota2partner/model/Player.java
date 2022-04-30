@@ -68,6 +68,9 @@ public class Player implements UserDetails {
     @Column(name = "creation_date")
     private LocalDateTime creationDate;
 
+    @Column(name = "last_login")
+    private LocalDateTime lastLogin;
+
     @ManyToMany
     @JoinTable(
             name = "friend",
@@ -83,6 +86,9 @@ public class Player implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "player_id")
     )
     private List<Player> friendListOf;
+
+    @Column(name = "dota_plus")
+    private boolean dotaPlus;
 
     @Column(name = "contributor")
     private boolean contributor;

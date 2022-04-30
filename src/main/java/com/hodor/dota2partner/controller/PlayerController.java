@@ -1,5 +1,8 @@
 package com.hodor.dota2partner.controller;
 
+import com.hodor.dota2partner.exception.EMailAlreadyExistsException;
+import com.hodor.dota2partner.exception.OpenDotaApiException;
+import com.hodor.dota2partner.exception.SteamIdNotFoundException;
 import com.hodor.dota2partner.model.Player;
 import com.hodor.dota2partner.service.PlayerService;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +18,7 @@ import javax.validation.Valid;
 @Slf4j
 @RequestMapping("/player")
 public class PlayerController {
-
+    //TODO: swagger doc
     private PlayerService playerService;
 
     @Autowired
@@ -24,11 +27,9 @@ public class PlayerController {
     }
 
     @PostMapping("/validate")
-    @Transactional
-    public String createNewPlayer(@AuthenticationPrincipal Player principal, @Valid @RequestBody Player player, BindingResult bindingResult){
+    //@ApiOperation(value = "This URI allows to save a new user in the database")
+    public String createNewPlayer(@AuthenticationPrincipal Player principal, @Valid @RequestBody Player player, BindingResult bindingResult) throws SteamIdNotFoundException, OpenDotaApiException, EMailAlreadyExistsException {
         log.info("HTTP POST Request received at /player/validate");
-
-        log.info(""+player.toString());
 
         if(bindingResult.hasErrors()) {
             log.error("binding result error"+bindingResult.getFieldError());
