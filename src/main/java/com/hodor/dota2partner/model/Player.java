@@ -112,7 +112,7 @@ public class Player implements UserDetails {
     private int loss;
 
     @Column(name = "win_rate")
-    private double winRate;
+    private float winRate;
 
 
     @Override

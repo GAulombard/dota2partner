@@ -68,7 +68,7 @@ public class PlayerServiceImpl implements PlayerService {
             player.setWin(winLossCount.path("win").asInt());
             player.setLoss(winLossCount.path("lose").asInt());
             winRate = ((double)player.getWin()/(double)(player.getWin()+ player.getLoss()))*100;
-            player.setWinRate(Math.round(winRate*100)/100);
+            player.setWinRate((float)Math.round(winRate*100)/100);
             //TODO: change this, depending of the country
             player.setCreationDate(LocalDateTime.now(Clock.systemUTC()));
             player.setLastLogin(LocalDateTime.now(Clock.systemUTC()));
