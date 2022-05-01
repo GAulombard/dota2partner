@@ -8,16 +8,19 @@ import com.hodor.dota2partner.service.PlayerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
-@RestController
+@Controller
 @Slf4j
 @RequestMapping("/player")
 public class PlayerController {
+
     //TODO: swagger doc
     private PlayerService playerService;
 
@@ -39,5 +42,13 @@ public class PlayerController {
         playerService.createPlayer(player);
 
         return "new player created";
+    }
+
+    @RolesAllowed({"USER", "ADMIN"})
+    @GetMapping("/home")
+    public String getHome(@AuthenticationPrincipal Player principal) {
+        log.info("HTTP POST Request received at /player/home - "+principal.getPersonaName());
+
+        return "/player/home";
     }
 }
