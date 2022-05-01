@@ -30,6 +30,6 @@ public class MyUserDetailsServiceImpl implements UserDetailsService {
         log.info("Process to authentication - email: "+email);
         Optional<Player> user = playerRepository.findPlayerByEmail(email);
 
-        return user.orElseThrow(() -> new PlayerEmailNotFoundException("Player: "+email+" not found"));
+        return user.orElseThrow(() -> new PlayerEmailNotFoundException("Player email: "+email+" not found - authentication failed"));
     }
 }
