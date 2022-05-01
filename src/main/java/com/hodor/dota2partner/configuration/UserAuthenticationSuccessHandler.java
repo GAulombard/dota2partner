@@ -1,7 +1,6 @@
 package com.hodor.dota2partner.configuration;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -18,11 +17,10 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
-
-    private static Logger LOGGER = LoggerFactory.getLogger(UserAuthenticationSuccessHandler.class);
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
@@ -47,12 +45,12 @@ public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHa
     protected String determineTargetUrl(final Authentication authentication) {//return the mapped URL for the first role the user has
 
         Map<String, String> roleTargetUrlMap = new HashMap<>();
-        roleTargetUrlMap.put("ROLE_USER", "/");
-        roleTargetUrlMap.put("ROLE_ADMIN", "/");
+        roleTargetUrlMap.put("ROLE_USER", "/player/profile");
+        roleTargetUrlMap.put("ROLE_ADMIN", "/player/profile");
 
         final Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 
-        LOGGER.info("Authentication succeed: "+authorities);
+        log.info("Authentication succeed: "+authorities);
 
         for (final GrantedAuthority grantedAuthority : authorities) {
             String authorityName = grantedAuthority.getAuthority();
