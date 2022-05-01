@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.text.DecimalFormat;
 import java.time.Clock;
 import java.time.LocalDateTime;
 
@@ -26,7 +27,7 @@ public class PlayerServiceImpl implements PlayerService {
     private PasswordEncoder passwordEncoder;
     private OpenDotaApiService openDotaApiService;
     private String openDotaApiUrl = "https://api.opendota.com/api";
-
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     @Autowired
     public PlayerServiceImpl(PlayerRepository playerRepository, PasswordEncoder passwordEncoder, OpenDotaApiService openDotaApiService) {
@@ -44,6 +45,8 @@ public class PlayerServiceImpl implements PlayerService {
         String profile = "profile";
 
         ObjectNode dataPlayer = openDotaApiService.getPlayerData(steamId32);
+        ObjectNode winLossCount = openDotaApiService.getWinLossCount(steamId32);
+        double winRate;
 
         if(dataPlayer.path("profile").path("steamid").asText().isEmpty()) {
 
@@ -62,6 +65,10 @@ public class PlayerServiceImpl implements PlayerService {
             player.setProfileUrl(dataPlayer.path(profile).path("profileurl").asText());
             player.setCountryCode(dataPlayer.path(profile).path("loccountrycode").asText());
             player.setRankTier(dataPlayer.path("rank_tier").asInt());
+            player.setWin(winLossCount.path("win").asInt());
+            player.setLoss(winLossCount.path("lose").asInt());
+            winRate = ((double)player.getWin()/(double)(player.getWin()+ player.getLoss()))*100;
+            player.setWinRate(Math.round(winRate*100)/100);
             //TODO: change this, depending of the country
             player.setCreationDate(LocalDateTime.now(Clock.systemUTC()));
             player.setLastLogin(LocalDateTime.now(Clock.systemUTC()));

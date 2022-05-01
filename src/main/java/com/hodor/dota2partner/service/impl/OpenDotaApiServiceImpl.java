@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.text.DecimalFormat;
+
 @Service
 @Slf4j
 public class OpenDotaApiServiceImpl implements OpenDotaApiService {
@@ -40,7 +42,7 @@ public class OpenDotaApiServiceImpl implements OpenDotaApiService {
         try {
 
             RestTemplate restTemplate = new RestTemplate();
-            String callUrl = openDotaApiUrl +"/"+steamId32+"/wl";
+            String callUrl = openDotaApiUrl +"/players/"+steamId32+"/wl";
 
             log.info("Calling OpenDota Api : "+callUrl);
             ResponseEntity<ObjectNode> response = restTemplate.getForEntity(callUrl,ObjectNode.class);

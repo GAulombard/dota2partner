@@ -105,6 +105,15 @@ public class Player implements UserDetails {
     @Column(name = "role")
     private String role;
 
+    @Column(name = "win")
+    private int win;
+
+    @Column(name = "loss")
+    private int loss;
+
+    @Column(name = "win_rate")
+    private double winRate;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

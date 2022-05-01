@@ -19,6 +19,9 @@ create table players
     profile_url   varchar(200) null,
     creation_date datetime     null,
     rank_tier     int          null,
+    win           int          null,
+    loss          int          null,
+    win_rate      double       null,
     constraint players_e_mail_uindex
         unique (e_mail),
     constraint players_id_uindex

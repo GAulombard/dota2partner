@@ -18,7 +18,9 @@
     <div class="row">
         <div class="col-sm-3 well">
             <div class="well">
-                <p><td th:text=${player.personaName}></p>
+                <p style="font-size:28px"><td th:text=${player.personaName}></p>
+                <p>Win: <td th:text=${player.win}></td> Loss: <td th:text=${player.loss}></td></p>
+                <p>WinRate: <td th:text=${player.winRate}></td>%</p>
                 <img th:src="${player.avatarFull}" class="img-circle" height="125" width="125" alt="Avatar">
             </div>
             <div class="well">
