@@ -26,6 +26,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                                     "/css/**",
                                     "/player/validate",
                                     "/api/*",
+                                    "/login",
                                     "/index"
                             )
                             .permitAll();
@@ -34,6 +35,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
+                .loginPage("/login")
                 .successHandler(authenticationSuccessHandler())
                 .and()
                 .httpBasic()

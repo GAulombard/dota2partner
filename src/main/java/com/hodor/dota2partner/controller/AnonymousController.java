@@ -14,4 +14,11 @@ public class AnonymousController {
 
         return "index";
     }
+
+    @GetMapping({"/login"})
+    public String getLogin() {
+        log.info("HTTP GET request received at /login");
+
+        return "login";
+    }
 }

@@ -37,12 +37,12 @@ public class PlayerController {
 
         if(bindingResult.hasErrors()) {
             log.error("binding result error"+bindingResult.getFieldError());
-            return "binding result error"+bindingResult.getFieldError();
+            return "redirect:/player/validate";
         }
 
         playerService.createPlayer(player);
 
-        return "new player created";
+        return "redirect:/login";
     }
 
     @RolesAllowed({"USER", "ADMIN"})

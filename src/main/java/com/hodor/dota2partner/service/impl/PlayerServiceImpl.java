@@ -6,6 +6,7 @@ import com.hodor.dota2partner.exception.OpenDotaApiException;
 import com.hodor.dota2partner.exception.SteamIdNotFoundException;
 import com.hodor.dota2partner.model.Player;
 import com.hodor.dota2partner.repository.PlayerRepository;
+import com.hodor.dota2partner.service.OpenDotaApiService;
 import com.hodor.dota2partner.service.PlayerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +24,15 @@ public class PlayerServiceImpl implements PlayerService {
 
     private PlayerRepository playerRepository;
     private PasswordEncoder passwordEncoder;
+    private OpenDotaApiService openDotaApiService;
     private String openDotaApiUrl = "https://api.opendota.com/api";
 
 
     @Autowired
-    public PlayerServiceImpl(PlayerRepository playerRepository, PasswordEncoder passwordEncoder) {
+    public PlayerServiceImpl(PlayerRepository playerRepository, PasswordEncoder passwordEncoder, OpenDotaApiService openDotaApiService) {
         this.playerRepository = playerRepository;
         this.passwordEncoder = passwordEncoder;
+        this.openDotaApiService = openDotaApiService;
     }
 
     @Override
@@ -40,7 +43,7 @@ public class PlayerServiceImpl implements PlayerService {
         long steamId32 = player.getSteamId64() - 76561197960265728L;
         String profile = "profile";
 
-        ObjectNode dataPlayer = loadPlayerDataFromOpenDota(steamId32);
+        ObjectNode dataPlayer = openDotaApiService.getPlayerData(steamId32);
 
         if(dataPlayer.path("profile").path("steamid").asText().isEmpty()) {
 
@@ -72,24 +75,4 @@ public class PlayerServiceImpl implements PlayerService {
         }
     }
 
-    @Override
-    public ObjectNode loadPlayerDataFromOpenDota(Long steamId32) throws OpenDotaApiException {
-
-        try {
-
-            RestTemplate restTemplate = new RestTemplate();
-            String callUrl = openDotaApiUrl +"/players/"+steamId32;
-
-            log.info("Calling OpenDota Api : "+callUrl);
-            ResponseEntity<ObjectNode> response = restTemplate.getForEntity(callUrl,ObjectNode.class);
-            ObjectNode jsonObject = response.getBody();
-            log.info("OpenDota Api response : {}", jsonObject);
-
-            return jsonObject;
-
-        } catch (Exception e) {
-            log.error("Can't reach OpenDota Api");
-            throw new OpenDotaApiException("Can't reach OpenDota Api");
-        }
-    }
 }
