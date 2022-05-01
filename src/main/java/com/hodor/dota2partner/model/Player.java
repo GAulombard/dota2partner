@@ -50,6 +50,9 @@ public class Player implements UserDetails {
     @NotBlank(message = "Password is mandatory")
     private String password;
 
+    @Column(name = "rank_tier")
+    private int rankTier;
+
     @Column(name = "avatar")
     private String avatar;
 

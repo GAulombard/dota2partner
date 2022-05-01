@@ -58,6 +58,7 @@ public class PlayerServiceImpl implements PlayerService {
             player.setPersonaName(dataPlayer.path(profile).path("personaname").asText());
             player.setProfileUrl(dataPlayer.path(profile).path("profileurl").asText());
             player.setCountryCode(dataPlayer.path(profile).path("loccountrycode").asText());
+            player.setRankTier(dataPlayer.path("rank_tier").asInt());
             //TODO: change this, depending of the country
             player.setCreationDate(LocalDateTime.now(Clock.systemUTC()));
             player.setLastLogin(LocalDateTime.now(Clock.systemUTC()));

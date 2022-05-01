@@ -1,5 +1,12 @@
 create table players
 (
+    last_login    datetime     null,
+    country_code  varchar(5)   null,
+    dota_plus     tinyint(1)   null,
+    contributor   tinyint(1)   null,
+    verified      tinyint(1)   null,
+    deleted       tinyint(1)   null,
+    role          varchar(50)  null,
     player_id     bigint auto_increment,
     steam_id_64   bigint       null,
     steam_id_32   bigint       null,
@@ -11,13 +18,7 @@ create table players
     avatar_medium varchar(200) null,
     profile_url   varchar(200) null,
     creation_date datetime     null,
-    last_login    datetime     null,
-    country_code  varchar(5)   null,
-    dota_plus     tinyint(1)   null,
-    contributor   tinyint(1)   null,
-    verified      tinyint(1)   null,
-    deleted       tinyint(1)   null,
-    role          varchar(50)  null,
+    rank_tier     int          null,
     constraint players_e_mail_uindex
         unique (e_mail),
     constraint players_id_uindex
