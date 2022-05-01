@@ -38,6 +38,7 @@ public class PlayerServiceImpl implements PlayerService {
         if(playerRepository.existsByEmail(player.getEmail())) throw new EMailAlreadyExistsException("E-Mail "+player.getEmail()+" already exists");
 
         long steamId32 = player.getSteamId64() - 76561197960265728L;
+        String profile = "profile";
 
         ObjectNode dataPlayer = loadPlayerDataFromOpenDota(steamId32);
 
@@ -48,18 +49,19 @@ public class PlayerServiceImpl implements PlayerService {
 
         } else {
 
-            log.info("Service - Creating new player - steamId32: "+player.getSteamId32());
+            log.info("Service - Creating new player - steamId32: "+steamId32);
             player.setSteamId32(steamId32);
             player.setPassword(passwordEncoder.encode(player.getPassword()));
-            player.setAvatar(dataPlayer.path("profile").path("avatar").asText());
-            player.setAvatarFull(dataPlayer.path("profile").path("avatarfull").asText());
-            player.setAvatarMedium(dataPlayer.path("profile").path("avatarmedium").asText());
-            player.setPersonaName(dataPlayer.path("profile").path("personaname").asText());
-            player.setProfileUrl(dataPlayer.path("profile").path("profileurl").asText());
-            player.setCountryCode(dataPlayer.path("profile").path("loccountrycode").asText());
-            player.setCreationDate(LocalDateTime.now(Clock.systemUTC())); //TODO: change this, depending of the country
-            player.setLastLogin(LocalDateTime.now(Clock.systemUTC())); //TODO: change this, depending of the country
-            player.setDotaPlus(dataPlayer.path("profile").path("plus").asText().equals("true") ? true : false);
+            player.setAvatar(dataPlayer.path(profile).path("avatar").asText());
+            player.setAvatarFull(dataPlayer.path(profile).path("avatarfull").asText());
+            player.setAvatarMedium(dataPlayer.path(profile).path("avatarmedium").asText());
+            player.setPersonaName(dataPlayer.path(profile).path("personaname").asText());
+            player.setProfileUrl(dataPlayer.path(profile).path("profileurl").asText());
+            player.setCountryCode(dataPlayer.path(profile).path("loccountrycode").asText());
+            //TODO: change this, depending of the country
+            player.setCreationDate(LocalDateTime.now(Clock.systemUTC()));
+            player.setLastLogin(LocalDateTime.now(Clock.systemUTC()));
+            player.setDotaPlus(dataPlayer.path(profile).path("plus").asText().equals("true"));
             player.setContributor(false);
             player.setVerified(false);
             player.setRole("ROLE_USER");
