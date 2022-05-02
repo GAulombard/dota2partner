@@ -11,4 +11,5 @@ public interface PlayerService {
 
     void createPlayer(Player player) throws SteamIdNotFoundException, OpenDotaApiException, EMailAlreadyExistsException;
 
+    void refreshPlayerData(Long steamId32) throws OpenDotaApiException;
 }

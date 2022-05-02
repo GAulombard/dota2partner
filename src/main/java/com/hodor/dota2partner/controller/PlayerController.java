@@ -48,10 +48,21 @@ public class PlayerController {
     @RolesAllowed({"USER", "ADMIN"})
     @GetMapping("/home")
     public String getHome(@AuthenticationPrincipal Player principal, Model model) {
-        log.info("HTTP POST Request received at /player/home - "+principal.getPersonaName());
+        log.info("HTTP GET Request received at /player/home - " + principal.getPersonaName());
 
-        model.addAttribute("player",principal);
+        model.addAttribute("player", principal);
 
         return "/player/home";
     }
+
+    @RolesAllowed({"USER", "ADMIN"})
+    @GetMapping("/refresh-data")
+    public String refreshData(@AuthenticationPrincipal Player principal, Model model) throws OpenDotaApiException {
+        log.info("HTTP GET Request received at /player/refresh-data - " + principal.getPersonaName());
+
+        playerService.refreshPlayerData(principal.getSteamId32());
+
+        return "redirect:/player/home";
+    }
+
 }
