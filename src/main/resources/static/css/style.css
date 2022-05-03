@@ -1,5 +1,9 @@
+body {
+    background-color: #575757;
+}
+
 footer {
-    background-color: #555;
+    background-color: #404040;
     color: white;
     padding: 15px;
 }

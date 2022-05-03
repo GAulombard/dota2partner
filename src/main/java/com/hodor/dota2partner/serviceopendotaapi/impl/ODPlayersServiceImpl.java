@@ -25,7 +25,8 @@ public class ODPlayersServiceImpl implements ODPlayersService {
             log.info("Calling OpenDota Api : "+callUrl);
             ResponseEntity<ObjectNode> response = restTemplate.getForEntity(callUrl,ObjectNode.class);
             ObjectNode jsonObject = response.getBody();
-            log.info("OpenDota Api response : {}", jsonObject);
+            log.info("Data from OpenDota Api fetched");
+            log.debug("OpenDota Api response : {}", jsonObject);
 
             return jsonObject;
 
@@ -45,7 +46,8 @@ public class ODPlayersServiceImpl implements ODPlayersService {
             log.info("Calling OpenDota Api : "+callUrl);
             ResponseEntity<ObjectNode> response = restTemplate.getForEntity(callUrl,ObjectNode.class);
             ObjectNode jsonObject = response.getBody();
-            log.info("OpenDota Api response : {}", jsonObject);
+            log.info("Data from OpenDota Api fetched");
+            log.debug("OpenDota Api response : {}", jsonObject);
 
             return jsonObject;
 
@@ -65,7 +67,8 @@ public class ODPlayersServiceImpl implements ODPlayersService {
             log.info("Calling OpenDota Api : " + callUrl);
             ResponseEntity<ObjectNode> response = restTemplate.getForEntity(callUrl, ObjectNode.class);
             ObjectNode jsonObject = response.getBody();
-            log.info("OpenDota Api response : {}", jsonObject);
+            log.info("Data from OpenDota Api fetched");
+            log.debug("OpenDota Api response : {}", jsonObject);
 
             return jsonObject;
 
@@ -85,7 +88,8 @@ public class ODPlayersServiceImpl implements ODPlayersService {
             log.info("Calling OpenDota Api : " + callUrl);
             ResponseEntity<ObjectNode> response = restTemplate.getForEntity(callUrl, ObjectNode.class);
             ObjectNode jsonObject = response.getBody();
-            log.info("OpenDota Api response : {}", jsonObject);
+            log.info("Data from OpenDota Api fetched");
+            log.debug("OpenDota Api response : {}", jsonObject);
 
             return jsonObject;
 

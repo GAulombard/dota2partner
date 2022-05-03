@@ -17,4 +17,6 @@ public interface PlayerRepository extends JpaRepository<Player,Integer> {
     Optional<Player> findPlayerByEmail(String eMail);
 
     Player findPlayerBySteamId32(Long steamId32);
+
+    boolean existsBySteamId32(Long steamId32);
 }

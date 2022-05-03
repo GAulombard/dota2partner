@@ -21,11 +21,10 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests(authorize -> {
                     authorize.antMatchers(
-                            "/",
-                                    "/images/**",
-                                    "/css/**",
+                                    "/",
+                                    "/static/**",
                                     "/player/validate",
-                                    "/api/*",
+                                    "/api/**",
                                     "/login",
                                     "/index"
                             )

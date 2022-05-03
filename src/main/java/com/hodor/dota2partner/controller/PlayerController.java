@@ -2,6 +2,7 @@ package com.hodor.dota2partner.controller;
 
 import com.hodor.dota2partner.exception.EMailAlreadyExistsException;
 import com.hodor.dota2partner.exception.OpenDotaApiException;
+import com.hodor.dota2partner.exception.PlayerNotFoundException;
 import com.hodor.dota2partner.exception.SteamIdNotFoundException;
 import com.hodor.dota2partner.model.Player;
 import com.hodor.dota2partner.service.PlayerService;
@@ -15,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
@@ -32,11 +34,17 @@ public class PlayerController {
 
     @PostMapping("/validate")
     //@ApiOperation(value = "This URI allows to save a new user in the database")
-    public String createNewPlayer(@AuthenticationPrincipal Player principal, @Valid @RequestBody Player player, BindingResult bindingResult) throws SteamIdNotFoundException, OpenDotaApiException, EMailAlreadyExistsException {
-        log.info("HTTP POST Request received at /player/validate");
+    public String createNewPlayer(@AuthenticationPrincipal Player principal,
+                                  @Valid @RequestBody Player player,
+                                  BindingResult bindingResult,
+                                  HttpServletRequest servletRequest) throws SteamIdNotFoundException, OpenDotaApiException, EMailAlreadyExistsException, PlayerNotFoundException {
 
-        if(bindingResult.hasErrors()) {
-            log.error("binding result error"+bindingResult.getFieldError());
+        log.info("HTTP " + servletRequest.getMethod() +
+                " request received at " + servletRequest.getRequestURI() +
+                " - by " + servletRequest.getRemoteUser());
+
+        if (bindingResult.hasErrors()) {
+            log.error("binding result error" + bindingResult.getFieldError());
             return "redirect:/player/validate";
         }
 
@@ -47,8 +55,10 @@ public class PlayerController {
 
     @RolesAllowed({"USER", "ADMIN"})
     @GetMapping("/home")
-    public String getHome(@AuthenticationPrincipal Player principal, Model model) {
-        log.info("HTTP GET Request received at /player/home - " + principal.getPersonaName());
+    public String getHome(@AuthenticationPrincipal Player principal, Model model, HttpServletRequest servletRequest) {
+        log.info("HTTP " + servletRequest.getMethod() +
+                " request received at " + servletRequest.getRequestURI() +
+                " - by " + servletRequest.getRemoteUser());
 
         model.addAttribute("player", principal);
 
@@ -57,8 +67,10 @@ public class PlayerController {
 
     @RolesAllowed({"USER", "ADMIN"})
     @GetMapping("/refresh-data")
-    public String refreshData(@AuthenticationPrincipal Player principal, Model model) throws OpenDotaApiException {
-        log.info("HTTP GET Request received at /player/refresh-data - " + principal.getPersonaName());
+    public String refreshData(@AuthenticationPrincipal Player principal, Model model, HttpServletRequest servletRequest) throws OpenDotaApiException, PlayerNotFoundException {
+        log.info("HTTP " + servletRequest.getMethod() +
+                " request received at " + servletRequest.getRequestURI() +
+                " - by " + servletRequest.getRemoteUser());
 
         playerService.refreshPlayerData(principal.getSteamId32());
 
