@@ -65,6 +65,7 @@ public class ODPlayersServiceImpl implements ODPlayersService {
             String callUrl = openDotaApiUrl + "/players/" + steamId32 + "/peers";
 
             log.info("Calling OpenDota Api : " + callUrl);
+            //todo: it doesn't work for now, probably because it's an array....
             ResponseEntity<ObjectNode> response = restTemplate.getForEntity(callUrl, ObjectNode.class);
             ObjectNode jsonObject = response.getBody();
             log.info("Data from OpenDota Api fetched");
@@ -86,6 +87,7 @@ public class ODPlayersServiceImpl implements ODPlayersService {
             String callUrl = openDotaApiUrl + "/players/" + steamId32 + "/peers?" + queryParameters;
 
             log.info("Calling OpenDota Api : " + callUrl);
+            //todo: it doesn't work for now, probably because it's an array....
             ResponseEntity<ObjectNode> response = restTemplate.getForEntity(callUrl, ObjectNode.class);
             ObjectNode jsonObject = response.getBody();
             log.info("Data from OpenDota Api fetched");
