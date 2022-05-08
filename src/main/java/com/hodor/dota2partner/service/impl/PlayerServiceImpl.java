@@ -35,16 +35,17 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public void createPlayer(Player player) throws SteamIdNotFoundException, OpenDotaApiException, EMailAlreadyExistsException, PlayerNotFoundException {
 
-        if(playerRepository.existsByEmail(player.getEmail())) throw new EMailAlreadyExistsException("E-Mail "+player.getEmail()+" already exists");
+        if (playerRepository.existsByEmail(player.getEmail()))
+            throw new EMailAlreadyExistsException("E-Mail " + player.getEmail() + " already exists");
 
         long steamId32 = player.getSteamId64() - 76561197960265728L;
 
         ObjectNode dataPlayer = oDPlayersService.getPlayerData(steamId32);
 
-        if(dataPlayer.path("profile").path("steamid").asText().isEmpty()) {
+        if (dataPlayer.path("profile").path("steamid").asText().isEmpty()) {
 
-            log.error("Steam ID: "+steamId32+" does not exist");
-            throw new SteamIdNotFoundException("Steam ID: "+steamId32+" does not exist");
+            log.error("Steam ID: " + steamId32 + " does not exist");
+            throw new SteamIdNotFoundException("Steam ID: " + steamId32 + " does not exist");
 
         } else {
 
@@ -68,7 +69,8 @@ public class PlayerServiceImpl implements PlayerService {
 
         log.info("Service - fetching data's player - " + steamId32);
 
-        if(!playerRepository.existsBySteamId32(steamId32)) throw new PlayerNotFoundException("Player with this steam Id not found");
+        if (!playerRepository.existsBySteamId32(steamId32))
+            throw new PlayerNotFoundException("Player with this steam Id not found");
 
         Player player = playerRepository.findPlayerBySteamId32(steamId32);
         double winRate;

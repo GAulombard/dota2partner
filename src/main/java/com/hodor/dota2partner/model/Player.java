@@ -19,7 +19,6 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
 @Table(name = "players")
 @SQLDelete(sql = "UPDATE players SET deleted = true WHERE player_id=?") //safe delete
 public class Player implements UserDetails {
@@ -113,7 +112,6 @@ public class Player implements UserDetails {
 
     @Column(name = "win_rate")
     private float winRate;
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

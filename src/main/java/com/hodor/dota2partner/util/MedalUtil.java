@@ -6,58 +6,6 @@ public class MedalUtil {
 
         String rankIcon = "";
 
-        switch (rankTier) {
-            case 11:
-                rankIcon = "";
-                break;
-            case 11:
-                rankIcon = "";
-                break;
-            case 11:
-                rankIcon = "";
-                break;
-            case 11:
-                rankIcon = "";
-                break;
-            case 11:
-                rankIcon = "";
-                break;
-            case 11:
-                rankIcon = "";
-                break;
-            case 11:
-                rankIcon = "";
-                break;
-            case 11:
-                rankIcon = "";
-                break;
-            case 11:
-                rankIcon = "";
-                break;
-            case 11:
-                rankIcon = "";
-                break;
-            case 11:
-                rankIcon = "";
-                break;
-            case 11:
-                rankIcon = "";
-                break;
-            case 11:
-                rankIcon = "";
-                break;
-            case 11:
-                rankIcon = "";
-                break;
-            case 11:
-                rankIcon = "";
-                break;
-            case 11:
-                rankIcon = "";
-                break;
-
-        }
-
         return rankIcon;
     }
 
