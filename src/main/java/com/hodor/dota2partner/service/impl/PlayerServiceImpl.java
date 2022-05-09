@@ -3,6 +3,7 @@ package com.hodor.dota2partner.service.impl;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.hodor.dota2partner.exception.*;
 import com.hodor.dota2partner.model.Player;
+import com.hodor.dota2partner.model.dto.CreatePlayerDto;
 import com.hodor.dota2partner.repository.PlayerRepository;
 import com.hodor.dota2partner.serviceopendotaapi.ODPlayersService;
 import com.hodor.dota2partner.service.PlayerService;
@@ -12,7 +13,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;
-import java.time.Clock;
 import java.time.LocalDateTime;
 
 @Service
@@ -22,18 +22,22 @@ public class PlayerServiceImpl implements PlayerService {
     private PlayerRepository playerRepository;
     private PasswordEncoder passwordEncoder;
     private ODPlayersService oDPlayersService;
+    private DtoConverterServiceImpl dtoConverterService;
     private String openDotaApiUrl = "https://api.opendota.com/api";
     private static final DecimalFormat df = new DecimalFormat("0.00");
 
     @Autowired
-    public PlayerServiceImpl(PlayerRepository playerRepository, PasswordEncoder passwordEncoder, ODPlayersService oDPlayersService) {
+    public PlayerServiceImpl(PlayerRepository playerRepository, PasswordEncoder passwordEncoder, ODPlayersService oDPlayersService, DtoConverterServiceImpl dtoConverterService) {
         this.playerRepository = playerRepository;
         this.passwordEncoder = passwordEncoder;
         this.oDPlayersService = oDPlayersService;
+        this.dtoConverterService = dtoConverterService;
     }
 
     @Override
-    public void createPlayer(Player player) throws SteamIdNotFoundException, OpenDotaApiException, EMailAlreadyExistsException, PlayerNotFoundException {
+    public void createPlayer(CreatePlayerDto dto) throws SteamIdNotFoundException, OpenDotaApiException, EMailAlreadyExistsException, PlayerNotFoundException {
+
+        Player player = dtoConverterService.CreatePlayerDtoToPlayer(dto);
 
         if (playerRepository.existsByEmail(player.getEmail()))
             throw new EMailAlreadyExistsException("E-Mail " + player.getEmail() + " already exists");
@@ -51,15 +55,15 @@ public class PlayerServiceImpl implements PlayerService {
 
             log.info("Service - Creating new player - steamId32: "+steamId32);
             player.setSteamId32(steamId32);
-            player.setPassword(passwordEncoder.encode(player.getPassword()));
+            //player.setPassword(passwordEncoder.encode(player.getPassword()));
             //TODO: change this, depending of the country
             player.setCreationDate(LocalDateTime.now().plusHours(2));
             player.setContributor(false);
             player.setVerified(false);
             player.setRole("ROLE_USER");
-            refreshPlayerData(steamId32);
             playerRepository.save(player);
             log.info("Service - Player created");
+            refreshPlayerData(steamId32);
 
         }
     }
@@ -78,7 +82,7 @@ public class PlayerServiceImpl implements PlayerService {
 
         ObjectNode dataPlayer = oDPlayersService.getPlayerData(steamId32);
         ObjectNode winLossCount = oDPlayersService.getWinLossCount(steamId32);
-        ObjectNode peers = oDPlayersService.getPeers(steamId32);
+        //ObjectNode peers = oDPlayersService.getPeers(steamId32);
 
         player.setAvatar(dataPlayer.path(profile).path("avatar").asText());
         player.setAvatarFull(dataPlayer.path(profile).path("avatarfull").asText());
