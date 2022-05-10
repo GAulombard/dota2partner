@@ -7,9 +7,9 @@ import com.hodor.dota2partner.dto.CreatePlayerDto;
 import com.hodor.dota2partner.repository.PlayerRepository;
 import com.hodor.dota2partner.serviceopendotaapi.ODPlayersService;
 import com.hodor.dota2partner.service.PlayerService;
+import com.hodor.dota2partner.util.Calculator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;
@@ -25,7 +25,9 @@ public class PlayerServiceImpl implements PlayerService {
     private ODPlayersService oDPlayersService;
     @Autowired
     private DtoConverterServiceImpl dtoConverterService;
+
     private static final DecimalFormat df = new DecimalFormat("0.00");
+
 
     @Override
     public void createPlayer(CreatePlayerDto dto) throws SteamIdNotFoundException, OpenDotaApiException, EMailAlreadyExistsException, PlayerNotFoundException {
@@ -35,8 +37,7 @@ public class PlayerServiceImpl implements PlayerService {
         if (playerRepository.existsByEmail(player.getEmail()))
             throw new EMailAlreadyExistsException("E-Mail " + player.getEmail() + " already exists");
 
-        long steamId32 = player.getSteamId64() - 76561197960265728L;
-
+        long steamId32 = Calculator.steamId64toSteamId32(dto.getSteamId64());
         ObjectNode dataPlayer = oDPlayersService.getPlayerData(steamId32);
 
         if (dataPlayer.path("profile").path("steamid").asText().isEmpty()) {
@@ -48,8 +49,6 @@ public class PlayerServiceImpl implements PlayerService {
 
             log.info("Service - Creating new player - steamId32: "+steamId32);
             player.setSteamId32(steamId32);
-            //player.setPassword(passwordEncoder.encode(player.getPassword()));
-            //TODO: change this, depending of the country
             player.setCreationDate(LocalDateTime.now().plusHours(2));
             player.setContributor(false);
             player.setVerified(false);
@@ -86,9 +85,7 @@ public class PlayerServiceImpl implements PlayerService {
         player.setRankTier(dataPlayer.path("rank_tier").asInt());
         player.setWin(winLossCount.path("win").asInt());
         player.setLoss(winLossCount.path("lose").asInt());
-        winRate = ((double) player.getWin() / (double) (player.getWin() + player.getLoss())) * 100;
-        player.setWinRate((float) Math.round(winRate * 100) / 100);
-        //TODO: change this, depending of the country
+        player.setWinRate(Calculator.winRateCalculator(player.getWin(), player.getLoss()));
         player.setLastLogin(LocalDateTime.now().plusHours(2));
         player.setDotaPlus(dataPlayer.path(profile).path("plus").asText().equals("true"));
 
