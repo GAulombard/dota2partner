@@ -5,6 +5,8 @@ import com.hodor.dota2partner.exception.OpenDotaApiException;
 import com.hodor.dota2partner.exception.PlayerNotFoundException;
 import com.hodor.dota2partner.exception.SteamIdNotFoundException;
 import com.hodor.dota2partner.model.Player;
+import com.hodor.dota2partner.model.dto.CreatePlayerDto;
+import com.hodor.dota2partner.model.dto.PlayerDto;
 import com.hodor.dota2partner.service.PlayerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +37,7 @@ public class PlayerController {
     @PostMapping("/validate")
     //@ApiOperation(value = "This URI allows to save a new user in the database")
     public String createNewPlayer(@AuthenticationPrincipal Player principal,
-                                  @Valid @RequestBody Player player,
+                                  @Valid @RequestBody CreatePlayerDto playerDto,
                                   BindingResult bindingResult,
                                   HttpServletRequest servletRequest) throws SteamIdNotFoundException, OpenDotaApiException, EMailAlreadyExistsException, PlayerNotFoundException {
 
@@ -48,7 +50,7 @@ public class PlayerController {
             return "redirect:/player/validate";
         }
 
-        playerService.createPlayer(player);
+        playerService.createPlayer(playerDto);
 
         return "redirect:/login";
     }
