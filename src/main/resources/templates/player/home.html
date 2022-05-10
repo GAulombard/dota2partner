@@ -38,7 +38,9 @@
                     </div>
                     <div>
                         <p>
-                            <img alt="Avatar" height="70" th:src=@{/assets/dota_plus_icon.png} width="60">
+                            <th:block th:if="${player.dotaPlus == true}">
+                                <img alt="Avatar" height="70" th:src=@{/assets/dota_plus_icon.png} width="60">
+                            </th:block>
                             <img alt="Avatar" height="100" th:src=@{/assets/rank_icon_3.png} width="90">
                         </p>
                     </div>

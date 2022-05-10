@@ -94,4 +94,9 @@ public class PlayerServiceImpl implements PlayerService {
 
     }
 
+    @Override
+    public Player getPlayer(long steamId32) {
+        return playerRepository.findPlayerBySteamId32(steamId32);
+    }
+
 }

@@ -6,6 +6,7 @@ import com.hodor.dota2partner.exception.OpenDotaApiException;
 import com.hodor.dota2partner.exception.PlayerNotFoundException;
 import com.hodor.dota2partner.exception.SteamIdNotFoundException;
 import com.hodor.dota2partner.dto.CreatePlayerDto;
+import com.hodor.dota2partner.model.Player;
 
 public interface PlayerService {
 
@@ -14,4 +15,5 @@ public interface PlayerService {
 
     void refreshPlayerData(Long steamId32) throws OpenDotaApiException, PlayerNotFoundException;
 
+    Player getPlayer(long steamId32);
 }

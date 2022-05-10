@@ -22,7 +22,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests(authorize -> {
                     authorize.antMatchers(
                                     "/",
-                                    "/static/**",
+                                    "/css/**",
                                     "/player/validate",
                                     "/api/**",
                                     "/login",

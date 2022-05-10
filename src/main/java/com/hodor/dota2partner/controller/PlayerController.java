@@ -56,7 +56,9 @@ public class PlayerController {
                 " request received at " + servletRequest.getRequestURI() +
                 " - by " + servletRequest.getRemoteUser());
 
-        model.addAttribute("player", principal);
+        Player player = playerService.getPlayer(principal.getSteamId32());
+
+        model.addAttribute("player", player);
 
         return "/player/home";
     }
