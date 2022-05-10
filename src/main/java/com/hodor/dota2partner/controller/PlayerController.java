@@ -5,14 +5,12 @@ import com.hodor.dota2partner.exception.OpenDotaApiException;
 import com.hodor.dota2partner.exception.PlayerNotFoundException;
 import com.hodor.dota2partner.exception.SteamIdNotFoundException;
 import com.hodor.dota2partner.model.Player;
-import com.hodor.dota2partner.model.dto.CreatePlayerDto;
-import com.hodor.dota2partner.model.dto.PlayerDto;
+import com.hodor.dota2partner.dto.CreatePlayerDto;
 import com.hodor.dota2partner.service.PlayerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -27,12 +25,8 @@ import javax.validation.Valid;
 public class PlayerController {
 
     //TODO: swagger doc
-    private PlayerService playerService;
-
     @Autowired
-    public PlayerController(PlayerService playerService) {
-        this.playerService = playerService;
-    }
+    private PlayerService playerService;
 
     @PostMapping("/validate")
     //@ApiOperation(value = "This URI allows to save a new user in the database")

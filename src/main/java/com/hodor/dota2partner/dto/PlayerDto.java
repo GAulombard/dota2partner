@@ -1,4 +1,4 @@
-package com.hodor.dota2partner.model.dto;
+package com.hodor.dota2partner.dto;
 
 import lombok.*;
 
@@ -11,8 +11,10 @@ import java.io.Serializable;
 
 public class PlayerDto implements Serializable {
 
+    private Integer playerId;
     private Long steamId32;
     private String personaName;
+    private String email;
     private int rankTier;
     private int win;
     private int loss;

@@ -1,4 +1,4 @@
-package com.hodor.dota2partner.model.dto;
+package com.hodor.dota2partner.dto;
 
 import lombok.*;
 

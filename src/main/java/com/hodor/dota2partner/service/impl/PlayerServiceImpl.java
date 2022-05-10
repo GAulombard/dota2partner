@@ -3,7 +3,7 @@ package com.hodor.dota2partner.service.impl;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.hodor.dota2partner.exception.*;
 import com.hodor.dota2partner.model.Player;
-import com.hodor.dota2partner.model.dto.CreatePlayerDto;
+import com.hodor.dota2partner.dto.CreatePlayerDto;
 import com.hodor.dota2partner.repository.PlayerRepository;
 import com.hodor.dota2partner.serviceopendotaapi.ODPlayersService;
 import com.hodor.dota2partner.service.PlayerService;
@@ -19,20 +19,13 @@ import java.time.LocalDateTime;
 @Slf4j
 public class PlayerServiceImpl implements PlayerService {
 
-    private PlayerRepository playerRepository;
-    private PasswordEncoder passwordEncoder;
-    private ODPlayersService oDPlayersService;
-    private DtoConverterServiceImpl dtoConverterService;
-    private String openDotaApiUrl = "https://api.opendota.com/api";
-    private static final DecimalFormat df = new DecimalFormat("0.00");
-
     @Autowired
-    public PlayerServiceImpl(PlayerRepository playerRepository, PasswordEncoder passwordEncoder, ODPlayersService oDPlayersService, DtoConverterServiceImpl dtoConverterService) {
-        this.playerRepository = playerRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.oDPlayersService = oDPlayersService;
-        this.dtoConverterService = dtoConverterService;
-    }
+    private PlayerRepository playerRepository;
+    @Autowired
+    private ODPlayersService oDPlayersService;
+    @Autowired
+    private DtoConverterServiceImpl dtoConverterService;
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     @Override
     public void createPlayer(CreatePlayerDto dto) throws SteamIdNotFoundException, OpenDotaApiException, EMailAlreadyExistsException, PlayerNotFoundException {

@@ -17,12 +17,8 @@ import java.util.Optional;
 @Slf4j
 public class MyUserDetailsServiceImpl implements UserDetailsService {
 
-    private final PlayerRepository playerRepository;
-
     @Autowired
-    public MyUserDetailsServiceImpl(PlayerRepository playerRepository) {
-        this.playerRepository = playerRepository;
-    }
+    private PlayerRepository playerRepository;
 
     @SneakyThrows
     @Override
