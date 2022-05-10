@@ -7,6 +7,7 @@ import com.hodor.dota2partner.exception.SteamIdNotFoundException;
 import com.hodor.dota2partner.model.Player;
 import com.hodor.dota2partner.dto.CreatePlayerDto;
 import com.hodor.dota2partner.service.PlayerService;
+import com.hodor.dota2partner.util.MedalUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -57,8 +58,12 @@ public class PlayerController {
                 " - by " + servletRequest.getRemoteUser());
 
         Player player = playerService.getPlayer(principal.getSteamId32());
+        String rankIcon = MedalUtil.getRankIconFromRankTier(player.getRankTier());
+        String rankStar = MedalUtil.getRankStarFromRankTier(player.getRankTier());
 
         model.addAttribute("player", player);
+        model.addAttribute("rankIcon", rankIcon);
+        model.addAttribute("rankStar", rankStar);
 
         return "/player/home";
     }

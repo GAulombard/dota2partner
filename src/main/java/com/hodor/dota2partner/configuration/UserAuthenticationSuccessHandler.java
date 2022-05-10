@@ -41,7 +41,6 @@ public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHa
     }
 
 
-
     protected String determineTargetUrl(final Authentication authentication) {//return the mapped URL for the first role the user has
 
         Map<String, String> roleTargetUrlMap = new HashMap<>();

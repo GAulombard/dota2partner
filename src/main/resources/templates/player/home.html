@@ -39,9 +39,10 @@
                     <div>
                         <p>
                             <th:block th:if="${player.dotaPlus == true}">
-                                <img alt="Avatar" height="70" th:src=@{/assets/dota_plus_icon.png} width="60">
+                                <img alt="DotaPlus" height="70" th:src=@{/assets/dota_plus_icon.png} width="60">
                             </th:block>
-                            <img alt="Avatar" height="100" th:src=@{/assets/rank_icon_3.png} width="90">
+                            <img alt="RankIcon" height="100" th:src=@{'/assets/'+${rankIcon}} width="90">
+                            <img alt="RankIcon" height="100" th:src=@{'/assets/'+${rankStar}} width="90">
                         </p>
                     </div>
                 </div>
