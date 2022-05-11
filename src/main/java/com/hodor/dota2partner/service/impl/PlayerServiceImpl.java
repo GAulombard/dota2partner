@@ -27,6 +27,8 @@ public class PlayerServiceImpl implements PlayerService {
     private ODPlayersService oDPlayersService;
     @Autowired
     private DtoConverterServiceImpl dtoConverterService;
+    @Autowired
+    private FriendServiceImpl friendService;
 
     private static final DecimalFormat df = new DecimalFormat("0.00");
 
@@ -71,12 +73,12 @@ public class PlayerServiceImpl implements PlayerService {
             throw new PlayerNotFoundException("Player with this steam Id not found");
 
         Player player = playerRepository.findPlayerBySteamId32(steamId32);
-        double winRate;
         String profile = "profile";
 
         ObjectNode dataPlayer = oDPlayersService.getPlayerData(steamId32);
         ObjectNode winLossCount = oDPlayersService.getWinLossCount(steamId32);
-        List<ArrayNode> peers = oDPlayersService.getPeers(steamId32);
+
+        List<Player> friendList = friendService.searchFriend(steamId32);
 
         player.setAvatar(dataPlayer.path(profile).path("avatar").asText());
         player.setAvatarFull(dataPlayer.path(profile).path("avatarfull").asText());
@@ -92,6 +94,7 @@ public class PlayerServiceImpl implements PlayerService {
         player.setDotaPlus(dataPlayer.path(profile).path("plus").asText().equals("true"));
 
         playerRepository.save(player);
+
         log.info("Service - Data's player fetched");
 
     }

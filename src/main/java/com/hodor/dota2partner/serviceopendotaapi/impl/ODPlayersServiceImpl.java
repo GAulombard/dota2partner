@@ -62,7 +62,7 @@ public class ODPlayersServiceImpl implements ODPlayersService {
     }
 
     @Override
-    public List<ArrayNode> getPeers(Long steamId32) throws OpenDotaApiException {
+    public ArrayNode getPeers(Long steamId32) throws OpenDotaApiException {
         try {
 
             RestTemplate restTemplate = new RestTemplate();
@@ -70,7 +70,7 @@ public class ODPlayersServiceImpl implements ODPlayersService {
 
             log.info("Calling OpenDota Api : " + callUrl);
             ResponseEntity<ArrayNode> response = restTemplate.getForEntity(callUrl, ArrayNode.class);
-            List<ArrayNode> jsonObject = Collections.singletonList(response.getBody());
+            ArrayNode jsonObject = response.getBody();
             log.info("Data from OpenDota Api fetched");
             log.debug("OpenDota Api response : {}", jsonObject);
 
@@ -83,7 +83,7 @@ public class ODPlayersServiceImpl implements ODPlayersService {
     }
 
     @Override
-    public List<ArrayNode> getPeers(Long steamId32, String queryParameters) throws OpenDotaApiException {
+    public ArrayNode getPeers(Long steamId32, String queryParameters) throws OpenDotaApiException {
         try {
 
             RestTemplate restTemplate = new RestTemplate();
@@ -91,7 +91,7 @@ public class ODPlayersServiceImpl implements ODPlayersService {
 
             log.info("Calling OpenDota Api : " + callUrl);
             ResponseEntity<ArrayNode>response = restTemplate.getForEntity(callUrl, ArrayNode.class);
-            List<ArrayNode> jsonObject = Collections.singletonList(response.getBody());
+            ArrayNode jsonObject = response.getBody();
             log.info("Data from OpenDota Api fetched");
             log.debug("OpenDota Api response : {}", jsonObject);
 
