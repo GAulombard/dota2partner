@@ -1,5 +1,6 @@
 package com.hodor.dota2partner.service.impl;
 
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.hodor.dota2partner.exception.*;
 import com.hodor.dota2partner.model.Player;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -74,7 +76,7 @@ public class PlayerServiceImpl implements PlayerService {
 
         ObjectNode dataPlayer = oDPlayersService.getPlayerData(steamId32);
         ObjectNode winLossCount = oDPlayersService.getWinLossCount(steamId32);
-        //ObjectNode peers = oDPlayersService.getPeers(steamId32);
+        List<ArrayNode> peers = oDPlayersService.getPeers(steamId32);
 
         player.setAvatar(dataPlayer.path(profile).path("avatar").asText());
         player.setAvatarFull(dataPlayer.path(profile).path("avatarfull").asText());
