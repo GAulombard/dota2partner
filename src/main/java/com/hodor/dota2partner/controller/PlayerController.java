@@ -87,4 +87,22 @@ public class PlayerController {
         return "redirect:/player/home";
     }
 
+    @RolesAllowed({"USER", "ADMIN"})
+    @GetMapping("/profile")
+    public String getProfile(@AuthenticationPrincipal Player principal, Model model, HttpServletRequest servletRequest) {
+        log.info("HTTP " + servletRequest.getMethod() +
+                " request received at " + servletRequest.getRequestURI() +
+                " - by " + servletRequest.getRemoteUser());
+
+        Player player = playerService.getPlayer(principal.getSteamId32());
+        String rankIcon = MedalUtil.getRankIconFromRankTier(player.getRankTier());
+        String rankStar = MedalUtil.getRankStarFromRankTier(player.getRankTier());
+
+        model.addAttribute("player", player);
+        model.addAttribute("rankIcon", rankIcon);
+        model.addAttribute("rankStar", rankStar);
+
+        return "/player/profile";
+    }
+
 }
