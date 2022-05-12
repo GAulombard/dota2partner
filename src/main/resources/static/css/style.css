@@ -2,8 +2,15 @@ body {
     background-color: #575757;
 }
 
+header {
+}
+
 footer {
     background-color: #404040;
     color: white;
     padding: 15px;
+}
+
+#main {
+
 }

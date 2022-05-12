@@ -11,38 +11,48 @@
     <title>Dota 2 Partner</title>
 </head>
 <body>
+<div class="d-flex">
+    <div th:replace="fragments/navbar"></div>
 
-<div th:replace="fragments/navbar"></div>
-
-<div class="container justify-content-center">
-    <div class="row">
-        <div class="col-12 col-lg-12">
-            <div class="card my-3 shadow">
-                <h5 class="card-title"></h5>
-                <div class="card-body d-flex justify-content-center">
-                    <form class="form-login" method="post" action="/login">
-                        <p>
-                            <label for="username" class="sr-only">Email</label>
-                            <input type="text" id="username" name="username" class="form-control"
-                                   placeholder="Enter your email" required="" autofocus="" autocomplete="off"
-                                   style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAXtJREFUOBGVUj2LwkAUnIjBICIIKe8gWKRKo2BvYXMgWNlYWZ3gn1B/htekibWVcH1aIVV+wQULCxsRtMrtrGYv8RLUB8nuvjczu+9DWywWH3EcL8X3jidM07QfAfucz+ffhJdeIZNwu+iLexoFnrr5Cr/+05xSOvBoX61WYdt2BvaSgGVZ6PV6+QKGYahApVKBKJY6p2PKeduUufb7fbTbbaxWKxwOB0ynU+x2O7ium4ndk3l+KYU8AW02m8UM8Jnn81limMLlcsnDK59IMRKHiXpBQibiEZkY0co3sSxlDegoMsdx0O12Ua/XEUUR1us1jsejhFNEvaBIgK07nU4IwxDNZhOdTicDLXO205OViYrDZrORLg5Qq9VSdUpwJSEwoUjiuF+FOEzTxGAwwH6/x3a7zUD+piXjBpLukDwej2XenufJdNLQhzUYjUao1WpoNBpywIbDYZqPwi6wz6xyEATQdV2ROKmJEVMoIECszdL3ffb7n5EsnJNf8S6HAZZBgLIAAAAASUVORK5CYII=&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
-                        </p>
-                        <p>
-                            <label for="password" class="sr-only">Password</label>
-                            <input type="password" id="password" name="password" class="form-control"
-                                   placeholder="Enter your password" required="" autocomplete="off"
-                                   style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAXtJREFUOBGVUj2LwkAUnIjBICIIKe8gWKRKo2BvYXMgWNlYWZ3gn1B/htekibWVcH1aIVV+wQULCxsRtMrtrGYv8RLUB8nuvjczu+9DWywWH3EcL8X3jidM07QfAfucz+ffhJdeIZNwu+iLexoFnrr5Cr/+05xSOvBoX61WYdt2BvaSgGVZ6PV6+QKGYahApVKBKJY6p2PKeduUufb7fbTbbaxWKxwOB0ynU+x2O7ium4ndk3l+KYU8AW02m8UM8Jnn81limMLlcsnDK59IMRKHiXpBQibiEZkY0co3sSxlDegoMsdx0O12Ua/XEUUR1us1jsejhFNEvaBIgK07nU4IwxDNZhOdTicDLXO205OViYrDZrORLg5Qq9VSdUpwJSEwoUjiuF+FOEzTxGAwwH6/x3a7zUD+piXjBpLukDwej2XenufJdNLQhzUYjUao1WpoNBpywIbDYZqPwi6wz6xyEATQdV2ROKmJEVMoIECszdL3ffb7n5EsnJNf8S6HAZZBgLIAAAAASUVORK5CYII=&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: pointer;">
-                        </p>
-                        <button class="btn btn-secondary btn-lg btn-block" type="submit">Sign in</button>
-                    </form>
+    <div class="container text-center">
+        <div class="row">
+        </div>
+        <div class="col-sm-3">
+        </div>
+        <div class="col-sm-7">
+            <div class="row">
+                <div class="col-12 col-lg-12">
+                    <div class="card my-3 shadow">
+                        <h5 class="card-title"></h5>
+                        <div class="card-body d-flex justify-content-center">
+                            <form class="form-login" method="post" action="/login">
+                                <p>
+                                    <label for="username" class="sr-only">Email</label>
+                                    <input type="text" id="username" name="username" class="form-control"
+                                           placeholder="Enter your email" required="" autofocus="" autocomplete="off"
+                                           style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAXtJREFUOBGVUj2LwkAUnIjBICIIKe8gWKRKo2BvYXMgWNlYWZ3gn1B/htekibWVcH1aIVV+wQULCxsRtMrtrGYv8RLUB8nuvjczu+9DWywWH3EcL8X3jidM07QfAfucz+ffhJdeIZNwu+iLexoFnrr5Cr/+05xSOvBoX61WYdt2BvaSgGVZ6PV6+QKGYahApVKBKJY6p2PKeduUufb7fbTbbaxWKxwOB0ynU+x2O7ium4ndk3l+KYU8AW02m8UM8Jnn81limMLlcsnDK59IMRKHiXpBQibiEZkY0co3sSxlDegoMsdx0O12Ua/XEUUR1us1jsejhFNEvaBIgK07nU4IwxDNZhOdTicDLXO205OViYrDZrORLg5Qq9VSdUpwJSEwoUjiuF+FOEzTxGAwwH6/x3a7zUD+piXjBpLukDwej2XenufJdNLQhzUYjUao1WpoNBpywIbDYZqPwi6wz6xyEATQdV2ROKmJEVMoIECszdL3ffb7n5EsnJNf8S6HAZZBgLIAAAAASUVORK5CYII=&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
+                                </p>
+                                <p>
+                                    <label for="password" class="sr-only">Password</label>
+                                    <input type="password" id="password" name="password" class="form-control"
+                                           placeholder="Enter your password" required="" autocomplete="off"
+                                           style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAXtJREFUOBGVUj2LwkAUnIjBICIIKe8gWKRKo2BvYXMgWNlYWZ3gn1B/htekibWVcH1aIVV+wQULCxsRtMrtrGYv8RLUB8nuvjczu+9DWywWH3EcL8X3jidM07QfAfucz+ffhJdeIZNwu+iLexoFnrr5Cr/+05xSOvBoX61WYdt2BvaSgGVZ6PV6+QKGYahApVKBKJY6p2PKeduUufb7fbTbbaxWKxwOB0ynU+x2O7ium4ndk3l+KYU8AW02m8UM8Jnn81limMLlcsnDK59IMRKHiXpBQibiEZkY0co3sSxlDegoMsdx0O12Ua/XEUUR1us1jsejhFNEvaBIgK07nU4IwxDNZhOdTicDLXO205OViYrDZrORLg5Qq9VSdUpwJSEwoUjiuF+FOEzTxGAwwH6/x3a7zUD+piXjBpLukDwej2XenufJdNLQhzUYjUao1WpoNBpywIbDYZqPwi6wz6xyEATQdV2ROKmJEVMoIECszdL3ffb7n5EsnJNf8S6HAZZBgLIAAAAASUVORK5CYII=&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: pointer;">
+                                </p>
+                                <button class="btn btn-secondary btn-lg btn-block" type="submit">Sign in</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="col-sm-3">
+
+        </div>
     </div>
+    <div class="row">
+    </div>
+    <div th:replace="fragments/footer"></div>
 </div>
-
-<div th:replace="fragments/footer"></div>
-
 </body>
 </html>
 
