@@ -5,7 +5,7 @@ import com.hodor.dota2partner.exception.OpenDotaApiException;
 import com.hodor.dota2partner.exception.PlayerNotFoundException;
 import com.hodor.dota2partner.exception.SteamIdNotFoundException;
 import com.hodor.dota2partner.model.Player;
-import com.hodor.dota2partner.dto.CreatePlayerDto;
+import com.hodor.dota2partner.dto.CreatePlayerDTO;
 import com.hodor.dota2partner.service.FriendService;
 import com.hodor.dota2partner.service.PlayerService;
 import com.hodor.dota2partner.util.MedalUtil;
@@ -36,20 +36,20 @@ public class PlayerController {
     @PostMapping("/validate")
     //@ApiOperation(value = "This URI allows to save a new user in the database")
     public String createNewPlayer(@AuthenticationPrincipal Player principal,
-                                  @Valid @RequestBody CreatePlayerDto playerDto,
+                                  @Valid @ModelAttribute("playerDto") CreatePlayerDTO playerDTO,
                                   BindingResult bindingResult,
                                   HttpServletRequest servletRequest) throws SteamIdNotFoundException, OpenDotaApiException, EMailAlreadyExistsException, PlayerNotFoundException {
 
         log.info("HTTP " + servletRequest.getMethod() +
                 " request received at " + servletRequest.getRequestURI() +
-                " - by " + servletRequest.getRemoteUser());
+                " - [" + (servletRequest.getRemoteUser() == null ? "anonymous user" : servletRequest.getRemoteUser()) + "]");
 
         if (bindingResult.hasErrors()) {
             log.error("binding result error" + bindingResult.getFieldError());
             return "redirect:/player/validate";
         }
 
-        playerService.createPlayer(playerDto);
+        playerService.createPlayer(playerDTO);
 
         return "redirect:/login";
     }
@@ -59,7 +59,7 @@ public class PlayerController {
     public String getHome(@AuthenticationPrincipal Player principal, Model model, HttpServletRequest servletRequest) throws OpenDotaApiException {
         log.info("HTTP " + servletRequest.getMethod() +
                 " request received at " + servletRequest.getRequestURI() +
-                " - by " + servletRequest.getRemoteUser());
+                " - [" + (servletRequest.getRemoteUser() == null ? "anonymous user" : servletRequest.getRemoteUser()) + "]");
 
         Player player = playerService.getPlayer(principal.getSteamId32());
         String rankIcon = MedalUtil.getRankIconFromRankTier(player.getRankTier());
@@ -80,7 +80,7 @@ public class PlayerController {
     public String refreshData(@AuthenticationPrincipal Player principal, Model model, HttpServletRequest servletRequest) throws OpenDotaApiException, PlayerNotFoundException {
         log.info("HTTP " + servletRequest.getMethod() +
                 " request received at " + servletRequest.getRequestURI() +
-                " - by " + servletRequest.getRemoteUser());
+                " - [" + (servletRequest.getRemoteUser() == null ? "anonymous user" : servletRequest.getRemoteUser()) + "]");
 
         playerService.refreshPlayerData(principal.getSteamId32());
 
@@ -92,7 +92,7 @@ public class PlayerController {
     public String getProfile(@AuthenticationPrincipal Player principal, Model model, HttpServletRequest servletRequest) {
         log.info("HTTP " + servletRequest.getMethod() +
                 " request received at " + servletRequest.getRequestURI() +
-                " - by " + servletRequest.getRemoteUser());
+                " - [" + (servletRequest.getRemoteUser() == null ? "anonymous user" : servletRequest.getRemoteUser()) + "]");
 
         Player player = playerService.getPlayer(principal.getSteamId32());
         String rankIcon = MedalUtil.getRankIconFromRankTier(player.getRankTier());

@@ -9,7 +9,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Getter
 @Setter
-public class CreatePlayerDto implements Serializable {
+public class CreatePlayerDTO implements Serializable {
 
     @NotNull(message = "Steam Id is mandatory")
     private Long steamId64;

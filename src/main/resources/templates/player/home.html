@@ -42,10 +42,14 @@
                                 <th:block th:if="${player.dotaPlus == true}">
                                     <img alt="DotaPlus" height="70" th:src=@{/assets/dota_plus_icon.png} width="60">
                                 </th:block>
+                            <div class="rankTierContainer">
                                 <th:block th:if="${player.rankTier != 0}">
-                                    <img alt="RankIcon" height="100" th:src=@{'/assets/'+${rankIcon}} width="90">
-                                    <img alt="RankIcon" height="100" th:src=@{'/assets/'+${rankStar}} width="90">
+                                    <img class="rankMedal-icon" alt="RankIcon" height="100"
+                                         th:src=@{'/assets/'+${rankIcon}} width="90">
+                                    <img class="rankMedal-star" alt="RankIcon" height="100"
+                                         th:src=@{'/assets/'+${rankStar}} width="90">
                                 </th:block>
+                            </div>
                             </p>
                         </div>
                     </div>

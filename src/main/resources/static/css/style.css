@@ -11,6 +11,10 @@ footer {
     padding: 15px;
 }
 
-#main {
+.rankMedal-star {
+    position: relative;
+}
 
+.rankTierContainer {
+    position: relative;
 }

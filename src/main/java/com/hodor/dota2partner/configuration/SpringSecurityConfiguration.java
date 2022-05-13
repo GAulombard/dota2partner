@@ -26,6 +26,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                                     "/player/validate",
                                     "/api/**",
                                     "/login",
+                                    "/signup",
                                     "/index"
                             )
                             .permitAll();

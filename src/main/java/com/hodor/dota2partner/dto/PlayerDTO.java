@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 
-public class PlayerDto implements Serializable {
+public class PlayerDTO implements Serializable {
 
     private Integer playerId;
     private Long steamId32;

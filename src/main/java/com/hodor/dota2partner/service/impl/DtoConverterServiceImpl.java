@@ -1,8 +1,8 @@
 package com.hodor.dota2partner.service.impl;
 
-import com.hodor.dota2partner.dto.PlayerDto;
+import com.hodor.dota2partner.dto.PlayerDTO;
 import com.hodor.dota2partner.model.Player;
-import com.hodor.dota2partner.dto.CreatePlayerDto;
+import com.hodor.dota2partner.dto.CreatePlayerDTO;
 import com.hodor.dota2partner.service.DtoConverterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,7 +15,8 @@ public class DtoConverterServiceImpl implements DtoConverterService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public Player CreatePlayerDtoToPlayer(CreatePlayerDto dto) {
+    @Override
+    public Player CreatePlayerDTOToPlayer(CreatePlayerDTO dto) {
 
         Player player = new Player();
 
@@ -26,9 +27,10 @@ public class DtoConverterServiceImpl implements DtoConverterService {
         return player;
     }
 
-    public PlayerDto PlayerToPlayerDto(Player player) {
+    @Override
+    public PlayerDTO PlayerToPlayerDTO(Player player) {
 
-        PlayerDto dto = new PlayerDto();
+        PlayerDTO dto = new PlayerDTO();
 
         dto.setPlayerId(player.getPlayerId());
         dto.setSteamId32(player.getSteamId32());

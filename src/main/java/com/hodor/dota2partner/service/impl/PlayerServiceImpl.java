@@ -1,10 +1,9 @@
 package com.hodor.dota2partner.service.impl;
 
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.hodor.dota2partner.exception.*;
 import com.hodor.dota2partner.model.Player;
-import com.hodor.dota2partner.dto.CreatePlayerDto;
+import com.hodor.dota2partner.dto.CreatePlayerDTO;
 import com.hodor.dota2partner.repository.PlayerRepository;
 import com.hodor.dota2partner.serviceopendotaapi.ODPlayersService;
 import com.hodor.dota2partner.service.PlayerService;
@@ -13,9 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.DecimalFormat;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 @Slf4j
@@ -30,13 +27,11 @@ public class PlayerServiceImpl implements PlayerService {
     @Autowired
     private FriendServiceImpl friendService;
 
-    private static final DecimalFormat df = new DecimalFormat("0.00");
-
 
     @Override
-    public void createPlayer(CreatePlayerDto dto) throws SteamIdNotFoundException, OpenDotaApiException, EMailAlreadyExistsException, PlayerNotFoundException {
+    public void createPlayer(CreatePlayerDTO dto) throws SteamIdNotFoundException, OpenDotaApiException, EMailAlreadyExistsException, PlayerNotFoundException {
 
-        Player player = dtoConverterService.CreatePlayerDtoToPlayer(dto);
+        Player player = dtoConverterService.CreatePlayerDTOToPlayer(dto);
 
         if (playerRepository.existsByEmail(player.getEmail()))
             throw new EMailAlreadyExistsException("E-Mail " + player.getEmail() + " already exists");
@@ -51,7 +46,7 @@ public class PlayerServiceImpl implements PlayerService {
 
         } else {
 
-            log.info("Service - Creating new player - steamId32: "+steamId32);
+            log.info("Service - Creating new player - steamId32: " + steamId32);
             player.setSteamId32(steamId32);
             player.setCreationDate(LocalDateTime.now().plusHours(2));
             player.setContributor(false);
@@ -78,8 +73,6 @@ public class PlayerServiceImpl implements PlayerService {
         ObjectNode dataPlayer = oDPlayersService.getPlayerData(steamId32);
         ObjectNode winLossCount = oDPlayersService.getWinLossCount(steamId32);
 
-        List<Player> friendList = friendService.searchFriend(steamId32);
-
         player.setAvatar(dataPlayer.path(profile).path("avatar").asText());
         player.setAvatarFull(dataPlayer.path(profile).path("avatarfull").asText());
         player.setAvatarMedium(dataPlayer.path(profile).path("avatarmedium").asText());
@@ -92,7 +85,6 @@ public class PlayerServiceImpl implements PlayerService {
         player.setWinRate(Calculator.winRateCalculator(player.getWin(), player.getLoss()));
         player.setLastLogin(LocalDateTime.now().plusHours(2));
         player.setDotaPlus(dataPlayer.path(profile).path("plus").asText().equals("true"));
-
         playerRepository.save(player);
 
         log.info("Service - Data's player fetched");
