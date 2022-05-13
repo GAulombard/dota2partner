@@ -19,4 +19,6 @@ public interface PlayerRepository extends JpaRepository<Player,Integer> {
     Player findPlayerBySteamId32(Long steamId32);
 
     boolean existsBySteamId32(Long steamId32);
+
+    boolean existsBySteamId64(Long steamId64);
 }

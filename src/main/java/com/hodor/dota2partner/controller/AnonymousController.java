@@ -4,6 +4,7 @@ import com.hodor.dota2partner.dto.CreatePlayerDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +29,11 @@ public class AnonymousController {
         log.info("HTTP " + servletRequest.getMethod() +
                 " request received at " + servletRequest.getRequestURI() +
                 " - [" + (servletRequest.getRemoteUser() == null ? "anonymous user" : servletRequest.getRemoteUser()) + "]");
+
+/*        if (bindingResult.hasErrors()) {
+            log.error("binding result error" + bindingResult.getFieldError());
+            return "login";
+        }*/
 
         return "login";
     }

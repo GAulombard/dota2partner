@@ -27,7 +27,6 @@ public class PlayerServiceImpl implements PlayerService {
     @Autowired
     private FriendServiceImpl friendService;
 
-
     @Override
     public void createPlayer(CreatePlayerDTO dto) throws SteamIdNotFoundException, OpenDotaApiException, EMailAlreadyExistsException, PlayerNotFoundException {
 
@@ -42,13 +41,13 @@ public class PlayerServiceImpl implements PlayerService {
         if (dataPlayer.path("profile").path("steamid").asText().isEmpty()) {
 
             log.error("Steam ID: " + steamId32 + " does not exist");
-            throw new SteamIdNotFoundException("Steam ID: " + steamId32 + " does not exist");
+            throw new SteamIdNotFoundException("Steam ID: " + steamId32 + " does not exist, or not public account");
 
         } else {
 
             log.info("Service - Creating new player - steamId32: " + steamId32);
             player.setSteamId32(steamId32);
-            player.setCreationDate(LocalDateTime.now().plusHours(2));
+            player.setCreationDate(LocalDateTime.now());
             player.setContributor(false);
             player.setVerified(false);
             player.setRole("ROLE_USER");
@@ -89,6 +88,11 @@ public class PlayerServiceImpl implements PlayerService {
 
         log.info("Service - Data's player fetched");
 
+    }
+
+    @Override
+    public boolean isExist(Long steamId64) {
+        return playerRepository.existsBySteamId64(steamId64);
     }
 
     @Override

@@ -36,7 +36,7 @@ public class PlayerController {
     @PostMapping("/validate")
     //@ApiOperation(value = "This URI allows to save a new user in the database")
     public String createNewPlayer(@AuthenticationPrincipal Player principal,
-                                  @Valid @ModelAttribute("playerDto") CreatePlayerDTO playerDTO,
+                                  @Valid @ModelAttribute("player") CreatePlayerDTO player,
                                   BindingResult bindingResult,
                                   HttpServletRequest servletRequest) throws SteamIdNotFoundException, OpenDotaApiException, EMailAlreadyExistsException, PlayerNotFoundException {
 
@@ -46,21 +46,22 @@ public class PlayerController {
 
         if (bindingResult.hasErrors()) {
             log.error("binding result error" + bindingResult.getFieldError());
-            return "redirect:/player/validate";
+            return "signup";
         }
 
-        playerService.createPlayer(playerDTO);
+        playerService.createPlayer(player);
 
-        return "redirect:/login";
+        return "redirect:/player/home";
     }
 
     @RolesAllowed({"USER", "ADMIN"})
     @GetMapping("/home")
-    public String getHome(@AuthenticationPrincipal Player principal, Model model, HttpServletRequest servletRequest) throws OpenDotaApiException {
+    public String getHome(@AuthenticationPrincipal Player principal, Model model, HttpServletRequest servletRequest) throws OpenDotaApiException, PlayerNotFoundException {
         log.info("HTTP " + servletRequest.getMethod() +
                 " request received at " + servletRequest.getRequestURI() +
                 " - [" + (servletRequest.getRemoteUser() == null ? "anonymous user" : servletRequest.getRemoteUser()) + "]");
 
+        playerService.refreshPlayerData(principal.getSteamId32());
         Player player = playerService.getPlayer(principal.getSteamId32());
         String rankIcon = MedalUtil.getRankIconFromRankTier(player.getRankTier());
         String rankStar = MedalUtil.getRankStarFromRankTier(player.getRankTier());

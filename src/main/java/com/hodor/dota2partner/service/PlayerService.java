@@ -9,10 +9,11 @@ import com.hodor.dota2partner.model.Player;
 
 public interface PlayerService {
 
-
     void createPlayer(CreatePlayerDTO dto) throws SteamIdNotFoundException, OpenDotaApiException, EMailAlreadyExistsException, PlayerNotFoundException;
 
     void refreshPlayerData(Long steamId32) throws OpenDotaApiException, PlayerNotFoundException;
+
+    boolean isExist(Long steamId64);
 
     Player getPlayer(long steamId32);
 }

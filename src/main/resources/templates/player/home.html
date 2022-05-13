@@ -39,25 +39,25 @@
                         </div>
                         <div>
                             <p>
-                                <th:block th:if="${player.dotaPlus == true}">
-                                    <img alt="DotaPlus" height="70" th:src=@{/assets/dota_plus_icon.png} width="60">
-                                </th:block>
-                            <div class="rankTierContainer">
-                                <th:block th:if="${player.rankTier != 0}">
-                                    <img class="rankMedal-icon" alt="RankIcon" height="100"
-                                         th:src=@{'/assets/'+${rankIcon}} width="90">
-                                    <img class="rankMedal-star" alt="RankIcon" height="100"
-                                         th:src=@{'/assets/'+${rankStar}} width="90">
-                                </th:block>
-                            </div>
+                                [****LiabilityBar****]
                             </p>
                         </div>
                     </div>
                 </div>
-                <div class="well">
-                    <p>
-                        <button class="btn btn-secondary btn-md" type="submit">Refresh</button>
-                    </p>
+                <div class="well inline-flex">
+                    <div class="dotaPlusContainer">
+                        <th:block th:if="${player.dotaPlus == true}">
+                            <img alt="DotaPlus" height="70" th:src=@{/assets/dota_plus_icon.png} width="60">
+                        </th:block>
+                    </div>
+                    <div class="rankTierContainer">
+                        <th:block th:if="${player.rankTier != 0}">
+                            <img alt="RankIcon" class="rankMedal-icon" height="100"
+                                 th:src=@{'/assets/'+${rankIcon}} width="90">
+                            <img alt="RankIcon" class="rankMedal-star" height="100"
+                                 th:src=@{'/assets/'+${rankStar}} width="90">
+                        </th:block>
+                    </div>
                 </div>
                 <div class="alert alert-success fade in">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
