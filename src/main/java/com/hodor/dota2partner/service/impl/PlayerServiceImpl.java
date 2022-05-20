@@ -27,7 +27,6 @@ public class PlayerServiceImpl implements PlayerService {
     @Autowired
     private FriendServiceImpl friendService;
 
-
     @Override
     public void createPlayer(CreatePlayerDTO dto) throws SteamIdNotFoundException, OpenDotaApiException, EMailAlreadyExistsException, PlayerNotFoundException {
 
