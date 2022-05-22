@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,12 +29,18 @@ public class Player implements UserDetails {
 
     @Column(name = "steam_id_64")
     @NotNull(message = "Steam Id is mandatory")
+/*    @Pattern(regexp = "^(.*?[0-9])$",
+            message = "Password must contain only digits")*/
+    @Positive(message = "Steam ID must be a positive number")
+    @Max(value = 99999999999999999L,message = "Steam ID must contains 17 digits maximum")
     private Long steamId64;
 
     @Column(name = "steam_id_32")
     private Long steamId32;
 
     @NotEmpty(message = "Email is mandatory")
+    @Pattern(regexp = "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$",
+            message = "Email is not valid")
     @Email(message = "Email is not valid")
     @Column(name = "e_mail")
     private String email;
@@ -45,7 +50,7 @@ public class Player implements UserDetails {
 
     @Column(name = "password")
     @Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$",
-            message = "Password must contain at least 1 uppercase char, 8 characters, 1 digit, and 1 symbol")
+            message = "Safety is number one priority, password must contain at least 1 uppercase char, 1 digit, 1 symbol, and 8 characters minimum")
     @NotBlank(message = "Password is mandatory")
     private String password;
 

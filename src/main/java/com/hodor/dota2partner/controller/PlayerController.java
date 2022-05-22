@@ -36,7 +36,7 @@ public class PlayerController {
     @PostMapping("/validate")
     //@ApiOperation(value = "This URI allows to save a new user in the database")
     public String createNewPlayer(@AuthenticationPrincipal Player principal,
-                                  @Valid @ModelAttribute("playerDto") CreatePlayerDTO playerDTO,
+                                  @Valid @ModelAttribute("player") CreatePlayerDTO player,
                                   BindingResult bindingResult,
                                   HttpServletRequest servletRequest) throws SteamIdNotFoundException, OpenDotaApiException, EMailAlreadyExistsException, PlayerNotFoundException {
 
@@ -46,12 +46,12 @@ public class PlayerController {
 
         if (bindingResult.hasErrors()) {
             log.error("binding result error" + bindingResult.getFieldError());
-            return "redirect:/player/validate";
+            return "signup";
         }
 
-        playerService.createPlayer(playerDTO);
+        playerService.createPlayer(player);
 
-        return "redirect:/login";
+        return "redirect:/player/home";
     }
 
     @RolesAllowed({"USER", "ADMIN"})
