@@ -1,5 +1,7 @@
 package com.hodor.dota2partner.model;
 
+import com.hodor.dota2partner.validation.Numeric;
+import com.hodor.dota2partner.validation.SteamId64;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.springframework.security.core.GrantedAuthority;
@@ -29,8 +31,8 @@ public class Player implements UserDetails {
 
     @Column(name = "steam_id_64")
     @NotNull(message = "Steam Id is mandatory")
-/*    @Pattern(regexp = "^(.*?[0-9])$",
-            message = "Password must contain only digits")*/
+    @SteamId64
+    @Numeric
     @Positive(message = "Steam ID must be a positive number")
     @Max(value = 99999999999999999L,message = "Steam ID must contains 17 digits maximum")
     private Long steamId64;

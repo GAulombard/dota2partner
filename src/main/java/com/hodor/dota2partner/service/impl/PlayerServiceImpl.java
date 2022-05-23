@@ -91,6 +91,11 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
+    public boolean isExist(Long steamId64) {
+        return playerRepository.existsBySteamId64(steamId64);
+    }
+
+    @Override
     public Player getPlayer(long steamId32) {
         return playerRepository.findPlayerBySteamId32(steamId32);
     }
