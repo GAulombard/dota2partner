@@ -11,10 +11,38 @@ footer {
     padding: 15px;
 }
 
-.rankMedal-star {
-    position: relative;
-}
-
 .rankTierContainer {
     position: relative;
 }
+
+.rankTierContainer img {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.rankMedal-star {
+    z-index: 1;
+}
+
+.rankTierContainer {
+    z-index: 2;
+}
+
+/*
+#multicouche {
+    position: relative; !*l'élément est positionné mais il se place tout seul*!
+}
+#multicouche img {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#couche1 {
+    z-index: 1;
+}
+
+#couche2 {
+    z-index: 2;
+}*/

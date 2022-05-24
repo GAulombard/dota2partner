@@ -47,7 +47,7 @@ public class PlayerServiceImpl implements PlayerService {
 
             log.info("Service - Creating new player - steamId32: " + steamId32);
             player.setSteamId32(steamId32);
-            player.setCreationDate(LocalDateTime.now().plusHours(2));
+            player.setCreationDate(LocalDateTime.now());
             player.setContributor(false);
             player.setVerified(false);
             player.setRole("ROLE_USER");

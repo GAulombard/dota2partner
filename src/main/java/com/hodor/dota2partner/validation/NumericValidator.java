@@ -6,13 +6,13 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 @Slf4j
-public class NumericValidator implements ConstraintValidator<Numeric,Object> {
+public class NumericValidator implements ConstraintValidator<Numeric, Long> {
 
     @Override
-    public boolean isValid(Object s, ConstraintValidatorContext constraintValidatorContext) {
+    public boolean isValid(Long s, ConstraintValidatorContext constraintValidatorContext) {
 
-        log.info("test: "+s);
+        log.info("test: " + s);
 
-        return false;
+        return true;
     }
 }
