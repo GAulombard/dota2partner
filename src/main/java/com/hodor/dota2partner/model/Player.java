@@ -32,7 +32,7 @@ public class Player implements UserDetails {
     @Column(name = "steam_id_64")
     @NotNull(message = "Steam Id is mandatory")
     @SteamId64
-    @Numeric
+    //@Numeric
     @Positive(message = "Steam ID must be a positive number")
     @Max(value = 99999999999999999L,message = "Steam ID must contains 17 digits maximum")
     private Long steamId64;

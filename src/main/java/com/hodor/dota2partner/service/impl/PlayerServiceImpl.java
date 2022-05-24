@@ -41,7 +41,7 @@ public class PlayerServiceImpl implements PlayerService {
         if (dataPlayer.path("profile").path("steamid").asText().isEmpty()) {
 
             log.error("Steam ID: " + steamId32 + " does not exist");
-            throw new SteamIdNotFoundException("Steam ID: " + steamId32 + " does not exist");
+            throw new SteamIdNotFoundException("Steam ID: " + steamId32 + " does not exist, or not public account");
 
         } else {
 

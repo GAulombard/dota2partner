@@ -13,4 +13,6 @@ public interface ODPlayersService {
     ArrayNode getPeers(Long steamId32) throws OpenDotaApiException;
 
     ArrayNode getPeers(Long steamId32, String queryParameters) throws OpenDotaApiException;
+
+    boolean isExistOrPublicAccount(Long steamId64) throws OpenDotaApiException;
 }

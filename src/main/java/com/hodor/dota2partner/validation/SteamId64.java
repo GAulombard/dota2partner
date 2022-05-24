@@ -17,7 +17,7 @@ public @interface SteamId64 {
      *
      * @return the string
      */
-    String message() default "This Steam Id does not exist.";
+    String message() default "This Steam Id does not exist, or not public account.";
 
     /**
      * Groups class [ ].
