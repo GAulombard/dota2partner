@@ -1,0 +1,30 @@
+body {
+    margin: 0;
+}
+
+p {
+    text-align: justify;
+    color: white;
+}
+
+a {
+    color: white;
+}
+
+header {
+    border: 1px, solid-black;
+    background-color: black;
+}
+
+.navbar-container {
+    display: flex;
+    padding: 5px;
+}
+
+.navbar-collapse {
+    display: flex;
+}
+
+.navbar-left {
+    display: flex;
+}
