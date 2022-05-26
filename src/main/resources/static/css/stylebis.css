@@ -1,30 +1,194 @@
+/* -----------------------------GLOBAL----------------------------------------- */
+* {
+    margin: 0%;
+    padding: 0%;
+}
+
+div {
+    border: 1px solid;
+}
+
+
 body {
     margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(161, 161, 161);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Droid Sans", Ubuntu, Cantarell, "Fira Sans", Helvetica, Arial, sans-serif;
 }
 
 p {
     text-align: justify;
-    color: white;
 }
 
 a {
+    text-decoration: none;
+}
+
+
+/* -----------------------------HEADER----------------------------------------- */
+
+
+nav a {
+    color: darkgray;
+    text-decoration: none;
+}
+
+nav a:hover {
     color: white;
 }
 
-header {
-    border: 1px, solid-black;
+nav li {
+    padding: 5px;
+}
+
+nav li:hover {
     background-color: black;
 }
 
+nav ul {
+    list-style-type: none;
+}
+
 .navbar-container {
+    background-color: rgb(28, 28, 28);
     display: flex;
-    padding: 5px;
+    flex-wrap: wrap;
+    padding: 0px;
+    margin: 0px;
+    align-items: center;
+}
+
+.navbar-brand {
+    font-size: large;
+    font-weight: bold;
+    color: darkgray;
+    padding: 6px;
+    margin: 0px;
+}
+
+.navbar-brand:hover {
+    background-color: black;
 }
 
 .navbar-collapse {
     display: flex;
+    flex: auto;
+    justify-content: space-between;
+    margin: 0px;
+    padding: 0;
 }
 
 .navbar-left {
+    margin: 0;
     display: flex;
+}
+
+.navbar-right {
+    margin: 0;
+    display: flex;
+}
+
+
+/* -----------------------------------ASIDE------------------------------------ */
+aside {
+    background-color: rgb(65, 65, 65);
+    box-shadow: 0px 6px 6px black;
+    color: white;
+    margin: 0px;
+    border: 0px 0px 1px 0px solid;
+}
+
+.aside-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    align-content: center;
+}
+
+.persona-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.persona-name, .persona-avatar, .liabimity-bar {
+    margin: 2px;
+}
+
+.persona-avatar {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.avatar {
+    border-radius: 10px;
+    box-shadow: 0px 0px 25px black;
+}
+
+.player-stat-container {
+    flex: auto;
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.stats {
+    display: flex;
+    justify-content: start;
+    margin: 5px;
+}
+
+.win, .losses, .winrate {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.best-heroes {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 5px;
+}
+
+.medal-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.dota-plus {
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.dota-plus-logo {
+    width: 60%;
+
+}
+
+.rank {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.rank-icon, .rank-star {
+
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0%;
+    left: 0%;
 }
