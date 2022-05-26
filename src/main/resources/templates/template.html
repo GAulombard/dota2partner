@@ -6,210 +6,99 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" th:href=@{/css/style.css} href="/src/main/resources/static/css/style.css">
+    <link href="/src/main/resources/static/css/stylebis.css" rel="stylesheet" th:href=@{/css/stylebis.css}>
     <title>Dota 2 Partner</title>
 </head>
 
 <body>
-    <!--header-->
-    <div class="navbar navbar-inverse" id="navbar">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="navbar-header">
-                        <button class="navbar-toggle" data-target="#mobile_menu" data-toggle="collapse"><span
-                                class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="/">DOTA 2 PARTNER</a>
-                    </div>
-                    <div class="navbar-collapse collapse" id="mobile_menu">
-                        <ul class="nav navbar-nav">
-                            <li class="active"><a href="/player/home">Home</a></li>
-                            <li><a href="#">Team</a></li>
-                            <li><a href="/player/refresh-data">Refresh</a></li>
-                            <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">About Us <span
-                                    class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Help</a></li>
-                                    <li><a href="#">Contact</a></li>
-                                    <li><a href="#">Ticket</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="/player/profile"><span class="glyphicon glyphicon-user"></span>
-                                Profile</a>
-                            </li>
-                            <li><a href="#"><span class="glyphicon glyphicon-cog"></span></a></li>
-                            <li>
-                                <div class="container-fluid">
-                                    <form class="navbar-form navbar-right" role="search">
-                                        <div class="form-group input-group">
-                                            <input type="text" class="form-control" placeholder="Search..">
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-default" type="button">
-                                                    <span class="glyphicon glyphicon-search"></span>
-                                                </button>
-                                            </span>
-                                        </div>
-                                    </form>
-                                </div>
-                            </li>
-                            <li><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span
-                                    class="glyphicon glyphicon-log-in"></span><span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="/login">Login</a></li>
-                                    <li><a href="/logout">Logout</a></li>
-                                    <li><a href="/signup">Sign Up</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
+<!--header-->
+<header>
+    <nav class="navbar-container">
+        <div class="navbar-brand">
+            <a href="#">DOTA 2 PARTNER</a>
+        </div>
+        <div class="navbar-collapse" id="mobile_menu">
+            <ul class="navbar-left">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Team</a></li>
+                <li><a href="#">Help</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Ticket</a></li>
+                </li>
+            </ul>
+            <ul class="navbar-right">
+                <li><a href="#"><span class="glyphicon-user"></span>Profile</a></li>
+                <li><a href="#"><span class="glyphicon-setting"></span>Setting</a></li>
+                <li><a href="#" title="refresh-data"><span class="glyphicon-refresh"></span>Refresh</a></li>
+                <li><a href="#">Login/Signin</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<aside>
+    <div class="aside-container">
+        <div class="persona-container">
+            <div class="persona-name">
+                <h1>Hodor</h1><span class="steam-icon"></span>
+            </div>
+            <div class="persona-avatar">
+                <img class="avatar"
+                     src="/src/main/resources/static/assets/8764a0f411e89fd7483b6871e01f5da013689e87_full.jpg">
+            </div>
+            <div class="liabimity-bar">
+                <p>[------------BAR-----------]</p>
+            </div>
+        </div>
+        <div class="player-stat-container">
+            <div class="stats">
+                <div class="win">
+                    <p>win</p>
+                    <p>3000</p>
                 </div>
+                <div class="losses">
+                    <p>losses</p>
+                    <p>3000</p>
+                </div>
+                <div class="winrate">
+                    <p>win rate</p>
+                    <p>50%</p>
+                </div>
+            </div>
+            <div class="best-heroes">
+                <div class="heros1">
+                    <p>heroe1</p>
+                </div>
+                <div class="heroe2">
+                    <p>heroe2</p>
+                </div>
+                <div class="heroe3">
+                    <p>heroe3</p>
+                </div>
+                <div class="heroe4">
+                    <p>heroe4</p>
+                </div>
+                <div class="heroe5">
+                    <p>heroe5</p>
+                </div>
+            </div>
+        </div>
+        <div class="medal-container">
+            <div class="dota-plus">
+                <img class="dota-plus-logo" src="/src/main/resources/static/assets/dota_plus_icon.png">
+            </div>
+            <div class="rank">
+                <img class="rank-icon" src="/src/main/resources/static/assets/rank_icon_3.png">
+                <img class="rank-star" src="/src/main/resources/static/assets/rank_star_2.png">
             </div>
         </div>
     </div>
+</aside>
 
-    <!--body-->
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <p>Just Forgot that I had to mention something about someone to someone about how I forgot
-                        something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <p>New template 1</p>
-            </div>
-            <div class="col-sm-6">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <div class="well">
-                            <p>John</p>
-                            <img alt="Avatar" class="img-circle" height="55" src="bird.jpg" width="55">
-                        </div>
-                    </div>
-                    <div class="col-sm-9">
-                        <div class="well">
-                            <p>Just Forgot that I had to mention something about someone to someone about how I forgot
-                                something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <p>New template 3</p>
-            </div>
-        </div>
+<!-- footer -->
+<footer>
 
-    </div>
-
-    <!-- footer -->
-    <div class="text-center text-lg-start bg-light text-muted">
-
-        <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-
-            <div class="me-5 d-none d-lg-block">
-                <span>Get connected with us on social networks:</span>
-            </div>
-            <div>
-                <a href="" class="me-4 text-reset">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="" class="me-4 text-reset">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="" class="me-4 text-reset">
-                    <i class="fab fa-google"></i>
-                </a>
-                <a href="" class="me-4 text-reset">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="" class="me-4 text-reset">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="" class="me-4 text-reset">
-                    <i class="fab fa-github"></i>
-                </a>
-            </div>
-
-        </section>
-        <section class="">
-            <div class="container text-center text-md-start mt-5">
-                <div class="row mt-3">
-                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            <i class="fas fa-gem me-3"></i>Company name
-                        </h6>
-                        <p>
-                            Here you can use rows and columns to organize your footer content. Lorem ipsum
-                            dolor sit amet, consectetur adipisicing elit.
-                        </p>
-                    </div>
-                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            Products
-                        </h6>
-                        <p>
-                            <a href="#!" class="text-reset">Angular</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">React</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Vue</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Laravel</a>
-                        </p>
-                    </div>
-                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            Useful links
-                        </h6>
-                        <p>
-                            <a href="#!" class="text-reset">Pricing</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Settings</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Orders</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Help</a>
-                        </p>
-                    </div>
-                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            Contact
-                        </h6>
-                        <p><i class="fas fa-home me-3"></i> New York, NY 10012, US</p>
-                        <p>
-                            <i class="fas fa-envelope me-3"></i>
-                            info@example.com
-                        </p>
-                        <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
-                        <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-            © 2021 Copyright:
-            <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-        </div>
-    </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</footer>
 </body>
 
 </html>
