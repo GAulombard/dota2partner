@@ -6,7 +6,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet">
     <link href="/src/main/resources/static/css/stylebis.css" rel="stylesheet" th:href=@{/css/stylebis.css}>
+    <link href="/src/main/resources/static/css/hint.css" rel="stylesheet" th:href=@{/css/hint.css}>
     <title>Dota 2 Partner</title>
 </head>
 
@@ -19,7 +22,7 @@
         </div>
         <div class="navbar-collapse" id="mobile_menu">
             <ul class="navbar-left">
-                <li><a href="#">Home</a></li>
+                <li><a href="#">home</a></li>
                 <li><a href="#">Team</a></li>
                 <li><a href="#">Help</a></li>
                 <li><a href="#">Contact</a></li>
@@ -27,10 +30,13 @@
                 </li>
             </ul>
             <ul class="navbar-right">
-                <li><a href="#"><span class="glyphicon-user"></span>Profile</a></li>
-                <li><a href="#"><span class="glyphicon-setting"></span>Setting</a></li>
-                <li><a href="#" title="refresh-data"><span class="glyphicon-refresh"></span>Refresh</a></li>
-                <li><a href="#">Login/Signin</a></li>
+                <li><a href="#"><span class="material-icons hint--bottom"
+                                      data-hint="Your profile page">person</span></a></li>
+                <li><a href="#"><span class="material-icons hint--bottom" data-hint="Refresh data">refresh</span></a>
+                </li>
+                <li><a href="#"><span class="material-icons hint--bottom" data-hint="Settings">settings</span></a></li>
+                <li><a href="#"><span class="material-icons hint--bottom"
+                                      data-hint="Log in or out">power_settings_new</span></a></li>
             </ul>
         </div>
     </nav>
@@ -39,18 +45,23 @@
 <aside>
     <div class="aside-container">
         <div class="persona-container">
-            <div class="persona-name">
-                <h1>Hodor</h1><span class="steam-icon"></span>
-            </div>
-            <div class="persona-role">
-                <p>Support - p5</p>
+            <div class="persona-name-header">
+                <div class="persona-name">
+                    <p>Hodor</p><span class="steam-icon"></span>
+                    <div class="persona-role">
+                        <p>Support - p5</p>
+                    </div>
+                </div>
+                <div class="verified-icon">
+                    <span class="material-icons w3-xxxlarge hint--right" data-hint="Verified administrator">admin_panel_settings</span>
+                </div>
             </div>
             <div class="persona-avatar">
                 <img class="avatar"
                      src="/src/main/resources/static/assets/8764a0f411e89fd7483b6871e01f5da013689e87_full.jpg">
             </div>
-            <div class="liabimity-bar">
-                <p>[------------BAR-----------]</p>
+            <div class="w3-light-grey hint--right" data-hint="Reliability bar">
+                <div class="w3-container w3-green w3-center" style="width:75%">75%</div>
             </div>
         </div>
         <div class="player-stat-container">
@@ -69,47 +80,52 @@
                 </div>
             </div>
             <div class="best-heroes-title">
-                <p>best-heroes</p>
+                <p>BEST HEROES AVERAGE</p>
                 <p>(last 50 games played)</p>
             </div>
             <div class="best-heroes">
                 <div class="heroe">
-                    <p>Invoker</p>
+                    <h6>Invoker</h6>
                     <img class="heroe-icon" src="/src/main/resources/static/assets/invoker.png">
-                    <p>50.5%</p>
-                    <p>5 / 8 / 30</p>
+                    <p>350 MP</p>
+                    <p>50.5% WR</p>
+                    <p>5/8/30 KDA</p>
                 </div>
                 <div class="heroe">
-                    <p>Earth Spirit</p>
+                    <h6>Earth Spirit</h6>
                     <img class="heroe-icon" src="/src/main/resources/static/assets/earth_spirit.png">
-                    <p>50.5%</p>
-                    <p>5 / 8 / 30</p>
+                    <p>350 MP</p>
+                    <p>50.5% WR</p>
+                    <p>5/8/30 KDA</p>
                 </div>
                 <div class="heroe">
-                    <p>Pudge</p>
+                    <h6>Pudge</h6>
                     <img class="heroe-icon" src="/src/main/resources/static/assets/pudge.png">
-                    <p>50.5%</p>
-                    <p>5 / 8 / 30</p>
+                    <p>350 MP</p>
+                    <p>50.5% WR</p>
+                    <p>5/8/30 KDA</p>
                 </div>
                 <div class="heroe">
-                    <p>Dark Willow</p>
+                    <h6>Dark Willow</h6>
                     <img class="heroe-icon" src="/src/main/resources/static/assets/dark_willow.png">
-                    <p>50.5%</p>
-                    <p>5 / 8 / 30</p>
+                    <p>350 MP</p>
+                    <p>50.5% WR</p>
+                    <p>5/8/30 KDA</p>
                 </div>
                 <div class="heroe">
-                    <p>Witch Doctor</p>
+                    <h6>Witch Doctor</h6>
                     <img class="heroe-icon" src="/src/main/resources/static/assets/witch_doctor.png">
-                    <p>50.5%</p>
-                    <p>5 / 8 / 30</p>
+                    <p>350 MP</p>
+                    <p>50.5% WR</p>
+                    <p>5/8/30 KDA</p>
                 </div>
             </div>
         </div>
         <div class="medal-container">
-            <div class="dota-plus">
+            <div class="dota-plus hint--top" data-hint="Dota Plus subscriber">
                 <img class="dota-plus-logo" src="/src/main/resources/static/assets/dota_plus_icon.png">
             </div>
-            <div class="rank">
+            <div class="rank hint--top" data-hint="Crusader 2">
                 <img class="rank-icon" src="/src/main/resources/static/assets/rank_icon_3.png">
                 <img class="rank-star" src="/src/main/resources/static/assets/rank_star_2.png">
             </div>
