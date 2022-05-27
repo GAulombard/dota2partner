@@ -4,9 +4,9 @@
     padding: 0%;
 }
 
-div {
+/* div {
     border: 1px solid;
-}
+} */
 
 
 body {
@@ -95,7 +95,7 @@ nav ul {
 aside {
     background-color: rgb(65, 65, 65);
     box-shadow: 0px 6px 6px black;
-    color: white;
+    color: darkgray;
     margin: 0px;
     border: 0px 0px 1px 0px solid;
 }
@@ -109,7 +109,6 @@ aside {
     margin-right: 10%;
     margin-top: 10px;
     margin-bottom: 10px;
-    align-content: center;
 }
 
 .persona-container {
@@ -118,8 +117,12 @@ aside {
     align-items: center;
 }
 
-.persona-name, .persona-avatar, .liabimity-bar {
+.persona-name,.persona-role, .persona-avatar, .liabimity-bar {
     margin: 2px;
+}
+
+.persona-role {
+    font-size: small;
 }
 
 .persona-avatar {
@@ -146,20 +149,51 @@ aside {
     margin: 5px;
 }
 
-.win, .losses, .winrate {
+.player-stat-container-name {
+    color: beige;
+    font-size: small;
+}
+
+.wins:nth-child(1) {
+    color: green;
+}
+
+.losses:nth-child(2) {
+    color: rgb(216, 0, 0);
+}
+
+.player-stat-container-value {
+    font-size: x-large;
+}
+
+
+.wins, .losses, .winrate {
     margin-left: 10px;
     margin-right: 10px;
 }
 
-.best-heroes {
+.best-heroes, .best-heroes-title {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
     margin: 5px;
 }
 
+.heroe {
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+    align-items: center;
+}
+
+.heroe-icon {
+    width: 100%;
+    height: auto;
+}
+
 .medal-container {
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
 }
