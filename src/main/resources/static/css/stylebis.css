@@ -101,7 +101,7 @@ nav li:hover {
 /* -----------------------------------ASIDE------------------------------------ */
 aside {
     background-color: rgb(65, 65, 65);
-    box-shadow: 0px 6px 6px black;
+    box-shadow: 0px 5px 10px black;
     color: darkgray;
     margin: 0px;
     border: 0px 0px 1px 0px solid;
@@ -281,8 +281,8 @@ aside {
 .main-section {
     margin-top: 20px;
     margin-bottom: 20px;
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-left: 5%;
+    margin-right: 5%;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -368,6 +368,13 @@ aside {
     color: black;
 }
 
+.middle-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
 .player-avatar {
     margin-top: 5px;
     margin-bottom: 5px;
@@ -380,7 +387,11 @@ aside {
 .avatar-player {
     border-radius: 5px;
     box-shadow: 0px 0px 25px black;
-    width: 160px;
+    width: 120px;
+}
+
+.right-arrow, .left-arrow {
+    margin: 8px;
 }
 
 .verified-icon-user-green {
@@ -389,4 +400,49 @@ aside {
 
 .verified-icon-user-red {
     color: darkred;
+}
+
+.partners-main-container, .partner-list {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.partner-container {
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+
+}
+
+.partner-avatar-sm {
+    width: 50px;
+    border-radius: 2px;
+    box-shadow: 0px 0px 10px black;
+}
+
+.partner-title, .player-title {
+    padding: 3px;
+    width: 100%;
+    background-color: rgb(65, 65, 65);
+    color: darkgray;
+    box-shadow: 0px 0px 5px black;
+}
+
+/* -------------------------------------footer ---------------------------- */
+.footer-container {
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(28, 28, 28);
+    color: darkgray;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    padding: 10px;
+    box-shadow: 0px 0px 10px black;
 }
