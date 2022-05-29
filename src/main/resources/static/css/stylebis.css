@@ -188,7 +188,7 @@ aside {
 }
 
 .losses:nth-child(2) {
-    color: rgb(216, 0, 0);
+    color: darkred;
 }
 
 .player-stat-container-value {
@@ -313,11 +313,13 @@ aside {
     border-radius: 5px;
     box-shadow: 0px 0px 10px black;
     width: 90px;
+    margin: 10px;
 }
 
 .radiant-team, .dire-team {
     display: flex;
     flex-direction: row;
+    margin: 5px;
 }
 
 .heroe-match-icon {
@@ -382,6 +384,7 @@ aside {
 
 .profile-button {
     margin-top: 5px;
+    font-size: small;
 }
 
 .avatar-player {
