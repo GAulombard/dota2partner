@@ -24,6 +24,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                                     "/",
                                     "/css/**",
                                     "/player/validate",
+                                    "/assets/*",
                                     "/api/**",
                                     "/login",
                                     "/signup",

@@ -6,163 +6,455 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" th:href=@{/css/style.css}>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet">
+    <link href="/src/main/resources/static/css/style.css" rel="stylesheet" th:href=@{/css/style.css}>
+    <link href="/src/main/resources/static/css/hint.css" rel="stylesheet" th:href=@{/css/hint.css}>
     <title>Dota 2 Partner</title>
 </head>
 
 <body>
-<div class="d-flex">
 
-    <div th:replace="fragments/navbar"></div>
 
-    <div class="container text-center" id="main">
-        <div class="row">
-            <div class="col-sm-3 well">
-                <div class="well">
-                    <div class="row justify-between">
-                        <div>
-                            <p style="font-size:28px">
-                            <td th:text=${player.personaName}>
-                            </p>
-                            <p>Win:
-                            <td th:text=${player.win}></td>
-                            Loss:
-                            <td th:text=${player.loss}></td>
-                            </p>
-                            <p>WinRate:
-                            <td th:text=${player.winRate}></td>
-                            %</p>
-                        </div>
-                        <div>
-                            <img alt="Avatar" class="img-circle" height="135" th:src="${player.avatarFull}" width="135">
-                        </div>
-                        <div>
-                            <p>
-                                [****LiabilityBar****]
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="well" id="medalContainer">
-                    <div class="dotaPlusContainer">
-                        <th:block th:if="${player.dotaPlus == true}">
-                            <img alt="DotaPlus" height="70" th:src=@{/assets/dota_plus_icon.png} width="60">
-                        </th:block>
-                    </div>
-                    <div class="rankTierContainer" data-hint="test" style="position: relative">
-                        <th:block th:if="${player.rankTier != 0}">
-                            <img alt="RankIcon" class="rankMedal-icon" height="100"
-                                 style="position:absolute;z-index:1;" th:src=@{'/assets/'+${rankIcon}} width="90">
-                            <img alt="RankIcon" class="rankMedal-star" height="100"
-                                 style="position:absolute;z-index:2;" th:src=@{'/assets/'+${rankStar}} width="90">
-                        </th:block>
-                    </div>
-                </div>
-                <div class="alert alert-success fade in">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                    <p><strong>Ey!</strong></p>
-                    People are looking at your profile. Find out who.
-                </div>
-                <p>Partners</p>
-                <th:block th:each="friend: ${friendList}">
-                    <p><a href="#" th:text="${friend.personaName}"></a></p>
-                </th:block>
-            </div>
-            <div class="col-sm-7">
+<div th:replace="fragments/navbar"></div>
 
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="panel panel-default text-left">
-                            <div class="panel-body">
-                                <p contenteditable="true">Status: Feeling Blue</p>
-                                <button type="button" class="btn btn-default btn-sm">
-                                    <span class="glyphicon glyphicon-thumbs-up"></span> Like
-                                </button>
-                            </div>
-                        </div>
+<aside>
+    <div class="aside-container">
+        <div class="persona-container">
+            <div class="persona-name-header">
+                <div class="persona-name">
+                    <p>
+                    <td th:text=${player.personaName}>
+                    </p><span class="steam-icon"></span>
+                    <div class="persona-role">
+                        <p>Support - p5</p>
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="col-sm-3">
-                        <div class="well">
-                            <p>John</p>
-                            <img src="bird.jpg" class="img-circle" height="55" width="55" alt="Avatar">
-                        </div>
-                    </div>
-                    <div class="col-sm-9">
-                        <div class="well">
-                            <p>Just Forgot that I had to mention something about someone to someone about how I forgot
-                                something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-3">
-                        <div class="well">
-                            <p>Bo</p>
-                            <img src="bandmember.jpg" class="img-circle" height="55" width="55" alt="Avatar">
-                        </div>
-                    </div>
-                    <div class="col-sm-9">
-                        <div class="well">
-                            <p>Just Forgot that I had to mention something about someone to someone about how I forgot
-                                something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-3">
-                        <div class="well">
-                            <p>Jane</p>
-                            <img src="bandmember.jpg" class="img-circle" height="55" width="55" alt="Avatar">
-                        </div>
-                    </div>
-                    <div class="col-sm-9">
-                        <div class="well">
-                            <p>Just Forgot that I had to mention something about someone to someone about how I forgot
-                                something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-3">
-                        <div class="well">
-                            <p>Anja</p>
-                            <img src="bird.jpg" class="img-circle" height="55" width="55" alt="Avatar">
-                        </div>
-                    </div>
-                    <div class="col-sm-9">
-                        <div class="well">
-                            <p>Just Forgot that I had to mention something about someone to someone about how I forgot
-                                something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
-                        </div>
-                    </div>
+                <div class="verified-icon-admin-green">
+                        <span class="material-icons w3-xxxlarge hint--right"
+                              data-hint="Verified administrator">admin_panel_settings</span>
                 </div>
             </div>
-            <div class="col-sm-2 well">
-                <div class="thumbnail">
-                    <p>Upcoming Events:</p>
-                    <img src="paris.jpg" alt="Paris" width="400" height="300">
-                    <p><strong>Paris</strong></p>
-                    <p>Fri. 27 November 2015</p>
-                    <button class="btn btn-primary">Info</button>
+            <div class="persona-avatar">
+                <img class="avatar"
+                     th:src="${player.avatarFull}">
+            </div>
+            <div class="w3-light-grey hint--right" data-hint="Reliability bar">
+                <div class="w3-container w3-green w3-center" style="width:75%">75%</div>
+            </div>
+        </div>
+        <div class="player-stat-container">
+            <div class="stats">
+                <div class="wins">
+                    <p class="player-stat-container-name">WINS</p>
+                    <p class="player-stat-container-value">
+                    <td th:text=${player.win}></td>
+                    </p>
                 </div>
-                <div class="well">
-                    <p>ADS</p>
+                <div class="losses">
+                    <p class="player-stat-container-name">LOSSES</p>
+                    <p class="player-stat-container-value">
+                    <td th:text=${player.loss}></td>
+                    </p>
                 </div>
-                <div class="well">
-                    <p>ADS</p>
+                <div class="winrate">
+                    <p class="player-stat-container-name">WINRATE</p>
+                    <p class="player-stat-container-value">
+                    <td th:text=${player.winRate}></td>
+                    </p>
                 </div>
-                <div class="well">
-                    <p>ADS</p>
+            </div>
+            <div class="best-heroes-title">
+                <p>BEST HEROES AVERAGE</p>
+                <p>(last 50 games played)</p>
+            </div>
+            <div class="best-heroes">
+                <div class="heroe">
+                    <h6>Invoker</h6>
+                    <div class="hint--bottom" data-hint="Invoker data stats" data-html="true"><img
+                            class="heroe-icon" th:src=@{/assets/invoker.png}>
+                    </div>
+                    <p class="hint--right" data-hint="Matches played">350 MP</p>
+                    <p class="hint--right" data-hint="Win rate">50.5% WR</p>
+                    <p class="hint--right" data-hint="Average KDA for the last 50 games">5/8/30 KDA</p>
+                </div>
+                <div class="heroe">
+                    <h6>Earth Spirit</h6>
+                    <img class="heroe-icon" th:src=@{/assets/earth_spirit.png}>
+                    <p>350 MP</p>
+                    <p>50.5% WR</p>
+                    <p>5/8/30 KDA</p>
+                </div>
+                <div class="heroe">
+                    <h6>Pudge</h6>
+                    <img class="heroe-icon" th:src=@{/assets/pudge.png}>
+                    <p>350 MP</p>
+                    <p>50.5% WR</p>
+                    <p>5/8/30 KDA</p>
+                </div>
+                <div class="heroe">
+                    <h6>Dark Willow</h6>
+                    <img class="heroe-icon" th:src=@{/assets/dark_willow.png}>
+                    <p>350 MP</p>
+                    <p>50.5% WR</p>
+                    <p>5/8/30 KDA</p>
+                </div>
+                <div class="heroe">
+                    <h6>Witch Doctor</h6>
+                    <img class="heroe-icon" th:src=@{/assets/witch_doctor.png}>
+                    <p>350 MP</p>
+                    <p>50.5% WR</p>
+                    <p>5/8/30 KDA</p>
+                </div>
+            </div>
+        </div>
+        <div class="medal-container" th:if="${player.dotaPlus == true || player.rankTier != 0}">
+            <div class="hint--bottom" data-hint="Dota plus subscriber" th:if="${player.dotaPlus == true}">
+                <div class="dota-plus">
+                    <img class="dota-plus-logo" th:src=@{/assets/dota_plus_icon.png}>
+                </div>
+            </div>
+            <div class="hint--bottom" data-hint="Crusader [2]" th:if="${player.rankTier != 0}">
+                <div class="rank hint--top" data-hint="Crusader 2">
+                    <img class="rank-icon" th:src=@{'/assets/'+${rankIcon}}>
+                    <img class="rank-star" th:src=@{'/assets/'+${rankStar}}>
                 </div>
             </div>
         </div>
     </div>
-    <div th:replace="fragments/footer"></div>
-</div>
+</aside>
+
+<!-- MAIN SECTION -->
+<div class="main-section">
+    <div class="center-column">
+        <div class="matche-history">
+            <div class="partner-matche">
+                <img class="partner-avatar"
+                     th:src=@{/assets/8764a0f411e89fd7483b6871e01f5da013689e87_full.jpg}>
+            </div>
+            <div class="radiant-team">
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/dark_willow.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/witch_doctor.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/earth_spirit.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/pudge.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/invoker.png}>
+                </div>
+            </div>
+            <div class="versus">
+                <p>V.S</p>
+            </div>
+            <div class="dire-team">
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/witch_doctor.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/dark_willow.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/invoker.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/earth_spirit.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/pudge.png}>
+                </div>
+            </div>
+        </div>
+        <div class="matche-history">
+            <div class="partner-matche">
+                <img class="partner-avatar"
+                     th:src=@{/assets/8764a0f411e89fd7483b6871e01f5da013689e87_full.jpg}>
+            </div>
+            <div class="radiant-team">
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/dark_willow.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/witch_doctor.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/earth_spirit.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/pudge.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/invoker.png}>
+                </div>
+            </div>
+            <div class="versus">
+                <p>V.S</p>
+            </div>
+            <div class="dire-team">
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/witch_doctor.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/dark_willow.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/invoker.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/earth_spirit.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/pudge.png}>
+                </div>
+            </div>
+        </div>
+        <div class="matche-history">
+            <div class="partner-matche">
+                <img class="partner-avatar"
+                     th:src=@{/assets/8764a0f411e89fd7483b6871e01f5da013689e87_full.jpg}>
+            </div>
+            <div class="radiant-team">
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/dark_willow.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/witch_doctor.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/earth_spirit.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/pudge.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/invoker.png}>
+                </div>
+            </div>
+            <div class="versus">
+                <p>V.S</p>
+            </div>
+            <div class="dire-team">
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/witch_doctor.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/dark_willow.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/invoker.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/earth_spirit.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/pudge.png}>
+                </div>
+            </div>
+        </div>
+        <div class="matche-history">
+            <div class="partner-matche">
+                <img class="partner-avatar"
+                     th:src=@{/assets/8764a0f411e89fd7483b6871e01f5da013689e87_full.jpg}>
+            </div>
+            <div class="radiant-team">
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/dark_willow.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/witch_doctor.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/earth_spirit.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/pudge.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/invoker.png}>
+                </div>
+            </div>
+            <div class="versus">
+                <p>V.S</p>
+            </div>
+            <div class="dire-team">
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/witch_doctor.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/dark_willow.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/invoker.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/earth_spirit.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/pudge.png}>
+                </div>
+            </div>
+        </div>
+        <div class="matche-history">
+            <div class="partner-matche">
+                <img class="partner-avatar"
+                     th:src=@{/assets/8764a0f411e89fd7483b6871e01f5da013689e87_full.jpg}>
+            </div>
+            <div class="radiant-team">
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/dark_willow.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/witch_doctor.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/earth_spirit.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/pudge.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/invoker.png}>
+                </div>
+            </div>
+            <div class="versus">
+                <p>V.S</p>
+            </div>
+            <div class="dire-team">
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/witch_doctor.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/dark_willow.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/invoker.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/earth_spirit.png}>
+                </div>
+                <div class="heroe-match">
+                    <img class="heroe-match-icon" th:src=@{/assets/pudge.png}>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="right-column">
+        <div class="player-list">
+            <div class="player-title">
+                <p>Partners matching preferences</p>
+            </div>
+            <div class="player-main-container">
+                <div class="player-container">
+                    <div class="player-name-header">
+                        <div class="player-name">
+                            <p>Hodor</p><span class="steam-icon"></span>
+                            <div class="player-role">
+                                <p>Support - P5</p>
+                            </div>
+                        </div>
+                        <div class="verified-icon-user-green">
+                                <span class="material-icons w3-xxxlarge hint--right"
+                                      data-hint="Verified user">verified_user</span>
+                        </div>
+                    </div>
+                    <div class="middle-container">
+                        <div class="left-arrow">
+                            <a href="#"><span class="material-icons hint--bottom"
+                                              data-hint="Previous">arrow_circle_left
+                                    </span></a>
+                        </div>
+                        <div class="player-avatar">
+                            <img class="avatar-player"
+                                 th:src=@{/assets/8764a0f411e89fd7483b6871e01f5da013689e87_full.jpg}>
+                        </div>
+                        <div class="right-arrow">
+                            <a href="#"><span class="material-icons hint--bottom"
+                                              data-hint="Next">arrow_circle_right
+                                    </span></a>
+                        </div>
+                    </div>
+                    <div class="w3-light-grey hint--right" data-hint="Reliability bar">
+                        <div class="w3-container w3-green w3-center" style="width:75%">75%</div>
+                    </div>
+                </div>
+            </div>
+            <div class="player-main-container">
+                <div class="player-container">
+                    <div class="player-name-header">
+                        <div class="player-name">
+                            <p>Hodor</p><span class="steam-icon"></span>
+                            <div class="player-role">
+                                <p>Core - P1</p>
+                            </div>
+                        </div>
+                        <div class="verified-icon-user-red">
+                                <span class="material-icons w3-xxxlarge hint--right"
+                                      data-hint="Unverified user">verified_user</span>
+                        </div>
+                    </div>
+                    <div class="middle-container">
+                        <div class="left-arrow">
+                            <a href="#"><span class="material-icons hint--bottom"
+                                              data-hint="Previous">arrow_circle_left
+                                    </span></a>
+                        </div>
+                        <div class="player-avatar">
+                            <img class="avatar-player"
+                                 th:src=@{/assets/8764a0f411e89fd7483b6871e01f5da013689e87_full.jpg}>
+                        </div>
+                        <div class="right-arrow">
+                            <a href="#"><span class="material-icons hint--bottom"
+                                              data-hint="Next">arrow_circle_right
+                                    </span></a>
+                        </div>
+                    </div>
+                    <div class="w3-light-grey hint--right" data-hint="Reliability bar">
+                        <div class="w3-container w3-orange w3-center" style="width:15%">15%</div>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-button">
+                <a class="w3-button w3-black" href="#">See more</a>
+            </div>
+        </div>
+        <div class="partners-main-container">
+            <div class="partner-title">
+                <p>Partners</p>
+            </div>
+            <div class="partner-list">
+                <div class="partner-container" th:each="friend: ${friendList}">
+                    <div class="partner-avatar-sm">
+                        <img class="partner-avatar-sm"
+                             th:src=${friend.avatarFull}>
+                    </div>
+                    <div class="partner-infos">
+                        <p th:text="${friend.personaName}"></p>
+                        <div class="partner-stats">
+                            <div class="partner-mp hint--bottom" data-hint="Matches played with">
+                                <p>250 MP</p>
+                            </div>
+                            <div class="partner-wr hint--bottom" data-hint="Win rate with">
+                                <p>52.4% WR</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-button">
+                <a class="w3-button w3-black" href="#">See more partners</a>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+<div th:replace="fragments/footer"></div>
+
 </body>
 </html>
 

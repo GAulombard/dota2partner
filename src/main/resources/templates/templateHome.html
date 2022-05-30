@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet">
-    <link href="/src/main/resources/static/css/stylebis.css" rel="stylesheet" th:href=@{/css/stylebis.css}>
+    <link href="/src/main/resources/static/css/style.css" rel="stylesheet" th:href=@{/css/style.css}>
     <link href="/src/main/resources/static/css/hint.css" rel="stylesheet" th:href=@{/css/hint.css}>
     <title>Dota 2 Partner</title>
 </head>
@@ -22,7 +22,7 @@
         </div>
         <div class="navbar-collapse" id="mobile_menu">
             <ul class="navbar-left">
-                <li><a href="#">Home</a></li>
+                <li><a href="/player/home">Home</a></li>
                 <li><a href="#">Team</a></li>
                 <li><a href="#">Help</a></li>
                 <li><a href="#">Contact</a></li>
@@ -33,8 +33,8 @@
                 <li><a href="#"><span class="material-icons hint--bottom" data-hint="Search">search</span></a></li>
                 <li><a href="#"><span class="material-icons hint--bottom"
                                       data-hint="Your profile page">person</span></a></li>
-                <li><a href="#"><span class="material-icons hint--bottom"
-                                      data-hint="Refresh data">refresh</span></a>
+                <li><a href="/player/refresh-data"><span class="material-icons hint--bottom"
+                                                         data-hint="Refresh data">refresh</span></a>
                 </li>
                 <li><a href="#"><span class="material-icons hint--bottom" data-hint="Settings">settings</span></a>
                 </li>
@@ -456,11 +456,16 @@
                         <img class="partner-avatar-sm"
                              src="/src/main/resources/static/assets/8764a0f411e89fd7483b6871e01f5da013689e87_full.jpg">
                     </div>
-                    <div class="partner-mp hint--bottom" data-hint="Matches played with">
-                        <p>250 MP</p>
-                    </div>
-                    <div class="partner-wr hint--bottom" data-hint="Win rate with">
-                        <p>52.4% WR</p>
+                    <div class="partner-infos">
+                        <p>Hodor</p>
+                        <div class="partner-stats">
+                            <div class="partner-mp hint--bottom" data-hint="Matches played with">
+                                <p>250 MP</p>
+                            </div>
+                            <div class="partner-wr hint--bottom" data-hint="Win rate with">
+                                <p>52.4% WR</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="partner-container">
