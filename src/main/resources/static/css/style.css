@@ -26,6 +26,93 @@ a {
     text-decoration: none;
 }
 
+/* -----------------------------FLEX PATTERN AND GLOBAL DESIGN----------------------------------------- */
+.main-container {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.flex-row-around {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+}
+
+.flex-column-around {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.flex-2 {
+    flex: 2;
+}
+
+.flex-3 {
+    flex: 3;
+}
+
+.flex-4 {
+    flex: 4;
+}
+
+.flex-5 {
+    flex: 5;
+}
+
+.flex-6 {
+    flex: 6;
+}
+
+.flex-7 {
+    flex: 7;
+}
+
+.flex-8 {
+    flex: 8;
+}
+
+.flex-9 {
+    flex: 9;
+}
+
+.flex-10 {
+    flex: 10;
+}
+
+.flex-11 {
+    flex: 11;
+}
+
+.flex-12 {
+    flex: 12;
+}
+
+.flex-auto {
+    flex: auto;
+}
+
+.box-shadow-10-black {
+    box-shadow: 0px 0px 10px black;
+}
+
+.box-shadow-10-darkred {
+    box-shadow: 0px 0px 10px darkred;
+}
 
 /* -----------------------------HEADER----------------------------------------- */
 
@@ -54,8 +141,6 @@ nav ul {
     background-color: rgb(28, 28, 28);
     display: flex;
     flex-wrap: wrap;
-    padding: 0px;
-    margin: 0px;
     align-items: center;
 }
 
@@ -64,7 +149,6 @@ nav ul {
     font-weight: bold;
     color: darkgray;
     padding: 6px;
-    margin: 0px;
 }
 
 .navbar-brand:hover {
@@ -77,8 +161,6 @@ nav ul {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    margin: 0px;
-    padding: 0;
 }
 
 .navbar-left {
@@ -118,25 +200,7 @@ aside {
     background-color: rgb(65, 65, 65);
     box-shadow: 0px 5px 10px rgb(80, 0, 0);
     color: darkgray;
-    margin: 0px;
     border: 0px 0px 1px 0px solid;
-}
-
-.aside-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.persona-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .verified-icon-admin-green {
@@ -148,11 +212,7 @@ aside {
 }
 
 .persona-name-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
     width: 100%;
-    align-items: center
 }
 
 .w3-light-grey {
