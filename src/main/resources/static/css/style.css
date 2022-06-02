@@ -10,8 +10,6 @@
 
 
 body {
-    margin: 0;
-    padding: 0;
     display: flex;
     flex-direction: column;
     background-color: rgb(161, 161, 161);
@@ -39,6 +37,16 @@ a {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+}
+
+.flex-row-center {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
     align-content: center;
     text-align: center;
@@ -277,24 +285,15 @@ aside {
 }
 
 .best-heroes {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
     margin: 5px;
 }
 
 .best-heroes-title {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
     margin-top: 5px;
 }
 
 .heroe {
-    display: flex;
-    flex-direction: column;
     width: 100px;
-    align-items: center;
     margin: 0px 5px 5px 5px;
 }
 
@@ -310,18 +309,10 @@ aside {
     box-shadow: 0px 0px 10px black;
 }
 
-.medal-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
 .dota-plus {
     position: relative;
     width: 100px;
     height: 100px;
-    text-align: center;
     overflow: hidden;
 }
 
@@ -338,7 +329,6 @@ aside {
     width: 100px;
     height: 100px;
     overflow: hidden;
-    text-align: center;
 }
 
 .rank-icon, .rank-star {
@@ -353,34 +343,18 @@ aside {
 
 
 /* ---------------------------------------SECTION--------------------------------------------- */
-.main-section {
-    margin-top: 20px;
-    margin-bottom: 20px;
+.main {
     margin-left: 5%;
     margin-right: 5%;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-around;
     align-items: flex-start;
+    padding-top: 10px;
 }
 
 .center-column {
-    margin: 10px;
     margin-right: 20px;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-    flex: 11;
 }
 
 .matche-history {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
     margin-bottom: 20px;
 }
 
@@ -392,8 +366,7 @@ aside {
 }
 
 .radiant-team, .dire-team {
-    display: flex;
-    flex-direction: row;
+    flex-wrap: nowrap;
     margin: 5px;
 }
 
@@ -404,12 +377,7 @@ aside {
 }
 
 .right-column {
-    margin: 5px;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-    flex: 1;
+    margin: 10px;
 }
 
 .player-main-container {
@@ -418,9 +386,6 @@ aside {
 
 .player-container {
     margin: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .player-name, .player-role, .player-avatar {
@@ -428,11 +393,7 @@ aside {
 }
 
 .player-name-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
     width: 100%;
-    align-items: center
 }
 
 .player-name {
@@ -443,13 +404,6 @@ aside {
 .player-role {
     font-size: small;
     color: black;
-}
-
-.middle-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
 }
 
 .player-avatar {
@@ -482,18 +436,11 @@ aside {
 
 .partners-main-container, .partner-list {
     margin: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
 }
 
 .partner-container {
     margin: 10px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
+    flex-wrap: nowrap;
     width: 100%;
 
 }
@@ -513,9 +460,6 @@ aside {
 }
 
 .partner-infos {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
     align-items: flex-start;
     width: 180px;
 }
@@ -524,21 +468,10 @@ aside {
     width: 90px;
 }
 
-.partner-stats {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-}
-
 /* -------------------------------------footer ---------------------------- */
 .footer-container {
-    display: flex;
-    flex-direction: row;
     background-color: rgb(28, 28, 28);
     color: darkgray;
-    align-items: center;
-    align-content: center;
-    text-align: center;
     padding: 10px;
     box-shadow: 0px 0px 10px black;
 }
