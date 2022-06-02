@@ -1,4 +1,4 @@
-package com.hodor.dota2partner.model;
+package com.hodor.dota2partner.entity;
 
 import lombok.*;
 

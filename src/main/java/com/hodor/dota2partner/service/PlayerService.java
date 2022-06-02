@@ -5,7 +5,7 @@ import com.hodor.dota2partner.exception.OpenDotaApiException;
 import com.hodor.dota2partner.exception.PlayerNotFoundException;
 import com.hodor.dota2partner.exception.SteamIdNotFoundException;
 import com.hodor.dota2partner.dto.CreatePlayerDTO;
-import com.hodor.dota2partner.model.Player;
+import com.hodor.dota2partner.entity.Player;
 
 public interface PlayerService {
 

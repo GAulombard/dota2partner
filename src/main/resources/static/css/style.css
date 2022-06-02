@@ -26,8 +26,8 @@ a {
 
 /* -----------------------------FLEX PATTERN AND GLOBAL DESIGN----------------------------------------- */
 .main-container {
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-left: 15%;
+    margin-right: 15%;
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -344,8 +344,8 @@ aside {
 
 /* ---------------------------------------SECTION--------------------------------------------- */
 .main {
-    margin-left: 5%;
-    margin-right: 5%;
+    margin-left: 10%;
+    margin-right: 10%;
     align-items: flex-start;
     padding-top: 10px;
 }

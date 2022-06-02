@@ -1,7 +1,5 @@
-package com.hodor.dota2partner.model;
+package com.hodor.dota2partner.entity;
 
-import com.hodor.dota2partner.validation.Numeric;
-import com.hodor.dota2partner.validation.SteamId64;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.springframework.security.core.GrantedAuthority;

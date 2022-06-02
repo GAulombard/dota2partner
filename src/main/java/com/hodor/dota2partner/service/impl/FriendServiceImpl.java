@@ -2,7 +2,7 @@ package com.hodor.dota2partner.service.impl;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.hodor.dota2partner.exception.OpenDotaApiException;
-import com.hodor.dota2partner.model.Player;
+import com.hodor.dota2partner.entity.Player;
 import com.hodor.dota2partner.repository.FriendRepository;
 import com.hodor.dota2partner.repository.PlayerRepository;
 import com.hodor.dota2partner.service.FriendService;

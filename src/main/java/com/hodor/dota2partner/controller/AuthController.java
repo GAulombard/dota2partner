@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @Slf4j
-public class AnonymousController {
+public class AuthController {
 
 
     @GetMapping({"/index", "/"})

@@ -2,7 +2,7 @@ package com.hodor.dota2partner.service.impl;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.hodor.dota2partner.exception.*;
-import com.hodor.dota2partner.model.Player;
+import com.hodor.dota2partner.entity.Player;
 import com.hodor.dota2partner.dto.CreatePlayerDTO;
 import com.hodor.dota2partner.repository.PlayerRepository;
 import com.hodor.dota2partner.serviceopendotaapi.ODPlayersService;

@@ -1,7 +1,7 @@
 package com.hodor.dota2partner.service.impl;
 
 import com.hodor.dota2partner.dto.PlayerDTO;
-import com.hodor.dota2partner.model.Player;
+import com.hodor.dota2partner.entity.Player;
 import com.hodor.dota2partner.dto.CreatePlayerDTO;
 import com.hodor.dota2partner.service.DtoConverterService;
 import org.springframework.beans.factory.annotation.Autowired;
