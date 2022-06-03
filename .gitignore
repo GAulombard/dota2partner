@@ -33,3 +33,7 @@ build/
 .vscode/
 /logs/
 /javadoc/
+
+env.properties
+/.jpb/
+/.mvn/

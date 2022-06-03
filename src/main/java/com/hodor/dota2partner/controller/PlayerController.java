@@ -27,32 +27,10 @@ import java.util.List;
 @RequestMapping("/player")
 public class PlayerController {
 
-    //TODO: swagger doc
     @Autowired
     private PlayerService playerService;
     @Autowired
     private FriendService friendService;
-
-    @PostMapping("/validate")
-    //@ApiOperation(value = "This URI allows to save a new user in the database")
-    public String createNewPlayer(@AuthenticationPrincipal Player principal,
-                                  @Valid @ModelAttribute("player") CreatePlayerDTO player,
-                                  BindingResult bindingResult,
-                                  HttpServletRequest servletRequest) throws SteamIdNotFoundException, OpenDotaApiException, EMailAlreadyExistsException, PlayerNotFoundException {
-
-        log.info("HTTP " + servletRequest.getMethod() +
-                " request received at " + servletRequest.getRequestURI() +
-                " - [" + (servletRequest.getRemoteUser() == null ? "anonymous user" : servletRequest.getRemoteUser()) + "]");
-
-        if (bindingResult.hasErrors()) {
-            log.error("binding result error" + bindingResult.getFieldError());
-            return "signup";
-        }
-
-        playerService.createPlayer(player);
-
-        return "redirect:/player/home";
-    }
 
     @RolesAllowed({"USER", "ADMIN"})
     @GetMapping("/home")

@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 @Service
@@ -26,37 +27,6 @@ public class PlayerServiceImpl implements PlayerService {
     private DtoConverterServiceImpl dtoConverterService;
     @Autowired
     private FriendServiceImpl friendService;
-
-    @Override
-    public void createPlayer(CreatePlayerDTO dto) throws SteamIdNotFoundException, OpenDotaApiException, EMailAlreadyExistsException, PlayerNotFoundException {
-
-        Player player = dtoConverterService.CreatePlayerDTOToPlayer(dto);
-
-        if (playerRepository.existsByEmail(player.getEmail()))
-            throw new EMailAlreadyExistsException("E-Mail " + player.getEmail() + " already exists");
-
-        long steamId32 = Calculator.steamId64toSteamId32(dto.getSteamId64());
-        ObjectNode dataPlayer = oDPlayersService.getPlayerData(steamId32);
-
-        if (dataPlayer.path("profile").path("steamid").asText().isEmpty()) {
-
-            log.error("Steam ID: " + steamId32 + " does not exist");
-            throw new SteamIdNotFoundException("Steam ID: " + steamId32 + " does not exist, or not public account");
-
-        } else {
-
-            log.info("Service - Creating new player - steamId32: " + steamId32);
-            player.setSteamId32(steamId32);
-            player.setCreationDate(LocalDateTime.now());
-            player.setContributor(false);
-            player.setVerified(false);
-            player.setRole("ROLE_USER");
-            playerRepository.save(player);
-            log.info("Service - Player created");
-            refreshPlayerData(steamId32);
-
-        }
-    }
 
     @Override
     public void refreshPlayerData(Long steamId32) throws OpenDotaApiException, PlayerNotFoundException {
@@ -82,7 +52,7 @@ public class PlayerServiceImpl implements PlayerService {
         player.setWin(winLossCount.path("win").asInt());
         player.setLoss(winLossCount.path("lose").asInt());
         player.setWinRate(Calculator.winRateCalculator(player.getWin(), player.getLoss()));
-        player.setLastLogin(LocalDateTime.now().plusHours(2));
+        player.setLastLogin(Instant.now());
         player.setDotaPlus(dataPlayer.path(profile).path("plus").asText().equals("true"));
         playerRepository.save(player);
 

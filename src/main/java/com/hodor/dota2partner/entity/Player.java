@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -71,10 +72,10 @@ public class Player implements UserDetails {
     private String countryCode;
 
     @Column(name = "creation_date")
-    private LocalDateTime creationDate;
+    private Instant creationDate;
 
     @Column(name = "last_login")
-    private LocalDateTime lastLogin;
+    private Instant lastLogin;
 
     @ManyToMany
     @JoinTable(

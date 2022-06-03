@@ -1,6 +1,5 @@
 package com.hodor.dota2partner.dto;
 
-import com.hodor.dota2partner.validation.Numeric;
 import com.hodor.dota2partner.validation.SteamId64;
 import lombok.*;
 
@@ -15,7 +14,6 @@ public class CreatePlayerDTO implements Serializable {
 
     @NotNull(message = "Steam Id is mandatory")
     @SteamId64
-    //@Numeric
     @Positive(message = "Steam ID must be a positive number")
     @Max(value = 99999999999999999L,message = "Steam ID must contains 17 digits maximum")
     private Long steamId64;
