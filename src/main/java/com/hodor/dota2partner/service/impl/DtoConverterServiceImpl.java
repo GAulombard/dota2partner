@@ -4,16 +4,17 @@ import com.hodor.dota2partner.dto.PlayerDTO;
 import com.hodor.dota2partner.entity.Player;
 import com.hodor.dota2partner.dto.CreatePlayerDTO;
 import com.hodor.dota2partner.service.DtoConverterService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
 @Service
+@AllArgsConstructor
 public class DtoConverterServiceImpl implements DtoConverterService {
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public Player CreatePlayerDTOToPlayer(CreatePlayerDTO dto) {

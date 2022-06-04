@@ -9,6 +9,7 @@ import com.hodor.dota2partner.dto.CreatePlayerDTO;
 import com.hodor.dota2partner.service.FriendService;
 import com.hodor.dota2partner.service.PlayerService;
 import com.hodor.dota2partner.util.MedalUtil;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -24,13 +25,12 @@ import java.util.List;
 
 @Controller
 @Slf4j
+@AllArgsConstructor
 @RequestMapping("/player")
 public class PlayerController {
 
-    @Autowired
-    private PlayerService playerService;
-    @Autowired
-    private FriendService friendService;
+    private final PlayerService playerService;
+    private final FriendService friendService;
 
     @RolesAllowed({"USER", "ADMIN"})
     @GetMapping("/home")

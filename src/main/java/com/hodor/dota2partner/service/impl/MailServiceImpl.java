@@ -4,6 +4,7 @@ import com.hodor.dota2partner.entity.NotificationEmail;
 import com.hodor.dota2partner.exception.ActivationMailException;
 import com.hodor.dota2partner.service.MailContentService;
 import com.hodor.dota2partner.service.MailService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
@@ -15,12 +16,11 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
+@AllArgsConstructor
 public class MailServiceImpl implements MailService {
 
-    @Autowired
-    private JavaMailSender javaMailSender;
-    @Autowired
-    private MailContentService mailContentService;
+    private final JavaMailSender javaMailSender;
+    private final MailContentService mailContentService;
 
     @Override
     @Async

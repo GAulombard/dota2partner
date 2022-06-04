@@ -3,34 +3,29 @@ package com.hodor.dota2partner.service.impl;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.hodor.dota2partner.exception.*;
 import com.hodor.dota2partner.entity.Player;
-import com.hodor.dota2partner.dto.CreatePlayerDTO;
 import com.hodor.dota2partner.repository.PlayerRepository;
 import com.hodor.dota2partner.serviceopendotaapi.ODPlayersService;
 import com.hodor.dota2partner.service.PlayerService;
 import com.hodor.dota2partner.util.Calculator;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
-import java.time.LocalDateTime;
 
 @Service
 @Slf4j
+@AllArgsConstructor
 public class PlayerServiceImpl implements PlayerService {
 
-    @Autowired
-    private PlayerRepository playerRepository;
-    @Autowired
-    private ODPlayersService oDPlayersService;
-    @Autowired
-    private DtoConverterServiceImpl dtoConverterService;
-    @Autowired
-    private FriendServiceImpl friendService;
+    private final PlayerRepository playerRepository;
+    private final ODPlayersService oDPlayersService;
 
     @Override
     @Async
+    @Transactional
     public void refreshPlayerData(Long steamId32) throws OpenDotaApiException, PlayerNotFoundException {
 
         log.info("Service - fetching data's player - " + steamId32);
@@ -63,11 +58,13 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public boolean isExist(Long steamId64) {
         return playerRepository.existsBySteamId64(steamId64);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Player getPlayer(long steamId32) {
         return playerRepository.findPlayerBySteamId32(steamId32);
     }

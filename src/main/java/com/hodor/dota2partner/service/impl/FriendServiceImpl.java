@@ -7,25 +7,26 @@ import com.hodor.dota2partner.repository.FriendRepository;
 import com.hodor.dota2partner.repository.PlayerRepository;
 import com.hodor.dota2partner.service.FriendService;
 import com.hodor.dota2partner.serviceopendotaapi.impl.ODPlayersServiceImpl;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
 @Service
+@AllArgsConstructor
 public class FriendServiceImpl implements FriendService {
 
-    @Autowired
-    private FriendRepository friendRepository;
-    @Autowired
-    private ODPlayersServiceImpl odPlayersService;
-    @Autowired
-    private PlayerRepository playerRepository;
+
+    private final ODPlayersServiceImpl odPlayersService;
+    private final PlayerRepository playerRepository;
 
     @Override
+    @Transactional(readOnly = true)
     public List<Player> searchFriend(long steamId32) throws OpenDotaApiException {
         log.info("Service - searching for friends");
         List<Player> friendList = new ArrayList<>();

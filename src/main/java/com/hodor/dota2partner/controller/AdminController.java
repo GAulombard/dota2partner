@@ -1,5 +1,6 @@
 package com.hodor.dota2partner.controller;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @Slf4j
 @RequestMapping("/admin")
+@AllArgsConstructor
 public class AdminController {
 
     @RolesAllowed({"ADMIN"})

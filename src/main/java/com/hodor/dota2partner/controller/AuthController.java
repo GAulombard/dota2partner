@@ -5,6 +5,7 @@ import com.hodor.dota2partner.entity.Player;
 import com.hodor.dota2partner.exception.*;
 import com.hodor.dota2partner.service.AuthService;
 import com.hodor.dota2partner.service.PlayerService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -18,13 +19,11 @@ import javax.validation.Valid;
 
 @Controller
 @Slf4j
+@AllArgsConstructor
 @RequestMapping("/api/auth")
 public class AuthController {
 
-    @Autowired
-    private AuthService authService;
-    @Autowired
-    private PlayerService playerService;
+    private final AuthService authService;
 
     @GetMapping("/signup")
     public String getSignupForm(HttpServletRequest servletRequest, Model model) {
