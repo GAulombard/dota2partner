@@ -1,7 +1,6 @@
 <!doctype html>
 
-<html lang="en" xmlns:th="http://wwww.thymeleaf.org" class="h-100"
-      xmlns:sec="http://thymeleaf.org/extras/spring-security">
+<html class="h-100" lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -30,8 +29,8 @@
                             <form class="form-login" method="post" th:action="@{/api/auth/login}"
                                   th:object="${loginRequest}">
                                 <p>
-                                    <label for="username" class="sr-only">Email</label>
-                                    <input class="form-control" id="username" name="username" th:field="*{email}"
+                                    <label class="sr-only" for="email">Email</label>
+                                    <input class="form-control" id="email" name="email" th:field="*{email}"
                                            type="text"
                                            placeholder="Enter your email" required="" autofocus="" autocomplete="off"
                                            style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAXtJREFUOBGVUj2LwkAUnIjBICIIKe8gWKRKo2BvYXMgWNlYWZ3gn1B/htekibWVcH1aIVV+wQULCxsRtMrtrGYv8RLUB8nuvjczu+9DWywWH3EcL8X3jidM07QfAfucz+ffhJdeIZNwu+iLexoFnrr5Cr/+05xSOvBoX61WYdt2BvaSgGVZ6PV6+QKGYahApVKBKJY6p2PKeduUufb7fbTbbaxWKxwOB0ynU+x2O7ium4ndk3l+KYU8AW02m8UM8Jnn81limMLlcsnDK59IMRKHiXpBQibiEZkY0co3sSxlDegoMsdx0O12Ua/XEUUR1us1jsejhFNEvaBIgK07nU4IwxDNZhOdTicDLXO205OViYrDZrORLg5Qq9VSdUpwJSEwoUjiuF+FOEzTxGAwwH6/x3a7zUD+piXjBpLukDwej2XenufJdNLQhzUYjUao1WpoNBpywIbDYZqPwi6wz6xyEATQdV2ROKmJEVMoIECszdL3ffb7n5EsnJNf8S6HAZZBgLIAAAAASUVORK5CYII=&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">

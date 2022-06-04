@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @Slf4j
-@RequestMapping("/admin")
+@RequestMapping("/api/admin")
 @AllArgsConstructor
 public class AdminController {
 

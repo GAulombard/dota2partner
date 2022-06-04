@@ -103,7 +103,7 @@ public class AuthController {
         AuthenticationResponseDTO authenticationResponseDTO = authService.login(loginRequestDTO);
         log.info("Authentication response: " + authenticationResponseDTO.getAuthenticationToken() + " " + authenticationResponseDTO.getEmail());
 
-        return "redirect:/player/home";
+        return "redirect:/api/player/home";
     }
 
 }

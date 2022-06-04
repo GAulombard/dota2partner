@@ -27,7 +27,7 @@ import java.util.List;
 @Controller
 @Slf4j
 @AllArgsConstructor
-@RequestMapping("/player")
+@RequestMapping("/api/player")
 public class PlayerController {
 
     private final PlayerService playerService;
@@ -65,7 +65,7 @@ public class PlayerController {
 
         playerService.refreshPlayerData(principal.getSteamId32());
 
-        return "redirect:/player/home";
+        return "redirect:/api/player/home";
     }
 
     @RolesAllowed({"USER", "ADMIN"})

@@ -1,32 +1,34 @@
 <header xmlns:sec="http://www.w3.org/1999/xhtml">
     <nav class="navbar-container">
         <div class="navbar-brand">
-            <a href="#">DOTA 2 PARTNER</a>
+            <a th:href="@{/index}">DOTA 2 PARTNER</a>
         </div>
         <div class="navbar-collapse" id="mobile_menu">
             <ul class="navbar-left">
-                <li><a th:href="@{/player/home}">Home</a></li>
-                <li><a href="#">Team</a></li>
-                <li><a href="#">Help</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">Ticket</a></li>
+                <li><a th:href="@{/api/player/home}">Home</a></li>
+                <li><a th:href="@{#}">Team</a></li>
+                <li><a th:href="@{#}">Help</a></li>
+                <li><a th:href="@{#}">Contact</a></li>
+                <li><a th:href="@{#}">Ticket</a></li>
                 </li>
             </ul>
             <ul class="navbar-right">
-                <li><a href="#"><span class="material-icons hint--bottom" data-hint="Search">search</span></a></li>
-                <li><a href="#"><span class="material-icons hint--bottom"
-                                      data-hint="Your profile page">person</span></a></li>
-                <li><a href="/player/refresh-data"><span class="material-icons hint--bottom"
-                                                         data-hint="Refresh data">refresh</span></a>
+                <li><a th:href="@{#}"><span class="material-icons hint--bottom" data-hint="Search">search</span></a>
                 </li>
-                <li><a href="#"><span class="material-icons hint--bottom" data-hint="Settings">settings</span></a>
+                <li><a th:href="@{#}"><span class="material-icons hint--bottom"
+                                            data-hint="Your profile page">person</span></a></li>
+                <li><a th:href="@{/api/player/refresh-data}"><span class="material-icons hint--bottom"
+                                                                   data-hint="Refresh data">refresh</span></a>
+                </li>
+                <li><a th:href="@{#}"><span class="material-icons hint--bottom" data-hint="Settings">settings</span></a>
                 </li>
                 <li class="w3-dropdown-hover">
                     <span class="w3-button material-icons">power_settings_new</span>
                     <div class="w3-dropdown-content w3-bar-block w3-card-4" style="right: 0;">
-                        <a class="w3-bar-item w3-button" href="/api/auth/login" sec:authorize="isAnonymous()">Login</a>
-                        <a class="w3-bar-item w3-button" href="/logout" sec:authorize="isAuthenticated()">Logout</a>
-                        <a class="w3-bar-item w3-button" href="/api/auth/signup">Signup</a>
+                        <a class="w3-bar-item w3-button" sec:authorize="isAnonymous()" th:href="@{/api/auth/login}">Login</a>
+                        <a class="w3-bar-item w3-button" sec:authorize="isAuthenticated()"
+                           th:href="@{/logout}">Logout</a>
+                        <a class="w3-bar-item w3-button" th:href="@{/api/auth/signup}">Signup</a>
                     </div>
                 </li>
             </ul>
