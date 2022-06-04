@@ -87,6 +87,8 @@ public class AuthController {
                 " request received at " + servletRequest.getRequestURI() +
                 " - [" + (servletRequest.getRemoteUser() == null ? "anonymous user" : servletRequest.getRemoteUser()) + "]");
 
+        //todo:implement validation form to check if player found or not, etc...
+
         return "login";
     }
 

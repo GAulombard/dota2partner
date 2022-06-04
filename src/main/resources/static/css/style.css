@@ -211,8 +211,12 @@ aside {
     border: 0px 0px 1px 0px solid;
 }
 
-.verified-icon-admin-green {
+.verified-icon-admin-darkgreen {
     color: darkgreen;
+}
+
+.verified-icon-admin-darkred {
+    color: darkred;
 }
 
 .persona-name, .persona-role, .persona-avatar, .w3-light-grey {
@@ -426,11 +430,11 @@ aside {
     margin: 8px;
 }
 
-.verified-icon-user-green {
+.verified-icon-user-darkgreen {
     color: darkgreen;
 }
 
-.verified-icon-user-red {
+.verified-icon-user-darkred {
     color: darkred;
 }
 

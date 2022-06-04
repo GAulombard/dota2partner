@@ -1,4 +1,4 @@
-<header>
+<header xmlns:sec="http://www.w3.org/1999/xhtml">
     <nav class="navbar-container">
         <div class="navbar-brand">
             <a href="#">DOTA 2 PARTNER</a>
@@ -24,7 +24,8 @@
                 <li class="w3-dropdown-hover">
                     <span class="w3-button material-icons">power_settings_new</span>
                     <div class="w3-dropdown-content w3-bar-block w3-card-4" style="right: 0;">
-                        <a class="w3-bar-item w3-button" href="/api/auth/login">Login</a>
+                        <a class="w3-bar-item w3-button" href="/api/auth/login" sec:authorize="isAnonymous()">Login</a>
+                        <a class="w3-bar-item w3-button" href="/logout" sec:authorize="isAuthenticated()">Logout</a>
                         <a class="w3-bar-item w3-button" href="/api/auth/signup">Signup</a>
                     </div>
                 </li>

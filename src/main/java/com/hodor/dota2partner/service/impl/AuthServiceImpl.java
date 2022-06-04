@@ -12,6 +12,7 @@ import com.hodor.dota2partner.service.AuthService;
 import com.hodor.dota2partner.service.MailService;
 import com.hodor.dota2partner.serviceopendotaapi.ODPlayersService;
 import com.hodor.dota2partner.util.Calculator;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,18 +25,14 @@ import java.util.UUID;
 
 @Service
 @Slf4j
+@AllArgsConstructor
 public class AuthServiceImpl implements AuthService {
 
-    @Autowired
-    private PlayerRepository playerRepository;
-    @Autowired
-    private ODPlayersService oDPlayersService;
-    @Autowired
-    private DtoConverterServiceImpl dtoConverterService;
-    @Autowired
-    private VerificationTokenRepository verificationTokenRepository;
-    @Autowired
-    private MailService mailService;
+    private final PlayerRepository playerRepository;
+    private final ODPlayersService oDPlayersService;
+    private final DtoConverterServiceImpl dtoConverterService;
+    private final VerificationTokenRepository verificationTokenRepository;
+    private final MailService mailService;
 
     @Override
     @Transactional
@@ -75,18 +72,20 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
+    @Transactional
     public boolean verifyAccount(String token) throws TokenVerificationException {
         Optional<VerificationToken> verificationToken = verificationTokenRepository.findByToken(token);
 
         verificationToken.orElseThrow(() -> new TokenVerificationException("Invalid Token"));
-
+        //todo: check expiry date
         fetchPlayerAndActivate(verificationToken.get());
+        //todo: delete token from DB
 
         return true;
     }
 
-    @Transactional
     @Override
+    @Transactional
     public void fetchPlayerAndActivate(VerificationToken verificationToken) {
         Player player = verificationToken.getPlayer();
         player.setVerified(true);
@@ -95,7 +94,9 @@ public class AuthServiceImpl implements AuthService {
 
     }
 
-    private String generateVerificationToken(Player player) {
+    @Override
+    @Transactional
+    public String generateVerificationToken(Player player) {
         String token = UUID.randomUUID().toString();
         VerificationToken verificationToken = new VerificationToken();
         verificationToken.setToken(token);

@@ -10,6 +10,7 @@ import com.hodor.dota2partner.service.PlayerService;
 import com.hodor.dota2partner.util.Calculator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -29,6 +30,7 @@ public class PlayerServiceImpl implements PlayerService {
     private FriendServiceImpl friendService;
 
     @Override
+    @Async
     public void refreshPlayerData(Long steamId32) throws OpenDotaApiException, PlayerNotFoundException {
 
         log.info("Service - fetching data's player - " + steamId32);
