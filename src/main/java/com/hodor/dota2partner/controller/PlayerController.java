@@ -12,6 +12,7 @@ import com.hodor.dota2partner.util.MedalUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,8 +33,9 @@ public class PlayerController {
     private final PlayerService playerService;
     private final FriendService friendService;
 
+    //, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
     @RolesAllowed({"USER", "ADMIN"})
-    @GetMapping("/home")
+    @GetMapping(value = "/home")
     public String getHome(@AuthenticationPrincipal Player principal, Model model, HttpServletRequest servletRequest) throws OpenDotaApiException, PlayerNotFoundException {
         log.info("HTTP " + servletRequest.getMethod() +
                 " request received at " + servletRequest.getRequestURI() +

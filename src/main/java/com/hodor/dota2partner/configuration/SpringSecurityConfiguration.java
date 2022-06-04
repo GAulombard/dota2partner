@@ -50,19 +50,21 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 })
                 .authorizeRequests()
                 .anyRequest().authenticated()
-               /* .and()
-                .formLogin()
-                .loginPage("/api/auth/login")
-                .successHandler(authenticationSuccessHandler())
                 .and()
+                //.log
+                //.formLogin()
+                //.loginPage("/api/auth/login")
+                //.successHandler(authenticationSuccessHandler())
+                //.and()
                 .httpBasic()
                 .and()
                 .csrf().disable()
                 .exceptionHandling()
+                .accessDeniedPage("/error/403")
                 .and()
                 .logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/")*/;
+                .logoutSuccessUrl("/");
     }
 
     @Override

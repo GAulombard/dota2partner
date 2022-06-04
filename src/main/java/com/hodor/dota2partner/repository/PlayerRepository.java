@@ -13,7 +13,7 @@ public interface PlayerRepository extends JpaRepository<Player,Integer> {
 
     boolean existsByEmail(@NotEmpty(message = "Email is mandatory") @Email(message = "Email is not valid") String email);
 
-    Optional<Player> findPlayerByEmail(String eMail);
+    Optional<Player> findPlayerByEmail(String email);
 
     Player findPlayerBySteamId32(Long steamId32);
 

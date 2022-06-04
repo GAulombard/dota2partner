@@ -41,7 +41,7 @@ public class Player implements UserDetails {
     @Pattern(regexp = "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$",
             message = "Email is not valid")
     @Email(message = "Email is not valid")
-    @Column(name = "e_mail")
+    @Column(name = "email")
     private String email;
 
     @Column(name = "persona_name")

@@ -1,15 +1,13 @@
 package com.hodor.dota2partner.controller;
 
-import com.hodor.dota2partner.dto.AuthenticationResponse;
+import com.hodor.dota2partner.dto.AuthenticationResponseDTO;
 import com.hodor.dota2partner.dto.CreatePlayerDTO;
-import com.hodor.dota2partner.dto.LoginRequest;
+import com.hodor.dota2partner.dto.LoginRequestDTO;
 import com.hodor.dota2partner.entity.Player;
 import com.hodor.dota2partner.exception.*;
 import com.hodor.dota2partner.service.AuthService;
-import com.hodor.dota2partner.service.PlayerService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -78,30 +76,34 @@ public class AuthController {
                 " request received at " + servletRequest.getRequestURI() +
                 " - [" + (servletRequest.getRemoteUser() == null ? "anonymous user" : servletRequest.getRemoteUser()) + "]");
 
-
         return "index";
     }
 
     @GetMapping({"/login"})
-    public String getLoginPage(HttpServletRequest servletRequest) {
+    public String getLoginPage(HttpServletRequest servletRequest, Model model) {
+        log.info("HTTP " + servletRequest.getMethod() +
+                " request received at " + servletRequest.getRequestURI() +
+                " - [" + (servletRequest.getRemoteUser() == null ? "anonymous user" : servletRequest.getRemoteUser()) + "]");
+
+        model.addAttribute("loginRequest", new LoginRequestDTO());
+
+
+        return "login";
+    }
+
+    @PostMapping(value = "/login")
+    public String login(@Valid @ModelAttribute("loginRequest") LoginRequestDTO loginRequestDTO, HttpServletRequest servletRequest) throws PrivateKeyException {
+
         log.info("HTTP " + servletRequest.getMethod() +
                 " request received at " + servletRequest.getRequestURI() +
                 " - [" + (servletRequest.getRemoteUser() == null ? "anonymous user" : servletRequest.getRemoteUser()) + "]");
 
         //todo:implement validation form to check if player found or not, etc...
 
-        return "login";
-    }
+        AuthenticationResponseDTO authenticationResponseDTO = authService.login(loginRequestDTO);
+        log.info("Authentication response: " + authenticationResponseDTO.getAuthenticationToken() + " " + authenticationResponseDTO.getEmail());
 
-    @PostMapping("/login")
-    public AuthenticationResponse login(@RequestBody LoginRequest loginRequest, HttpServletRequest servletRequest) throws PrivateKeyException {
-
-        log.info("HTTP " + servletRequest.getMethod() +
-                " request received at " + servletRequest.getRequestURI() +
-                " - [" + (servletRequest.getRemoteUser() == null ? "anonymous user" : servletRequest.getRemoteUser()) + "]");
-
-        return authService.login(loginRequest);
-
+        return "redirect:/player/home";
     }
 
 }

@@ -1,0 +1,40 @@
+<!doctype html>
+
+<html class="h-100" lang="en" xmlns:sec="http://thymeleaf.org/extras/spring-security"
+      xmlns:th="http://wwww.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet">
+    <link href="/src/main/resources/static/css/style.css" rel="stylesheet" th:href=@{/css/style.css}>
+    <link href="/src/main/resources/static/css/hint.css" rel="stylesheet" th:href=@{/css/hint.css}>
+    <title>Dota 2 Partner</title>
+</head>
+
+<body>
+<div class="d-flex">
+
+    <div th:replace="fragments/navbar"></div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-12">
+                <div class="card my-3 shadow">
+                    <div class="card-body">
+                        <h2 class="card-title">403 - ERROR</h2><br>
+                        <h4 class="card-title">Access denied</h4><br>
+
+                        <button class="btn btn-info" onclick="javascript:history.back()" type="button">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="fragments/footer"></div>
+</div>
+</body>
+</html>
+

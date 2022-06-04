@@ -1,8 +1,8 @@
 package com.hodor.dota2partner.service;
 
-import com.hodor.dota2partner.dto.AuthenticationResponse;
+import com.hodor.dota2partner.dto.AuthenticationResponseDTO;
 import com.hodor.dota2partner.dto.CreatePlayerDTO;
-import com.hodor.dota2partner.dto.LoginRequest;
+import com.hodor.dota2partner.dto.LoginRequestDTO;
 import com.hodor.dota2partner.entity.Player;
 import com.hodor.dota2partner.entity.VerificationToken;
 import com.hodor.dota2partner.exception.*;
@@ -17,5 +17,5 @@ public interface AuthService {
 
     String generateVerificationToken(Player player);
 
-    AuthenticationResponse login(LoginRequest loginRequest) throws PrivateKeyException;
+    AuthenticationResponseDTO login(LoginRequestDTO loginRequestDTO) throws PrivateKeyException;
 }

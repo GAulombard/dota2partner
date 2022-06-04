@@ -1,9 +1,9 @@
 package com.hodor.dota2partner.service.impl;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.hodor.dota2partner.dto.AuthenticationResponse;
+import com.hodor.dota2partner.dto.AuthenticationResponseDTO;
 import com.hodor.dota2partner.dto.CreatePlayerDTO;
-import com.hodor.dota2partner.dto.LoginRequest;
+import com.hodor.dota2partner.dto.LoginRequestDTO;
 import com.hodor.dota2partner.entity.NotificationEmail;
 import com.hodor.dota2partner.entity.Player;
 import com.hodor.dota2partner.entity.VerificationToken;
@@ -17,7 +17,6 @@ import com.hodor.dota2partner.serviceopendotaapi.ODPlayersService;
 import com.hodor.dota2partner.util.Calculator;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -26,7 +25,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
-import java.time.temporal.TemporalAmount;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -117,12 +115,12 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public AuthenticationResponse login(LoginRequest loginRequest) throws PrivateKeyException {
+    public AuthenticationResponseDTO login(LoginRequestDTO loginRequestDTO) throws PrivateKeyException {
         Authentication authenticate = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(),loginRequest.getPassword()));
+                new UsernamePasswordAuthenticationToken(loginRequestDTO.getEmail(), loginRequestDTO.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authenticate);
         String token = jwtProvider.generateToken(authenticate);
 
-        return new AuthenticationResponse(token, loginRequest.getEmail());
+        return new AuthenticationResponseDTO(token, loginRequestDTO.getEmail());
     }
 }

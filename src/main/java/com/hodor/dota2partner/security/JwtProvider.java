@@ -3,6 +3,7 @@ package com.hodor.dota2partner.security;
 import com.hodor.dota2partner.entity.Player;
 import com.hodor.dota2partner.exception.PrivateKeyException;
 import io.jsonwebtoken.Jwts;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ import java.security.*;
 import java.security.cert.CertificateException;
 
 @Service
+@Slf4j
 public class JwtProvider {
 
     private KeyStore keyStore;
@@ -38,6 +40,7 @@ public class JwtProvider {
 
     private PrivateKey getPrivateKey() throws PrivateKeyException {
         try {
+            log.info("generating token");
             return (PrivateKey) keyStore.getKey("dota2partner","@KeyStore03330".toCharArray());
         } catch (KeyStoreException | NoSuchAlgorithmException | UnrecoverableKeyException e) {
             throw new PrivateKeyException("Exception occurred while retrieving public key from keystore");
