@@ -38,5 +38,4 @@ env.properties
 /.jpb/
 /.mvn/
 
-src/main/resources/keystore.jks
-/dota2partner.jks
+/src/main/resources/dota2partner.jks

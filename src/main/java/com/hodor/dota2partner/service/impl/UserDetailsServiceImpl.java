@@ -33,16 +33,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) {
         log.info("Process to authentication - email: "+email);
         Optional<Player> user = playerRepository.findPlayerByEmail(email);
-        Player player = user.
-                orElseThrow(() -> new PlayerEmailNotFoundException("Player email: "
-                        +email+" not found - authentication failed"));
 
-        return new org.springframework.security.core.userdetails.User(player.getEmail(), player.getPassword(),
-                player.isEnabled(), true,true,true,
-                getAuthorities("USER"));
+        return user.orElseThrow(() -> new PlayerEmailNotFoundException("Player email: "+email+" not found - authentication failed"));
     }
 
-    private Collection<? extends GrantedAuthority> getAuthorities(String role) {
-        return singletonList(new SimpleGrantedAuthority(role));
-    }
 }

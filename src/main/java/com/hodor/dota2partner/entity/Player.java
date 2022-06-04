@@ -99,8 +99,8 @@ public class Player implements UserDetails {
     @Column(name = "contributor")
     private boolean contributor;
 
-    @Column(name = "verified")
-    private boolean verified;
+    @Column(name = "enabled")
+    private boolean enabled;
 
     @Column(name = "deleted")
     private boolean deleted;
@@ -145,11 +145,4 @@ public class Player implements UserDetails {
     public boolean isCredentialsNonExpired() {
         return true;
     }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
-
-
 }

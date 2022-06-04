@@ -31,22 +31,22 @@
                     </div>
                 </div>
                 <div class="verified-icon-admin-darkgreen"
-                     th:if="${player.role == 'ROLE_ADMIN' && player.verified == true}">
+                     th:if="${player.role == 'ROLE_ADMIN' && player.enabled == true}">
                         <span class="material-icons w3-xxxlarge hint--right"
                               data-hint="Verified administrator">admin_panel_settings</span>
                 </div>
                 <div class="verified-icon-admin-darkred"
-                     th:if="${player.role == 'ROLE_ADMIN' && player.verified == false}">
+                     th:if="${player.role == 'ROLE_ADMIN' && player.enabled == false}">
                         <span class="material-icons w3-xxxlarge hint--right"
                               data-hint="Unverified administrator">admin_panel_settings</span>
                 </div>
                 <div class="verified-icon-user-darkgreen"
-                     th:if="${player.role == 'ROLE_USER' && player.verified == true}">
+                     th:if="${player.role == 'ROLE_USER' && player.enabled == true}">
                         <span class="material-icons w3-xxxlarge hint--right"
                               data-hint="Verified user">verified_user</span>
                 </div>
                 <div class="verified-icon-user-darkred"
-                     th:if="${player.role == 'ROLE_USER' && player.verified == false}">
+                     th:if="${player.role == 'ROLE_USER' && player.enabled == false}">
                         <span class="material-icons w3-xxxlarge hint--right"
                               data-hint="Unverified user">verified_user</span>
                 </div>

@@ -66,7 +66,7 @@ public class AuthServiceImpl implements AuthService {
             player.setSteamId32(steamId32);
             player.setCreationDate(Instant.now());
             player.setContributor(false);
-            player.setVerified(false);
+            player.setEnabled(false);
             player.setRole("ROLE_USER");
             playerRepository.save(player);
             log.info("Service - Player created");
@@ -97,7 +97,7 @@ public class AuthServiceImpl implements AuthService {
     @Transactional
     public void fetchPlayerAndActivate(VerificationToken verificationToken) {
         Player player = verificationToken.getPlayer();
-        player.setVerified(true);
+        player.setEnabled(true);
         playerRepository.save(player);
         log.info("Player account successfully activated");
 
