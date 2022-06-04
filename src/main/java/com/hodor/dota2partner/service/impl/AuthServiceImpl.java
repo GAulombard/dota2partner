@@ -1,13 +1,16 @@
 package com.hodor.dota2partner.service.impl;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.hodor.dota2partner.dto.AuthenticationResponse;
 import com.hodor.dota2partner.dto.CreatePlayerDTO;
+import com.hodor.dota2partner.dto.LoginRequest;
 import com.hodor.dota2partner.entity.NotificationEmail;
 import com.hodor.dota2partner.entity.Player;
 import com.hodor.dota2partner.entity.VerificationToken;
 import com.hodor.dota2partner.exception.*;
 import com.hodor.dota2partner.repository.PlayerRepository;
 import com.hodor.dota2partner.repository.VerificationTokenRepository;
+import com.hodor.dota2partner.security.JwtProvider;
 import com.hodor.dota2partner.service.AuthService;
 import com.hodor.dota2partner.service.MailService;
 import com.hodor.dota2partner.serviceopendotaapi.ODPlayersService;
@@ -15,6 +18,10 @@ import com.hodor.dota2partner.util.Calculator;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,6 +40,8 @@ public class AuthServiceImpl implements AuthService {
     private final DtoConverterServiceImpl dtoConverterService;
     private final VerificationTokenRepository verificationTokenRepository;
     private final MailService mailService;
+    private final AuthenticationManager authenticationManager;
+    private final JwtProvider jwtProvider;
 
     @Override
     @Transactional
@@ -105,5 +114,15 @@ public class AuthServiceImpl implements AuthService {
 
         verificationTokenRepository.save(verificationToken);
         return token;
+    }
+
+    @Override
+    public AuthenticationResponse login(LoginRequest loginRequest) throws PrivateKeyException {
+        Authentication authenticate = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(),loginRequest.getPassword()));
+        SecurityContextHolder.getContext().setAuthentication(authenticate);
+        String token = jwtProvider.generateToken(authenticate);
+
+        return new AuthenticationResponse(token, loginRequest.getEmail());
     }
 }

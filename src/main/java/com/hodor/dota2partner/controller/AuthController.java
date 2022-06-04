@@ -1,6 +1,8 @@
 package com.hodor.dota2partner.controller;
 
+import com.hodor.dota2partner.dto.AuthenticationResponse;
 import com.hodor.dota2partner.dto.CreatePlayerDTO;
+import com.hodor.dota2partner.dto.LoginRequest;
 import com.hodor.dota2partner.entity.Player;
 import com.hodor.dota2partner.exception.*;
 import com.hodor.dota2partner.service.AuthService;
@@ -89,6 +91,17 @@ public class AuthController {
         //todo:implement validation form to check if player found or not, etc...
 
         return "login";
+    }
+
+    @PostMapping("/login")
+    public AuthenticationResponse login(@RequestBody LoginRequest loginRequest, HttpServletRequest servletRequest) throws PrivateKeyException {
+
+        log.info("HTTP " + servletRequest.getMethod() +
+                " request received at " + servletRequest.getRequestURI() +
+                " - [" + (servletRequest.getRemoteUser() == null ? "anonymous user" : servletRequest.getRemoteUser()) + "]");
+
+        return authService.login(loginRequest);
+
     }
 
 }
