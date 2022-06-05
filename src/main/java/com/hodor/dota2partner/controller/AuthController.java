@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -67,7 +68,7 @@ public class AuthController {
 
         if (!authService.verifyAccount(token)) throw new TokenVerificationException("Something went wrong !");
 
-        return "login";
+        return "index";
     }
 
     @GetMapping({"/index", "/"})
@@ -91,6 +92,7 @@ public class AuthController {
         return "login";
     }
 
+    @RolesAllowed({"USER", "ADMIN"})
     @PostMapping(value = "/login")
     public String login(@Valid @ModelAttribute("loginRequest") LoginRequestDTO loginRequestDTO, HttpServletRequest servletRequest) throws PrivateKeyException {
 

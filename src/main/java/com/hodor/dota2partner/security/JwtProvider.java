@@ -17,7 +17,6 @@ import java.security.*;
 import java.security.cert.CertificateException;
 
 import static io.jsonwebtoken.Jwts.parser;
-import static io.jsonwebtoken.Jwts.parserBuilder;
 
 @Service
 @Slf4j

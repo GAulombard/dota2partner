@@ -1,14 +1,15 @@
 <!doctype html>
 
-<html class="h-100" lang="en">
+<html class="h-100" lang="en" xmlns:sec="http://thymeleaf.org/extras/spring-security"
+      xmlns:th="http://wwww.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet">
-    <link href="/src/main/resources/static/css/style.css" rel="stylesheet" th:href=@{/css/style.css}>
-    <link href="/src/main/resources/static/css/hint.css" rel="stylesheet" th:href=@{/css/hint.css}>
+    <link href="/src/main/resources/static/css/style.css" rel="stylesheet" th:href="@{/css/style.css}">
+    <link href="/src/main/resources/static/css/hint.css" rel="stylesheet" th:href="@{/css/hint.css}">
     <title>Dota 2 Partner</title>
 </head>
 
@@ -23,29 +24,29 @@
             <div class="flex-row-around persona-name-header">
                 <div class="persona-name">
                     <p>
-                    <td th:text=${player.personaName}>
+                    <td th:text="${player.personaName}">
                     </p><span class="steam-icon"></span>
                     <div class="persona-role">
                         <p>Support - p5</p>
                     </div>
                 </div>
                 <div class="verified-icon-admin-darkgreen"
-                     th:if="${player.role == 'ROLE_ADMIN' && player.enabled == true}">
+                     sec:authorize="hasAuthority('ROLE_ADMIN')" th:if="${player.enabled == true}">
                         <span class="material-icons w3-xxxlarge hint--right"
                               data-hint="Verified administrator">admin_panel_settings</span>
                 </div>
                 <div class="verified-icon-admin-darkred"
-                     th:if="${player.role == 'ROLE_ADMIN' && player.enabled == false}">
+                     sec:authorize="hasAuthority('ROLE_ADMIN')" th:if="${player.enabled == false}">
                         <span class="material-icons w3-xxxlarge hint--right"
                               data-hint="Unverified administrator">admin_panel_settings</span>
                 </div>
                 <div class="verified-icon-user-darkgreen"
-                     th:if="${player.role == 'ROLE_USER' && player.enabled == true}">
+                     sec:authorize="hasAuthority('ROLE_USER')" th:if="${player.enabled == true}">
                         <span class="material-icons w3-xxxlarge hint--right"
                               data-hint="Verified user">verified_user</span>
                 </div>
                 <div class="verified-icon-user-darkred"
-                     th:if="${player.role == 'ROLE_USER' && player.enabled == false}">
+                     sec:authorize="hasAuthority('ROLE_USER')" th:if="${player.enabled == false}">
                         <span class="material-icons w3-xxxlarge hint--right"
                               data-hint="Unverified user">verified_user</span>
                 </div>
@@ -63,19 +64,19 @@
                 <div class="wins">
                     <p class="player-stat-container-name">WINS</p>
                     <p class="player-stat-container-value">
-                    <td th:text=${player.win}></td>
+                    <td th:text="${player.win}"></td>
                     </p>
                 </div>
                 <div class="losses">
                     <p class="player-stat-container-name">LOSSES</p>
                     <p class="player-stat-container-value">
-                    <td th:text=${player.loss}></td>
+                    <td th:text="${player.loss}"></td>
                     </p>
                 </div>
                 <div class="winrate">
                     <p class="player-stat-container-name">WINRATE</p>
                     <p class="player-stat-container-value">
-                    <td th:text=${player.winRate}></td>
+                    <td th:text="${player.winRate}"></td>
                     </p>
                 </div>
             </div>
@@ -87,7 +88,7 @@
                 <div class="flex-column-around heroe">
                     <h6>Invoker</h6>
                     <div class="hint--bottom" data-hint="Invoker data stats" data-html="true"><img
-                            class="heroe-icon" th:src=@{/assets/invoker.png}>
+                            class="heroe-icon" th:src="@{/assets/invoker.png}">
                     </div>
                     <p class="hint--right" data-hint="Matches played">350 MP</p>
                     <p class="hint--right" data-hint="Win rate">50.5% WR</p>
@@ -95,28 +96,28 @@
                 </div>
                 <div class="heroe">
                     <h6>Earth Spirit</h6>
-                    <img class="heroe-icon" th:src=@{/assets/earth_spirit.png}>
+                    <img class="heroe-icon" th:src="@{/assets/earth_spirit.png}">
                     <p>350 MP</p>
                     <p>50.5% WR</p>
                     <p>5/8/30 KDA</p>
                 </div>
                 <div class="heroe">
                     <h6>Pudge</h6>
-                    <img class="heroe-icon" th:src=@{/assets/pudge.png}>
+                    <img class="heroe-icon" th:src="@{/assets/pudge.png}">
                     <p>350 MP</p>
                     <p>50.5% WR</p>
                     <p>5/8/30 KDA</p>
                 </div>
                 <div class="heroe">
                     <h6>Dark Willow</h6>
-                    <img class="heroe-icon" th:src=@{/assets/dark_willow.png}>
+                    <img class="heroe-icon" th:src="@{/assets/dark_willow.png}">
                     <p>350 MP</p>
                     <p>50.5% WR</p>
                     <p>5/8/30 KDA</p>
                 </div>
                 <div class="heroe">
                     <h6>Witch Doctor</h6>
-                    <img class="heroe-icon" th:src=@{/assets/witch_doctor.png}>
+                    <img class="heroe-icon" th:src="@{/assets/witch_doctor.png}">
                     <p>350 MP</p>
                     <p>50.5% WR</p>
                     <p>5/8/30 KDA</p>
@@ -126,13 +127,13 @@
         <div class="flex-row-center" th:if="${player.dotaPlus == true || player.rankTier != 0}">
             <div class="hint--bottom" data-hint="Dota plus subscriber" th:if="${player.dotaPlus == true}">
                 <div class="dota-plus">
-                    <img class="dota-plus-logo" th:src=@{/assets/dota_plus_icon.png}>
+                    <img class="dota-plus-logo" th:src="@{/assets/dota_plus_icon.png}">
                 </div>
             </div>
             <div class="hint--bottom" data-hint="Crusader [2]" th:if="${player.rankTier != 0}">
                 <div class="rank hint--top" data-hint="Crusader 2">
-                    <img class="rank-icon" th:src=@{'/assets/'+${rankIcon}}>
-                    <img class="rank-star" th:src=@{'/assets/'+${rankStar}}>
+                    <img class="rank-icon" th:src="@{'/assets/'+${rankIcon}}">
+                    <img class="rank-star" th:src="@{'/assets/'+${rankStar}}">
                 </div>
             </div>
         </div>
@@ -145,23 +146,23 @@
         <div class="flex-row-around matche-history">
             <div class="partner-matche">
                 <img class="partner-avatar"
-                     th:src=@{/assets/8764a0f411e89fd7483b6871e01f5da013689e87_full.jpg}>
+                     th:src="@{/assets/8764a0f411e89fd7483b6871e01f5da013689e87_full.jpg}">
             </div>
             <div class="flex-row-around radiant-team">
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/dark_willow.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/dark_willow.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/witch_doctor.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/witch_doctor.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/earth_spirit.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/earth_spirit.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/pudge.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/pudge.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/invoker.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/invoker.png}">
                 </div>
             </div>
             <div class="versus">
@@ -169,42 +170,42 @@
             </div>
             <div class="flex-row-around dire-team">
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/witch_doctor.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/witch_doctor.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/dark_willow.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/dark_willow.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/invoker.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/invoker.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/earth_spirit.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/earth_spirit.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/pudge.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/pudge.png}">
                 </div>
             </div>
         </div>
         <div class="flex-row-around matche-history">
             <div class="partner-matche">
                 <img class="partner-avatar"
-                     th:src=@{/assets/8764a0f411e89fd7483b6871e01f5da013689e87_full.jpg}>
+                     th:src="@{/assets/8764a0f411e89fd7483b6871e01f5da013689e87_full.jpg}">
             </div>
             <div class="flex-row-around radiant-team">
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/dark_willow.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/dark_willow.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/witch_doctor.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/witch_doctor.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/earth_spirit.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/earth_spirit.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/pudge.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/pudge.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/invoker.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/invoker.png}">
                 </div>
             </div>
             <div class="versus">
@@ -212,42 +213,42 @@
             </div>
             <div class="flex-row-around dire-team">
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/witch_doctor.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/witch_doctor.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/dark_willow.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/dark_willow.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/invoker.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/invoker.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/earth_spirit.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/earth_spirit.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/pudge.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/pudge.png}">
                 </div>
             </div>
         </div>
         <div class="flex-row-around matche-history">
             <div class="partner-matche">
                 <img class="partner-avatar"
-                     th:src=@{/assets/8764a0f411e89fd7483b6871e01f5da013689e87_full.jpg}>
+                     th:src="@{/assets/8764a0f411e89fd7483b6871e01f5da013689e87_full.jpg}">
             </div>
             <div class="flex-row-around radiant-team">
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/dark_willow.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/dark_willow.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/witch_doctor.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/witch_doctor.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/earth_spirit.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/earth_spirit.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/pudge.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/pudge.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/invoker.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/invoker.png}">
                 </div>
             </div>
             <div class="versus">
@@ -255,26 +256,26 @@
             </div>
             <div class="flex-row-around dire-team">
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/witch_doctor.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/witch_doctor.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/dark_willow.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/dark_willow.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/invoker.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/invoker.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/earth_spirit.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/earth_spirit.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/pudge.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/pudge.png}">
                 </div>
             </div>
         </div>
         <div class="flex-row-around matche-history">
             <div class="partner-matche">
                 <img class="partner-avatar"
-                     th:src=@{/assets/8764a0f411e89fd7483b6871e01f5da013689e87_full.jpg}>
+                     th:src="@{/assets/8764a0f411e89fd7483b6871e01f5da013689e87_full.jpg}">
             </div>
             <div class="flex-row-around radiant-team">
                 <div class="heroe-match">
@@ -298,42 +299,42 @@
             </div>
             <div class="flex-row-around dire-team">
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/witch_doctor.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/witch_doctor.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/dark_willow.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/dark_willow.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/invoker.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/invoker.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/earth_spirit.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/earth_spirit.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/pudge.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/pudge.png}">
                 </div>
             </div>
         </div>
         <div class="flex-row-around matche-history">
             <div class="partner-matche">
                 <img class="partner-avatar"
-                     th:src=@{/assets/8764a0f411e89fd7483b6871e01f5da013689e87_full.jpg}>
+                     th:src="@{/assets/8764a0f411e89fd7483b6871e01f5da013689e87_full.jpg}">
             </div>
             <div class="flex-row-around radiant-team">
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/dark_willow.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/dark_willow.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/witch_doctor.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/witch_doctor.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/earth_spirit.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/earth_spirit.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/pudge.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/pudge.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/invoker.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/invoker.png}">
                 </div>
             </div>
             <div class="versus">
@@ -341,19 +342,19 @@
             </div>
             <div class="flex-row-around dire-team">
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/witch_doctor.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/witch_doctor.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/dark_willow.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/dark_willow.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/invoker.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/invoker.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/earth_spirit.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/earth_spirit.png}">
                 </div>
                 <div class="heroe-match">
-                    <img class="heroe-match-icon" th:src=@{/assets/pudge.png}>
+                    <img class="heroe-match-icon" th:src="@{/assets/pudge.png}">
                 </div>
             </div>
         </div>
@@ -385,7 +386,7 @@
                         </div>
                         <div class="player-avatar">
                             <img class="avatar-player"
-                                 th:src=@{/assets/8764a0f411e89fd7483b6871e01f5da013689e87_full.jpg}>
+                                 th:src="@{/assets/8764a0f411e89fd7483b6871e01f5da013689e87_full.jpg}">
                         </div>
                         <div class="right-arrow">
                             <a href="#"><span class="material-icons hint--bottom"
@@ -420,7 +421,7 @@
                         </div>
                         <div class="player-avatar">
                             <img class="avatar-player"
-                                 th:src=@{/assets/8764a0f411e89fd7483b6871e01f5da013689e87_full.jpg}>
+                                 th:src="@{/assets/8764a0f411e89fd7483b6871e01f5da013689e87_full.jpg}">
                         </div>
                         <div class="right-arrow">
                             <a href="#"><span class="material-icons hint--bottom"
@@ -445,7 +446,7 @@
                 <div class="flex-row-around partner-container" th:each="friend: ${friendList}">
                     <div class="partner-avatar-sm">
                         <img class="partner-avatar-sm"
-                             th:src=${friend.avatarFull}>
+                             th:src="${friend.avatarFull}">
                     </div>
                     <div class="flex-column-around partner-infos">
                         <p th:text="${friend.personaName}"></p>

@@ -6,9 +6,11 @@ import com.hodor.dota2partner.dto.CreatePlayerDTO;
 import com.hodor.dota2partner.dto.LoginRequestDTO;
 import com.hodor.dota2partner.entity.NotificationEmail;
 import com.hodor.dota2partner.entity.Player;
+import com.hodor.dota2partner.entity.Role;
 import com.hodor.dota2partner.entity.VerificationToken;
 import com.hodor.dota2partner.exception.*;
 import com.hodor.dota2partner.repository.PlayerRepository;
+import com.hodor.dota2partner.repository.RoleRepository;
 import com.hodor.dota2partner.repository.VerificationTokenRepository;
 import com.hodor.dota2partner.security.JwtProvider;
 import com.hodor.dota2partner.service.AuthService;
@@ -25,8 +27,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -40,6 +41,7 @@ public class AuthServiceImpl implements AuthService {
     private final MailService mailService;
     private final AuthenticationManager authenticationManager;
     private final JwtProvider jwtProvider;
+    private final RoleRepository roleRepository;
 
     @Override
     @Transactional
@@ -65,7 +67,8 @@ public class AuthServiceImpl implements AuthService {
             player.setCreationDate(Instant.now());
             player.setContributor(false);
             player.setEnabled(false);
-            player.setRole("ROLE_USER");
+            Role role = roleRepository.findByName("ROLE_USER");
+            player.setRoles(Arrays.asList(role));
             playerRepository.save(player);
             log.info("Service - Player created");
 

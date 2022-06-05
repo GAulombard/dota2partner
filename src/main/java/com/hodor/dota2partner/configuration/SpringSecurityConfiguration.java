@@ -34,6 +34,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .cors().and()
                 .csrf().disable()
                 .authorizeRequests(authorize -> {
                     authorize.antMatchers(
@@ -56,9 +57,8 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 //.loginPage("/api/auth/login")
                 //.successHandler(authenticationSuccessHandler())
                 //.and()
-                .httpBasic()
-                .and()
-                .csrf().disable()
+                //.httpBasic()
+                //and()
                 .exceptionHandling()
                 .accessDeniedPage("/error/403")
                 .and()

@@ -31,10 +31,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String email) {
-        log.info("Process to authentication - email: "+email);
-        Optional<Player> user = playerRepository.findPlayerByEmail(email);
+        log.info("Process to authentication - email: " + email);
 
-        return user.orElseThrow(() -> new PlayerEmailNotFoundException("Player email: "+email+" not found - authentication failed"));
+        return playerRepository.findPlayerByEmail(email).orElseThrow(
+                () -> new PlayerEmailNotFoundException("Player email: " + email + " not found - authentication failed"));
     }
 
 }
