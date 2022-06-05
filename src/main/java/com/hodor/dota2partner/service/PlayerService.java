@@ -15,5 +15,5 @@ public interface PlayerService {
 
     Player getPlayer(long steamId32);
 
-    List<AsideHeroRequestDTO> getAsideHeroList(Long steamId32);
+    List<AsideHeroRequestDTO> getAsideHeroList(Long steamId32) throws OpenDotaApiException;
 }

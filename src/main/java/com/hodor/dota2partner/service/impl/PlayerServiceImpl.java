@@ -1,9 +1,11 @@
 package com.hodor.dota2partner.service.impl;
 
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.hodor.dota2partner.dto.AsideHeroRequestDTO;
 import com.hodor.dota2partner.exception.*;
 import com.hodor.dota2partner.entity.Player;
+import com.hodor.dota2partner.repository.HeroRepository;
 import com.hodor.dota2partner.repository.PlayerRepository;
 import com.hodor.dota2partner.serviceopendotaapi.ODPlayerService;
 import com.hodor.dota2partner.service.PlayerService;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,6 +25,7 @@ import java.util.List;
 @AllArgsConstructor
 public class PlayerServiceImpl implements PlayerService {
 
+    private final HeroRepository heroRepository;
     private final PlayerRepository playerRepository;
     private final ODPlayerService oDPlayerService;
 
@@ -72,8 +76,28 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public List<AsideHeroRequestDTO> getAsideHeroList(Long steamId32) {
-        return null;
+    public List<AsideHeroRequestDTO> getAsideHeroList(Long steamId32) throws OpenDotaApiException {
+
+        List<AsideHeroRequestDTO> asideHeroRequestDTOList = new ArrayList<>();
+
+        ArrayNode data = oDPlayerService.getHeroes(steamId32, "date=180&having=20");
+
+        data.iterator().forEachRemaining(hero -> {
+            AsideHeroRequestDTO asideHeroRequestDTO = new AsideHeroRequestDTO();
+            int id = hero.path("hero_id").asInt();
+            asideHeroRequestDTO.setName(heroRepository.getHeroLocalizedNameById(id));
+            asideHeroRequestDTO.setImage(heroRepository.getHeroImageById(id));
+            asideHeroRequestDTO.setMatchPlayed(hero.path("games").asInt());
+            asideHeroRequestDTO.setWinRate(Calculator.winRateCalculator(hero.path("win").asInt(),
+                    (hero.path("games").asInt()) - (hero.path("win").asInt())));
+            asideHeroRequestDTO.setAverageKill(99);
+            asideHeroRequestDTO.setAverageDeath(99);
+            asideHeroRequestDTO.setAverageAssist(99);
+            asideHeroRequestDTOList.add(asideHeroRequestDTO);
+        });
+
+
+        return asideHeroRequestDTOList;
     }
 
 }

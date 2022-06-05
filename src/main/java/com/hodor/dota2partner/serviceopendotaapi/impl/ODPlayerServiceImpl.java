@@ -81,6 +81,27 @@ public class ODPlayerServiceImpl implements ODPlayerService {
     }
 
     @Override
+    public ArrayNode getHeroes(Long steamId32, String queryParameters) throws OpenDotaApiException {
+        try {
+
+            RestTemplate restTemplate = new RestTemplate();
+            String callUrl = openDotaApiUrl + "/players/" + steamId32 + "/heroes?" + queryParameters;
+
+            log.info("Calling OpenDota Api : " + callUrl);
+            ResponseEntity<ArrayNode> response = restTemplate.getForEntity(callUrl, ArrayNode.class);
+            ArrayNode jsonObject = response.getBody();
+            log.info("Data from OpenDota Api fetched");
+            log.debug("OpenDota Api response : {}", jsonObject);
+
+            return jsonObject;
+
+        } catch (Exception e) {
+            log.error("Can't reach OpenDota Api");
+            throw new OpenDotaApiException("Can't reach OpenDota Api");
+        }
+    }
+
+    @Override
     public ArrayNode getPeers(Long steamId32, String queryParameters) throws OpenDotaApiException {
         try {
 

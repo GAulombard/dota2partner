@@ -82,45 +82,20 @@
             </div>
             <div class="flex-row-around best-heroes-title">
                 <p>BEST HEROES AVERAGE</p>
-                <p>(last 50 games played)</p>
+                <p>(the last 6 months and at least 20 games played)</p>
             </div>
             <div class="flex-row-around best-heroes">
-                <div class="flex-column-around heroe">
-                    <h6>Invoker</h6>
-                    <div class="hint--bottom" data-hint="Invoker data stats" data-html="true"><img
-                            class="heroe-icon" th:src="@{/assets/invoker.png}">
+                <div class="flex-column-around heroe" th:each="hero :${asideHeroList}">
+                    <h6 th:text="${hero.name}"></h6>
+                    <div class="hint--bottom" data-hint="data stats" data-html="true"><img
+                            class="heroe-icon" th:src="${hero.image}">
                     </div>
-                    <p class="hint--right" data-hint="Matches played">350 MP</p>
-                    <p class="hint--right" data-hint="Win rate">50.5% WR</p>
-                    <p class="hint--right" data-hint="Average KDA for the last 50 games">5/8/30 KDA</p>
-                </div>
-                <div class="heroe">
-                    <h6>Earth Spirit</h6>
-                    <img class="heroe-icon" th:src="@{/assets/earth_spirit.png}">
-                    <p>350 MP</p>
-                    <p>50.5% WR</p>
-                    <p>5/8/30 KDA</p>
-                </div>
-                <div class="heroe">
-                    <h6>Pudge</h6>
-                    <img class="heroe-icon" th:src="@{/assets/pudge.png}">
-                    <p>350 MP</p>
-                    <p>50.5% WR</p>
-                    <p>5/8/30 KDA</p>
-                </div>
-                <div class="heroe">
-                    <h6>Dark Willow</h6>
-                    <img class="heroe-icon" th:src="@{/assets/dark_willow.png}">
-                    <p>350 MP</p>
-                    <p>50.5% WR</p>
-                    <p>5/8/30 KDA</p>
-                </div>
-                <div class="heroe">
-                    <h6>Witch Doctor</h6>
-                    <img class="heroe-icon" th:src="@{/assets/witch_doctor.png}">
-                    <p>350 MP</p>
-                    <p>50.5% WR</p>
-                    <p>5/8/30 KDA</p>
+                    <p class="hint--right" data-hint="Matches played with this hero the last 6 months"
+                       th:text="${hero.matchPlayed+' MP'}"></p>
+                    <p class="hint--right" data-hint="Win rate with this hero the last 6 months"
+                       th:text="${hero.winRate+'% WR'}"></p>
+                    <p class="hint--right" data-hint="Average KDA with this hero for the last 6 months"
+                       th:text="${hero.averageKill+' / '+hero.averageDeath+' / '+hero.averageAssist+' KDA'}"></p>
                 </div>
             </div>
         </div>
@@ -142,7 +117,7 @@
 
 <!-- MAIN SECTION -->
 <div class="main-container flex-row-around main">
-    <div class="flex-column-center flex-11 center-column">
+    <div class="flex-column-center flex-9 center-column">
         <div class="flex-row-around matche-history">
             <div class="partner-matche">
                 <img class="partner-avatar"
@@ -359,7 +334,7 @@
             </div>
         </div>
     </div>
-    <div class="flex-column-center flex-1 right-column">
+    <div class="flex-column-center flex-3 right-column">
         <div class="player-list">
             <div class="player-title">
                 <p>Partners matching preferences</p>

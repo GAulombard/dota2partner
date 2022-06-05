@@ -12,7 +12,7 @@ public class AsideHeroRequestDTO {
     private String name;
     private String image;
     private int matchPlayed;
-    private double winRate;
+    private float winRate;
     private int averageKill;
     private int averageDeath;
     private int averageAssist;

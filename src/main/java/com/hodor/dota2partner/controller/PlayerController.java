@@ -37,7 +37,6 @@ public class PlayerController {
 
     @RolesAllowed({"USER", "ADMIN"})
     @GetMapping(value = "/home")
-    @Async
     public String getHome(@AuthenticationPrincipal Player principal, Model model, HttpServletRequest servletRequest) throws OpenDotaApiException, PlayerNotFoundException {
         log.info("HTTP " + servletRequest.getMethod() +
                 " request received at " + servletRequest.getRequestURI() +
