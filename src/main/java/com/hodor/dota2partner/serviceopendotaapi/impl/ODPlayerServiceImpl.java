@@ -3,19 +3,16 @@ package com.hodor.dota2partner.serviceopendotaapi.impl;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.hodor.dota2partner.exception.OpenDotaApiException;
-import com.hodor.dota2partner.serviceopendotaapi.ODPlayersService;
+import com.hodor.dota2partner.serviceopendotaapi.ODPlayerService;
 import com.hodor.dota2partner.util.Calculator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Collections;
-import java.util.List;
-
 @Service
 @Slf4j
-public class ODPlayersServiceImpl implements ODPlayersService {
+public class ODPlayerServiceImpl implements ODPlayerService {
 
     private String openDotaApiUrl = "https://api.opendota.com/api";
 

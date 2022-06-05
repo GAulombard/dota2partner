@@ -38,7 +38,7 @@ public class Hero {
     @JoinTable(name = "heroes_map_roles",
             joinColumns = @JoinColumn(name = "hero_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Collection<Role> roles;
+    private Collection<HeroRole> roles;
 
     @Column(name = "img", length = 500)
     private String img;

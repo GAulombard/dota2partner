@@ -1,8 +1,9 @@
 package com.hodor.dota2partner.serviceopendotaapi.impl;
 
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.hodor.dota2partner.exception.OpenDotaApiException;
-import com.hodor.dota2partner.serviceopendotaapi.ODConstantsService;
+import com.hodor.dota2partner.serviceopendotaapi.ODConstantService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -10,12 +11,12 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 @Slf4j
-public class ODConstantsServiceImpl implements ODConstantsService {
+public class ODConstantServiceImpl implements ODConstantService {
 
     private String openDotaApiUrl = "https://api.opendota.com/api";
 
     @Override
-    public ObjectNode getConstants(String resourceName) throws OpenDotaApiException {
+    public ObjectNode getConstant(String resourceName) throws OpenDotaApiException {
         try {
 
             RestTemplate restTemplate = new RestTemplate();
@@ -36,7 +37,7 @@ public class ODConstantsServiceImpl implements ODConstantsService {
     }
 
     @Override
-    public ObjectNode getConstants() throws OpenDotaApiException {
+    public ObjectNode getConstant() throws OpenDotaApiException {
         try {
 
             RestTemplate restTemplate = new RestTemplate();

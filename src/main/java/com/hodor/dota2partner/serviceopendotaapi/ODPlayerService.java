@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.hodor.dota2partner.exception.OpenDotaApiException;
 
-public interface ODPlayersService {
+public interface ODPlayerService {
 
     ObjectNode getPlayerData(Long steamId32) throws OpenDotaApiException;
 

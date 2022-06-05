@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.hodor.dota2partner.exception.*;
 import com.hodor.dota2partner.entity.Player;
 import com.hodor.dota2partner.repository.PlayerRepository;
-import com.hodor.dota2partner.serviceopendotaapi.ODPlayersService;
+import com.hodor.dota2partner.serviceopendotaapi.ODPlayerService;
 import com.hodor.dota2partner.service.PlayerService;
 import com.hodor.dota2partner.util.Calculator;
 import lombok.AllArgsConstructor;
@@ -21,7 +21,7 @@ import java.time.Instant;
 public class PlayerServiceImpl implements PlayerService {
 
     private final PlayerRepository playerRepository;
-    private final ODPlayersService oDPlayersService;
+    private final ODPlayerService oDPlayerService;
 
     @Override
     @Async
@@ -36,8 +36,8 @@ public class PlayerServiceImpl implements PlayerService {
         Player player = playerRepository.findPlayerBySteamId32(steamId32);
         String profile = "profile";
 
-        ObjectNode dataPlayer = oDPlayersService.getPlayerData(steamId32);
-        ObjectNode winLossCount = oDPlayersService.getWinLossCount(steamId32);
+        ObjectNode dataPlayer = oDPlayerService.getPlayerData(steamId32);
+        ObjectNode winLossCount = oDPlayerService.getWinLossCount(steamId32);
 
         player.setAvatar(dataPlayer.path(profile).path("avatar").asText());
         player.setAvatarFull(dataPlayer.path(profile).path("avatarfull").asText());

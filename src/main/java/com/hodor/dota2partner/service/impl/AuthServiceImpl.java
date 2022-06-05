@@ -15,7 +15,7 @@ import com.hodor.dota2partner.repository.VerificationTokenRepository;
 import com.hodor.dota2partner.security.JwtProvider;
 import com.hodor.dota2partner.service.AuthService;
 import com.hodor.dota2partner.service.MailService;
-import com.hodor.dota2partner.serviceopendotaapi.ODPlayersService;
+import com.hodor.dota2partner.serviceopendotaapi.ODPlayerService;
 import com.hodor.dota2partner.util.Calculator;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +35,7 @@ import java.util.*;
 public class AuthServiceImpl implements AuthService {
 
     private final PlayerRepository playerRepository;
-    private final ODPlayersService oDPlayersService;
+    private final ODPlayerService oDPlayerService;
     private final DtoConverterServiceImpl dtoConverterService;
     private final VerificationTokenRepository verificationTokenRepository;
     private final MailService mailService;
@@ -53,7 +53,7 @@ public class AuthServiceImpl implements AuthService {
             throw new EMailAlreadyExistsException("E-Mail " + player.getEmail() + " already exists");
 
         long steamId32 = Calculator.steamId64toSteamId32(dto.getSteamId64());
-        ObjectNode dataPlayer = oDPlayersService.getPlayerData(steamId32);
+        ObjectNode dataPlayer = oDPlayerService.getPlayerData(steamId32);
 
         if (dataPlayer.path("profile").path("steamid").asText().isEmpty()) {
 
@@ -67,8 +67,10 @@ public class AuthServiceImpl implements AuthService {
             player.setCreationDate(Instant.now());
             player.setContributor(false);
             player.setEnabled(false);
+
             Role role = roleRepository.findByName("ROLE_USER");
             player.setRoles(Arrays.asList(role));
+
             playerRepository.save(player);
             log.info("Service - Player created");
 

@@ -3,13 +3,11 @@ package com.hodor.dota2partner.service.impl;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.hodor.dota2partner.exception.OpenDotaApiException;
 import com.hodor.dota2partner.entity.Player;
-import com.hodor.dota2partner.repository.FriendRepository;
 import com.hodor.dota2partner.repository.PlayerRepository;
 import com.hodor.dota2partner.service.FriendService;
-import com.hodor.dota2partner.serviceopendotaapi.impl.ODPlayersServiceImpl;
+import com.hodor.dota2partner.serviceopendotaapi.impl.ODPlayerServiceImpl;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,7 +20,7 @@ import java.util.List;
 public class FriendServiceImpl implements FriendService {
 
 
-    private final ODPlayersServiceImpl odPlayersService;
+    private final ODPlayerServiceImpl odPlayersService;
     private final PlayerRepository playerRepository;
 
     @Override
