@@ -1,6 +1,7 @@
 package com.hodor.dota2partner.service.impl;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.hodor.dota2partner.dto.AsideHeroRequestDTO;
 import com.hodor.dota2partner.exception.*;
 import com.hodor.dota2partner.entity.Player;
 import com.hodor.dota2partner.repository.PlayerRepository;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -67,6 +69,11 @@ public class PlayerServiceImpl implements PlayerService {
     @Transactional(readOnly = true)
     public Player getPlayer(long steamId32) {
         return playerRepository.findPlayerBySteamId32(steamId32);
+    }
+
+    @Override
+    public List<AsideHeroRequestDTO> getAsideHeroList(Long steamId32) {
+        return null;
     }
 
 }

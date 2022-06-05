@@ -1,5 +1,6 @@
 package com.hodor.dota2partner.controller;
 
+import com.hodor.dota2partner.dto.AsideHeroRequestDTO;
 import com.hodor.dota2partner.exception.EMailAlreadyExistsException;
 import com.hodor.dota2partner.exception.OpenDotaApiException;
 import com.hodor.dota2partner.exception.PlayerNotFoundException;
@@ -13,6 +14,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,9 +35,9 @@ public class PlayerController {
     private final PlayerService playerService;
     private final FriendService friendService;
 
-    //, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
     @RolesAllowed({"USER", "ADMIN"})
     @GetMapping(value = "/home")
+    @Async
     public String getHome(@AuthenticationPrincipal Player principal, Model model, HttpServletRequest servletRequest) throws OpenDotaApiException, PlayerNotFoundException {
         log.info("HTTP " + servletRequest.getMethod() +
                 " request received at " + servletRequest.getRequestURI() +
@@ -45,13 +47,14 @@ public class PlayerController {
         Player player = playerService.getPlayer(principal.getSteamId32());
         String rankIcon = MedalUtil.getRankIconFromRankTier(player.getRankTier());
         String rankStar = MedalUtil.getRankStarFromRankTier(player.getRankTier());
-
         List<Player> friendList = friendService.searchFriend(principal.getSteamId32());
+        List<AsideHeroRequestDTO> asideHeroList = playerService.getAsideHeroList(principal.getSteamId32());
 
         model.addAttribute("player", player);
         model.addAttribute("rankIcon", rankIcon);
         model.addAttribute("rankStar", rankStar);
         model.addAttribute("friendList", friendList);
+        model.addAttribute("asideHeroList", asideHeroList);
 
         return "/player/home";
     }
