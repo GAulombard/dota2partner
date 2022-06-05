@@ -76,6 +76,7 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<AsideHeroRequestDTO> getAsideHeroList(Long steamId32) throws OpenDotaApiException {
 
         List<AsideHeroRequestDTO> asideHeroRequestDTOList = new ArrayList<>();
