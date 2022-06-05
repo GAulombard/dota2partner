@@ -15,19 +15,19 @@ create table heroes
     base_mr           decimal      null,
     base_attack_min   decimal      null,
     base_attack_max   decimal      null,
-    base_str          decimal      null,
-    base_agi          decimal      null,
-    base_int          decimal      null,
-    str_gain          decimal      null,
-    agi_gain          decimal      null,
-    int_gain          decimal      null,
-    attack_range      decimal      null,
-    projectile_speed  decimal      null,
-    attack_rate       decimal      null,
-    move_speed        decimal      null,
-    turn_rate         decimal      null,
-    cm_enabled        tinyint(1)   null,
-    legs              int          null,
+    base_str         decimal    null,
+    base_agi         decimal    null,
+    base_int         decimal    null,
+    str_gain         decimal    null,
+    agi_gain         decimal    null,
+    int_gain         decimal    null,
+    attack_range     decimal    null,
+    projectile_speed decimal    null,
+    attack_rate      decimal    null,
+    move_speed       decimal    null,
+    turn_rate        decimal    null,
+    cm_enabled       tinyint(1) null,
+    legs             int        null,
     constraint heroes_id_uindex
         unique (id)
 );
@@ -35,21 +35,47 @@ create table heroes
 alter table heroes
     add primary key (id);
 
+create table heroes_roles
+(
+    role_id int auto_increment,
+    name    varchar(200) not null,
+    constraint heroes_roles_role_id_uindex
+        unique (role_id)
+);
+
+alter table heroes_roles
+    add primary key (role_id);
+
+create table heroes_map_roles
+(
+    hero_id int not null,
+    role_id int not null,
+    constraint hero_fk
+        foreign key (hero_id) references heroes (id),
+    constraint hero_role_fk
+        foreign key (role_id) references heroes_roles (role_id)
+);
+
+create index heroe_fk_idx
+    on heroes_map_roles (hero_id);
+
+create index heroe_role_fk_idx
+    on heroes_map_roles (role_id);
+
 create table players
 (
     player_id     bigint auto_increment,
     steam_id_64   bigint       null,
     steam_id_32   bigint       null,
     persona_name  varchar(50)  null,
-    e_mail        varchar(125) not null,
+    email         varchar(125) not null,
     password      varchar(100) null,
-    role          varchar(50)  null,
     creation_date datetime     null,
     last_login    datetime     null,
     country_code  varchar(5)   null,
     dota_plus     tinyint(1)   null,
     contributor   tinyint(1)   null,
-    verified      tinyint(1)   null,
+    enabled       tinyint(1)   null,
     deleted       tinyint(1)   null,
     avatar        varchar(200) null,
     avatar_full   varchar(200) null,
@@ -60,7 +86,7 @@ create table players
     loss          int          null,
     win_rate      double       null,
     constraint players_e_mail_uindex
-        unique (e_mail),
+        unique (email),
     constraint players_id_uindex
         unique (player_id),
     constraint players_steam_id_32_uindex
@@ -89,6 +115,33 @@ create index player_friend_fk
 
 create index player_friend_fk1
     on friend (friend_player_id);
+
+create table roles
+(
+    role_id int auto_increment,
+    name    varchar(50) not null,
+    constraint roles_role_id_uindex
+        unique (role_id)
+);
+
+alter table roles
+    add primary key (role_id);
+
+create table players_map_roles
+(
+    player_id bigint not null,
+    role_id   int    not null,
+    constraint player_fk
+        foreign key (player_id) references players (player_id),
+    constraint role_fk
+        foreign key (role_id) references roles (role_id)
+);
+
+create index player_fk_idx
+    on players_map_roles (player_id);
+
+create index role_fk_idx
+    on players_map_roles (role_id);
 
 create table token
 (
