@@ -47,6 +47,8 @@ public class AuthServiceImpl implements AuthService {
     @Transactional
     public void signup(CreatePlayerDTO dto) throws EMailAlreadyExistsException, SteamIdNotFoundException, OpenDotaApiException, PlayerNotFoundException {
 
+        log.debug("Create new player process");
+
         Player player = dtoConverterService.CreatePlayerDTOToPlayer(dto);
 
         if (playerRepository.existsByEmail(player.getEmail()))
@@ -62,7 +64,7 @@ public class AuthServiceImpl implements AuthService {
 
         } else {
 
-            log.info("Service - Creating new player - steamId32: " + steamId32);
+            log.debug("Creating new player - steamId32: " + steamId32);
             player.setSteamId32(steamId32);
             player.setCreationDate(Instant.now());
             player.setContributor(false);
@@ -72,20 +74,23 @@ public class AuthServiceImpl implements AuthService {
             player.setRoles(Arrays.asList(role));
 
             playerRepository.save(player);
-            log.info("Service - Player created");
 
+            log.debug("Sending account verification mail");
             String token = generateVerificationToken(player);
-            //playerService.refreshPlayerData(steamId32);
             mailService.sendMail(new NotificationEmail("Please activate your account",
                     player.getEmail(),
                     "Thank you !" + "click here" + "http://localhost:8080/api/auth/account-verification/" + token));
 
         }
+
+        log.debug("Create new player process successful");
     }
 
     @Override
     @Transactional
     public boolean verifyAccount(String token) throws TokenVerificationException {
+        log.debug("Account verification process");
+
         Optional<VerificationToken> verificationToken = verificationTokenRepository.findByToken(token);
 
         verificationToken.orElseThrow(() -> new TokenVerificationException("Invalid Token"));
@@ -93,22 +98,28 @@ public class AuthServiceImpl implements AuthService {
         fetchPlayerAndActivate(verificationToken.get());
         //todo: delete token from DB
 
+        log.debug("Account verification process successful");
         return true;
     }
 
     @Override
     @Transactional
     public void fetchPlayerAndActivate(VerificationToken verificationToken) {
+        log.debug("Activation account process");
+
         Player player = verificationToken.getPlayer();
         player.setEnabled(true);
         playerRepository.save(player);
-        log.info("Player account successfully activated");
+
+        log.debug("Activation account process successful");
 
     }
 
     @Override
     @Transactional
     public String generateVerificationToken(Player player) {
+        log.debug("Generate verification token process");
+
         String token = UUID.randomUUID().toString();
         VerificationToken verificationToken = new VerificationToken();
         verificationToken.setToken(token);
@@ -116,16 +127,21 @@ public class AuthServiceImpl implements AuthService {
         verificationToken.setExpiryDate(Instant.now().plusSeconds(3600));
 
         verificationTokenRepository.save(verificationToken);
+
+        log.debug("Generate verification token process successful");
         return token;
     }
 
     @Override
     public AuthenticationResponseDTO login(LoginRequestDTO loginRequestDTO) throws PrivateKeyException {
+        log.debug("Login authentication process");
+
         Authentication authenticate = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequestDTO.getEmail(), loginRequestDTO.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authenticate);
         String token = jwtProvider.generateToken(authenticate);
 
+        log.debug("Login authentication process successful");
         return new AuthenticationResponseDTO(token, loginRequestDTO.getEmail());
     }
 }

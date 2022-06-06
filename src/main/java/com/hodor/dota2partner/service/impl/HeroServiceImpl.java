@@ -30,9 +30,11 @@ public class HeroServiceImpl implements HeroService {
     @Override
     @Transactional
     public void saveHeroData() throws OpenDotaApiException {
-        String urlSteam = "https://steamcdn-a.akamaihd.net";
+        log.debug("Fetching heroes data process");
 
-        log.info("Service - fetching heroes data's");
+        //todo: check if there are exception to throw
+
+        String urlSteam = "https://steamcdn-a.akamaihd.net";
 
         ObjectNode heroData = odConstantService.getConstant("heroes");
 
@@ -79,6 +81,6 @@ public class HeroServiceImpl implements HeroService {
 
         });
 
-
+        log.debug("Fetching heroes data process successful");
     }
 }

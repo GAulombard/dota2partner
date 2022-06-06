@@ -25,6 +25,8 @@ public class MailServiceImpl implements MailService {
     @Override
     @Async
     public void sendMail(NotificationEmail notificationEmail) throws ActivationMailException {
+        log.debug("Sending mail process");
+
         MimeMessagePreparator mimeMessagePreparator = mimeMessage -> {
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
             mimeMessageHelper.setFrom("no-reply@dota2partner.com");
@@ -34,7 +36,7 @@ public class MailServiceImpl implements MailService {
         };
         try {
             javaMailSender.send(mimeMessagePreparator);
-            log.info("Activation email sent !");
+            log.debug("Sending mail process successful");
         } catch (MailException e) {
             throw new ActivationMailException("For some reasons, we couldn't sent the activation email");
         }

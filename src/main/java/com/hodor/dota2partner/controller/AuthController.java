@@ -103,7 +103,7 @@ public class AuthController {
         //todo:implement validation form to check if player found or not, etc...
 
         AuthenticationResponseDTO authenticationResponseDTO = authService.login(loginRequestDTO);
-        log.info("Authentication response: " + authenticationResponseDTO.getAuthenticationToken() + " " + authenticationResponseDTO.getEmail());
+        log.info("Authentication response: " + authenticationResponseDTO.getAuthenticationToken());
 
         return "redirect:/api/player/home";
     }

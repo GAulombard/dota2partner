@@ -34,7 +34,7 @@ public class PlayerServiceImpl implements PlayerService {
     @Transactional
     public void refreshPlayerData(Long steamId32) throws OpenDotaApiException, PlayerNotFoundException {
 
-        log.info("Service - fetching data's player - " + steamId32);
+        log.debug("Fetching player data process");
 
         if (!playerRepository.existsBySteamId32(steamId32))
             throw new PlayerNotFoundException("Player with this steam Id not found");
@@ -59,7 +59,7 @@ public class PlayerServiceImpl implements PlayerService {
         player.setDotaPlus(dataPlayer.path(profile).path("plus").asText().equals("true"));
         playerRepository.save(player);
 
-        log.info("Service - Data's player fetched");
+        log.debug("Fetching player data process successful");
 
     }
 
@@ -78,6 +78,7 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     @Transactional(readOnly = true)
     public List<AsideHeroRequestDTO> getAsideHeroList(Long steamId32) throws OpenDotaApiException {
+        log.debug("Retrieving aside data process");
 
         List<AsideHeroRequestDTO> asideHeroRequestDTOList = new ArrayList<>();
 
@@ -97,7 +98,7 @@ public class PlayerServiceImpl implements PlayerService {
             asideHeroRequestDTOList.add(asideHeroRequestDTO);
         });
 
-
+        log.debug("Retrieving aside data process successful");
         return asideHeroRequestDTOList;
     }
 

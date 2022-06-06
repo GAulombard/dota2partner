@@ -78,7 +78,7 @@ public class Player implements UserDetails {
     @Column(name = "last_login")
     private Instant lastLogin;
 
-    @ManyToMany
+/*    @ManyToMany
     @JoinTable(
             name = "friend",
             joinColumns = @JoinColumn( name = "player_id"),
@@ -92,7 +92,7 @@ public class Player implements UserDetails {
             joinColumns = @JoinColumn( name = "friend_player_id"),
             inverseJoinColumns = @JoinColumn(name = "player_id")
     )
-    private List<Player> friendListOf;
+    private List<Player> friendListOf;*/
 
     @Column(name = "dota_plus")
     private boolean dotaPlus;

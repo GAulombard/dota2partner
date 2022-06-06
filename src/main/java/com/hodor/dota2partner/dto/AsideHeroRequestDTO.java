@@ -4,10 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AsideHeroRequestDTO {
+public class AsideHeroRequestDTO implements Serializable {
 
     private String name;
     private String image;

@@ -26,6 +26,8 @@ public class JwtProvider {
 
     @PostConstruct
     public void init() throws PrivateKeyException {
+        log.debug("todo: debug comment");
+
         try {
             keyStore = KeyStore.getInstance("JKS");
             InputStream resourceAsStream = getClass().getResourceAsStream("/dota2partner.jks");
@@ -36,7 +38,7 @@ public class JwtProvider {
     }
 
     public String generateToken(Authentication authentication) throws PrivateKeyException {
-        log.info("generating token");
+        log.debug("Generating token");
 
         Player principal = (Player) authentication.getPrincipal();
         return Jwts.builder()
@@ -46,6 +48,8 @@ public class JwtProvider {
     }
 
     private PrivateKey getPrivateKey() throws PrivateKeyException {
+        log.debug("Retrieving private key");
+
         try {
             return (PrivateKey) keyStore.getKey("dota2partner", EnvironmentProperties.retrieveEnvironmentProperty("KEY_STORE").toCharArray());
         } catch (KeyStoreException | NoSuchAlgorithmException | UnrecoverableKeyException | IOException e) {
@@ -54,11 +58,17 @@ public class JwtProvider {
     }
 
     public boolean validateToken(String jwt) throws PublicKeyException {
+        log.debug("Validating token");
+
         parser().setSigningKey(getPublicKey()).parseClaimsJws(jwt);
+        log.debug("Validating token successful");
+
         return true;
     }
 
     private PublicKey getPublicKey() throws PublicKeyException {
+        log.debug("Retrieving public key");
+
         try {
             return keyStore.getCertificate("dota2partner").getPublicKey();
         } catch (KeyStoreException e) {
@@ -67,6 +77,8 @@ public class JwtProvider {
     }
 
     public String getUserEmailFromJwt(String token) throws PublicKeyException {
+        log.debug("Fetching user email from Jwt");
+
         Claims claims = parser()
                 .setSigningKey(getPublicKey())
                 .parseClaimsJws(token)

@@ -1,6 +1,7 @@
 package com.hodor.dota2partner.controller;
 
 import com.hodor.dota2partner.dto.AsideHeroRequestDTO;
+import com.hodor.dota2partner.dto.PartnerRequestDTO;
 import com.hodor.dota2partner.exception.EMailAlreadyExistsException;
 import com.hodor.dota2partner.exception.OpenDotaApiException;
 import com.hodor.dota2partner.exception.PlayerNotFoundException;
@@ -25,6 +26,7 @@ import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @Slf4j
@@ -43,16 +45,27 @@ public class PlayerController {
                 " - [" + (servletRequest.getRemoteUser() == null ? "anonymous user" : servletRequest.getRemoteUser()) + "]");
 
         playerService.refreshPlayerData(principal.getSteamId32());
+        //todo:make a PlayerDTO instead of sending entity information
         Player player = playerService.getPlayer(principal.getSteamId32());
+
+        //todo: do this directly inside the DTO converter or service layer
         String rankIcon = MedalUtil.getRankIconFromRankTier(player.getRankTier());
         String rankStar = MedalUtil.getRankStarFromRankTier(player.getRankTier());
-        List<Player> friendList = friendService.searchFriend(principal.getSteamId32());
-        List<AsideHeroRequestDTO> asideHeroList = playerService.getAsideHeroList(principal.getSteamId32());
+        //todo: do this in service layer instead ?
+        List<PartnerRequestDTO> partnerRequestDTOListList = friendService.searchFriend(principal.getSteamId32())
+                .stream()
+                .limit(5)
+                .collect(Collectors.toList());
+        //todo: do this in service layer instead ?
+        List<AsideHeroRequestDTO> asideHeroList = playerService.getAsideHeroList(principal.getSteamId32())
+                .stream()
+                .limit(5)
+                .collect(Collectors.toList());
 
         model.addAttribute("player", player);
         model.addAttribute("rankIcon", rankIcon);
         model.addAttribute("rankStar", rankStar);
-        model.addAttribute("friendList", friendList);
+        model.addAttribute("partnerList", partnerRequestDTOListList);
         model.addAttribute("asideHeroList", asideHeroList);
 
         return "/player/home";
@@ -78,6 +91,8 @@ public class PlayerController {
                 " - [" + (servletRequest.getRemoteUser() == null ? "anonymous user" : servletRequest.getRemoteUser()) + "]");
 
         Player player = playerService.getPlayer(principal.getSteamId32());
+
+        //todo: do this directly inside the DTO converter or service layer
         String rankIcon = MedalUtil.getRankIconFromRankTier(player.getRankTier());
         String rankStar = MedalUtil.getRankStarFromRankTier(player.getRankTier());
 

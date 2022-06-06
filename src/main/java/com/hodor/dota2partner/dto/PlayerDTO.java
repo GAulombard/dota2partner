@@ -8,7 +8,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Getter
 @Setter
-
 public class PlayerDTO implements Serializable {
 
     private Integer playerId;

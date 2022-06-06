@@ -22,10 +22,10 @@ public class ODConstantServiceImpl implements ODConstantService {
             RestTemplate restTemplate = new RestTemplate();
             String callUrl = openDotaApiUrl + "/constants/" + resourceName;
 
-            log.info("Calling OpenDota Api : " + callUrl);
+            log.debug("Calling OpenDota Api : " + callUrl);
             ResponseEntity<ObjectNode> response = restTemplate.getForEntity(callUrl, ObjectNode.class);
             ObjectNode jsonObject = response.getBody();
-            log.info("Data from OpenDota Api fetched");
+            log.debug("Data from OpenDota Api fetched");
             log.debug("OpenDota Api response : {}", jsonObject);
 
             return jsonObject;
@@ -43,10 +43,10 @@ public class ODConstantServiceImpl implements ODConstantService {
             RestTemplate restTemplate = new RestTemplate();
             String callUrl = openDotaApiUrl + "/constants/";
 
-            log.info("Calling OpenDota Api : " + callUrl);
+            log.debug("Calling OpenDota Api : " + callUrl);
             ResponseEntity<ObjectNode> response = restTemplate.getForEntity(callUrl, ObjectNode.class);
             ObjectNode jsonObject = response.getBody();
-            log.info("Data from OpenDota Api fetched");
+            log.debug("Data from OpenDota Api fetched");
             log.debug("OpenDota Api response : {}", jsonObject);
 
             return jsonObject;

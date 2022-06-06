@@ -66,10 +66,10 @@ public class ODPlayerServiceImpl implements ODPlayerService {
             RestTemplate restTemplate = new RestTemplate();
             String callUrl = openDotaApiUrl + "/players/" + steamId32 + "/peers";
 
-            log.info("Calling OpenDota Api : " + callUrl);
+            log.debug("Calling OpenDota Api : " + callUrl);
             ResponseEntity<ArrayNode> response = restTemplate.getForEntity(callUrl, ArrayNode.class);
             ArrayNode jsonObject = response.getBody();
-            log.info("Data from OpenDota Api fetched");
+            log.debug("Data from OpenDota Api fetched");
             log.debug("OpenDota Api response : {}", jsonObject);
 
             return jsonObject;
@@ -87,10 +87,10 @@ public class ODPlayerServiceImpl implements ODPlayerService {
             RestTemplate restTemplate = new RestTemplate();
             String callUrl = openDotaApiUrl + "/players/" + steamId32 + "/heroes?" + queryParameters;
 
-            log.info("Calling OpenDota Api : " + callUrl);
+            log.debug("Calling OpenDota Api : " + callUrl);
             ResponseEntity<ArrayNode> response = restTemplate.getForEntity(callUrl, ArrayNode.class);
             ArrayNode jsonObject = response.getBody();
-            log.info("Data from OpenDota Api fetched");
+            log.debug("Data from OpenDota Api fetched");
             log.debug("OpenDota Api response : {}", jsonObject);
 
             return jsonObject;
@@ -108,10 +108,10 @@ public class ODPlayerServiceImpl implements ODPlayerService {
             RestTemplate restTemplate = new RestTemplate();
             String callUrl = openDotaApiUrl + "/players/" + steamId32 + "/peers?" + queryParameters;
 
-            log.info("Calling OpenDota Api : " + callUrl);
+            log.debug("Calling OpenDota Api : " + callUrl);
             ResponseEntity<ArrayNode>response = restTemplate.getForEntity(callUrl, ArrayNode.class);
             ArrayNode jsonObject = response.getBody();
-            log.info("Data from OpenDota Api fetched");
+            log.debug("Data from OpenDota Api fetched");
             log.debug("OpenDota Api response : {}", jsonObject);
 
             return jsonObject;
@@ -132,10 +132,10 @@ public class ODPlayerServiceImpl implements ODPlayerService {
             RestTemplate restTemplate = new RestTemplate();
             String callUrl = openDotaApiUrl + "/players/" + steamId32;
 
-            log.info("Calling OpenDota Api : " + callUrl);
+            log.debug("Calling OpenDota Api : " + callUrl);
             ResponseEntity<ObjectNode> response = restTemplate.getForEntity(callUrl, ObjectNode.class);
             ObjectNode jsonObject = response.getBody();
-            log.info("Data from OpenDota Api fetched");
+            log.debug("Data from OpenDota Api fetched");
             log.debug("OpenDota Api response : {}", jsonObject);
 
             if (jsonObject.path("profile").path("steamid").asText().isEmpty()) {
