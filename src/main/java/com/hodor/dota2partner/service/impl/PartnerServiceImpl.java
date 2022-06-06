@@ -3,9 +3,8 @@ package com.hodor.dota2partner.service.impl;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.hodor.dota2partner.dto.PartnerRequestDTO;
 import com.hodor.dota2partner.exception.OpenDotaApiException;
-import com.hodor.dota2partner.entity.Player;
 import com.hodor.dota2partner.repository.PlayerRepository;
-import com.hodor.dota2partner.service.FriendService;
+import com.hodor.dota2partner.service.PartnerService;
 import com.hodor.dota2partner.serviceopendotaapi.impl.ODPlayerServiceImpl;
 import com.hodor.dota2partner.util.Calculator;
 import lombok.AllArgsConstructor;
@@ -19,7 +18,7 @@ import java.util.List;
 @Slf4j
 @Service
 @AllArgsConstructor
-public class FriendServiceImpl implements FriendService {
+public class PartnerServiceImpl implements PartnerService {
 
 
     private final ODPlayerServiceImpl odPlayersService;

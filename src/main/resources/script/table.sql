@@ -39,6 +39,8 @@ create table heroes_roles
 (
     role_id int auto_increment,
     name    varchar(200) not null,
+    constraint heroes_roles_name_uindex
+        unique (name),
     constraint heroes_roles_role_id_uindex
         unique (role_id)
 );
@@ -98,28 +100,12 @@ create table players
 alter table players
     add primary key (player_id);
 
-create table friend
-(
-    id               bigint auto_increment
-        primary key,
-    friend_player_id bigint not null,
-    player_id        bigint not null,
-    constraint friend_players__fk1
-        foreign key (player_id) references players (player_id),
-    constraint friend_players_player_id_fk
-        foreign key (friend_player_id) references players (player_id)
-);
-
-create index player_friend_fk
-    on friend (player_id);
-
-create index player_friend_fk1
-    on friend (friend_player_id);
-
 create table roles
 (
     role_id int auto_increment,
     name    varchar(50) not null,
+    constraint roles_name_uindex
+        unique (name),
     constraint roles_role_id_uindex
         unique (role_id)
 );

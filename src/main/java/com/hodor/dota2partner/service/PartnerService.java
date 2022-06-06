@@ -6,7 +6,7 @@ import com.hodor.dota2partner.entity.Player;
 
 import java.util.List;
 
-public interface FriendService {
+public interface PartnerService {
 
     List<PartnerRequestDTO> searchFriend(long steamId32) throws OpenDotaApiException;
 

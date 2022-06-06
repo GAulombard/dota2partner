@@ -2,29 +2,22 @@ package com.hodor.dota2partner.controller;
 
 import com.hodor.dota2partner.dto.AsideHeroRequestDTO;
 import com.hodor.dota2partner.dto.PartnerRequestDTO;
-import com.hodor.dota2partner.exception.EMailAlreadyExistsException;
+import com.hodor.dota2partner.entity.Player;
 import com.hodor.dota2partner.exception.OpenDotaApiException;
 import com.hodor.dota2partner.exception.PlayerNotFoundException;
-import com.hodor.dota2partner.exception.SteamIdNotFoundException;
-import com.hodor.dota2partner.entity.Player;
-import com.hodor.dota2partner.dto.CreatePlayerDTO;
-import com.hodor.dota2partner.service.FriendService;
+import com.hodor.dota2partner.service.PartnerService;
 import com.hodor.dota2partner.service.PlayerService;
 import com.hodor.dota2partner.util.MedalUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,7 +28,7 @@ import java.util.stream.Collectors;
 public class PlayerController {
 
     private final PlayerService playerService;
-    private final FriendService friendService;
+    private final PartnerService partnerService;
 
     @RolesAllowed({"USER", "ADMIN"})
     @GetMapping(value = "/home")
@@ -52,7 +45,7 @@ public class PlayerController {
         String rankIcon = MedalUtil.getRankIconFromRankTier(player.getRankTier());
         String rankStar = MedalUtil.getRankStarFromRankTier(player.getRankTier());
         //todo: do this in service layer instead ?
-        List<PartnerRequestDTO> partnerRequestDTOListList = friendService.searchFriend(principal.getSteamId32())
+        List<PartnerRequestDTO> partnerRequestDTOListList = partnerService.searchFriend(principal.getSteamId32())
                 .stream()
                 .limit(5)
                 .collect(Collectors.toList());
