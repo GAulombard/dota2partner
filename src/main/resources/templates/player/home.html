@@ -30,6 +30,11 @@
                         <p>Support - p5</p>
                     </div>
                 </div>
+                <div class="anonymous-icon-admin-darkblue"
+                     sec:authorize="isAnonymous()">
+                        <span class="material-icons w3-xxxlarge hint--right"
+                              data-hint="anonymous user">fingerprint</span>
+                </div>
                 <div class="verified-icon-admin-darkgreen"
                      sec:authorize="hasAuthority('ROLE_ADMIN')" th:if="${player.enabled == true}">
                         <span class="material-icons w3-xxxlarge hint--right"

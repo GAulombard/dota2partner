@@ -78,20 +78,29 @@ public class PlayerController {
 
     @RolesAllowed({"USER", "ADMIN"})
     @GetMapping("/profile")
-    public String getProfile(@AuthenticationPrincipal Player principal, Model model, HttpServletRequest servletRequest) {
+    public String getProfile(@AuthenticationPrincipal Player principal, Model model, HttpServletRequest servletRequest) throws PlayerNotFoundException, OpenDotaApiException {
         log.info("HTTP " + servletRequest.getMethod() +
                 " request received at " + servletRequest.getRequestURI() +
                 " - [" + (servletRequest.getRemoteUser() == null ? "anonymous user" : servletRequest.getRemoteUser()) + "]");
 
+        playerService.refreshPlayerData(principal.getSteamId32());
+        //todo:make a PlayerDTO instead of sending entity information
         Player player = playerService.getPlayer(principal.getSteamId32());
 
         //todo: do this directly inside the DTO converter or service layer
         String rankIcon = MedalUtil.getRankIconFromRankTier(player.getRankTier());
         String rankStar = MedalUtil.getRankStarFromRankTier(player.getRankTier());
 
+        //todo: do this in service layer instead ?
+        List<AsideHeroRequestDTO> asideHeroList = playerService.getAsideHeroList(principal.getSteamId32())
+                .stream()
+                .limit(5)
+                .collect(Collectors.toList());
+
         model.addAttribute("player", player);
         model.addAttribute("rankIcon", rankIcon);
         model.addAttribute("rankStar", rankStar);
+        model.addAttribute("asideHeroList", asideHeroList);
 
         return "/player/profile";
     }

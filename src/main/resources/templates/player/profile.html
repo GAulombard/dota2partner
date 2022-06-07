@@ -8,11 +8,120 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet">
-    <link href="/src/main/resources/static/css/style.css" rel="stylesheet" th:href=@{/css/style.css}>
-    <link href="/src/main/resources/static/css/hint.css" rel="stylesheet" th:href=@{/css/hint.css}>
+    <link href="/src/main/resources/static/css/style.css" rel="stylesheet" th:href="@{/css/style.css}">
+    <link href="/src/main/resources/static/css/hint.css" rel="stylesheet" th:href="@{/css/hint.css}">
     <title>Dota 2 Partner</title>
 </head>
+
 <body>
+
+
+<div th:replace="fragments/navbar"></div>
+
+<aside>
+    <div class="main-container flex-row-around">
+        <div class="flex-column-around">
+            <div class="flex-row-around persona-name-header">
+                <div class="persona-name">
+                    <p>
+                    <td th:text="${player.personaName}">
+                    </p><span class="steam-icon"></span>
+                    <div class="persona-role">
+                        <p>Support - p5</p>
+                    </div>
+                </div>
+                <div class="verified-icon-admin-darkgreen"
+                     sec:authorize="hasAuthority('ROLE_ADMIN')" th:if="${player.enabled == true}">
+                        <span class="material-icons w3-xxxlarge hint--right"
+                              data-hint="Verified administrator">admin_panel_settings</span>
+                </div>
+                <div class="verified-icon-admin-darkred"
+                     sec:authorize="hasAuthority('ROLE_ADMIN')" th:if="${player.enabled == false}">
+                        <span class="material-icons w3-xxxlarge hint--right"
+                              data-hint="Unverified administrator">admin_panel_settings</span>
+                </div>
+                <div class="verified-icon-user-darkgreen"
+                     sec:authorize="hasAuthority('ROLE_USER')" th:if="${player.enabled == true}">
+                        <span class="material-icons w3-xxxlarge hint--right"
+                              data-hint="Verified user">verified_user</span>
+                </div>
+                <div class="verified-icon-user-darkred"
+                     sec:authorize="hasAuthority('ROLE_USER')" th:if="${player.enabled == false}">
+                        <span class="material-icons w3-xxxlarge hint--right"
+                              data-hint="Unverified user">verified_user</span>
+                </div>
+            </div>
+            <div class="persona-avatar">
+                <img class="avatar"
+                     th:src="${player.avatarFull}">
+            </div>
+            <div class="w3-light-grey hint--right" data-hint="Reliability bar">
+                <div class="w3-container w3-green w3-center" style="width:75%">75%</div>
+            </div>
+        </div>
+        <div class="player-stat-container">
+            <div class="stats">
+                <div class="wins">
+                    <p class="player-stat-container-name">WINS</p>
+                    <p class="player-stat-container-value">
+                    <td th:text="${player.win}"></td>
+                    </p>
+                </div>
+                <div class="losses">
+                    <p class="player-stat-container-name">LOSSES</p>
+                    <p class="player-stat-container-value">
+                    <td th:text="${player.loss}"></td>
+                    </p>
+                </div>
+                <div class="winrate">
+                    <p class="player-stat-container-name">WINRATE</p>
+                    <p class="player-stat-container-value">
+                    <td th:text="${player.winRate}"></td>
+                    </p>
+                </div>
+            </div>
+            <div class="flex-row-around best-heroes-title">
+                <p>BEST HEROES AVERAGE</p>
+                <p>(the last 6 months and at least 20 games played)</p>
+            </div>
+            <div class="flex-row-around best-heroes">
+                <div class="flex-column-around heroe" th:each="hero :${asideHeroList}">
+                    <h6 th:text="${hero.name}"></h6>
+                    <div class="hint--bottom" data-hint="data stats" data-html="true"><img
+                            class="heroe-icon" th:src="${hero.image}">
+                    </div>
+                    <p class="hint--right" data-hint="Matches played with this hero the last 6 months"
+                       th:text="${hero.matchPlayed+' MP'}"></p>
+                    <p class="hint--right" data-hint="Win rate with this hero the last 6 months"
+                       th:text="${hero.winRate+'% WR'}"></p>
+                    <p class="hint--right" data-hint="Average KDA with this hero for the last 6 months"
+                       th:text="${hero.averageKill+' / '+hero.averageDeath+' / '+hero.averageAssist+' KDA'}"></p>
+                </div>
+            </div>
+        </div>
+        <div class="flex-row-center" th:if="${player.dotaPlus == true || player.rankTier != 0}">
+            <div class="hint--bottom" data-hint="Dota plus subscriber" th:if="${player.dotaPlus == true}">
+                <div class="dota-plus">
+                    <img class="dota-plus-logo" th:src="@{/assets/dota_plus_icon.png}">
+                </div>
+            </div>
+            <div class="hint--bottom" data-hint="Crusader [2]" th:if="${player.rankTier != 0}">
+                <div class="rank hint--top" data-hint="Crusader 2">
+                    <img class="rank-icon" th:src="@{'/assets/'+${rankIcon}}">
+                    <img class="rank-star" th:src="@{'/assets/'+${rankStar}}">
+                </div>
+            </div>
+        </div>
+    </div>
+</aside>
+
+<!-- MAIN SECTION -->
+<div class="main-container flex-row-around main">
+    <p>Welcome to your profile page !</p>
+</div>
+
+
+<div th:replace="fragments/footer"></div>
 
 </body>
 </html>

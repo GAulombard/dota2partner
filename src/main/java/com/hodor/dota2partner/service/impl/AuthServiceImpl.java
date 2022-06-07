@@ -69,6 +69,12 @@ public class AuthServiceImpl implements AuthService {
             player.setCreationDate(Instant.now());
             player.setContributor(false);
             player.setEnabled(false);
+            player.setDeleted(false);
+            player.setDotaPlus(false);
+            player.setWin(0);
+            player.setLoss(0);
+            player.setWinRate(0);
+            player.setRankTier(0);
 
             Role role = roleRepository.findByName("ROLE_USER");
             player.setRoles(Arrays.asList(role));
