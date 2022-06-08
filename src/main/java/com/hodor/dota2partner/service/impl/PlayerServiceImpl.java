@@ -1,5 +1,6 @@
 package com.hodor.dota2partner.service.impl;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.hodor.dota2partner.dto.AsideHeroRequestDTO;
@@ -7,6 +8,7 @@ import com.hodor.dota2partner.exception.*;
 import com.hodor.dota2partner.entity.Player;
 import com.hodor.dota2partner.repository.HeroRepository;
 import com.hodor.dota2partner.repository.PlayerRepository;
+import com.hodor.dota2partner.serviceopendotaapi.ODMatchService;
 import com.hodor.dota2partner.serviceopendotaapi.ODPlayerService;
 import com.hodor.dota2partner.service.PlayerService;
 import com.hodor.dota2partner.util.Calculator;
@@ -28,6 +30,7 @@ public class PlayerServiceImpl implements PlayerService {
     private final HeroRepository heroRepository;
     private final PlayerRepository playerRepository;
     private final ODPlayerService oDPlayerService;
+    private final ODMatchService odMatchService;
 
     @Override
     @Async
@@ -84,17 +87,36 @@ public class PlayerServiceImpl implements PlayerService {
 
         ArrayNode data = oDPlayerService.getHeroes(steamId32, "date=180&having=20");
 
+
         data.iterator().forEachRemaining(hero -> {
             AsideHeroRequestDTO asideHeroRequestDTO = new AsideHeroRequestDTO();
             int id = hero.path("hero_id").asInt();
+            String query = "?hero_id=" + id + "&date=180";
+            int killSum = 0;
+            int deathSum = 0;
+            int assistSum = 0;
+
+            //todo: make a special method for that
+            try {
+                ArrayNode singleHeroDetail = odMatchService.getMyHeroData(steamId32, query);
+                for (JsonNode heroDetail : singleHeroDetail) {
+                    killSum = killSum + heroDetail.path("kills").asInt();
+                    deathSum = deathSum + heroDetail.path("deaths").asInt();
+                    assistSum = assistSum + heroDetail.path("assists").asInt();
+                }
+                asideHeroRequestDTO.setAverageKill(killSum / singleHeroDetail.size());
+                asideHeroRequestDTO.setAverageDeath(deathSum / singleHeroDetail.size());
+                asideHeroRequestDTO.setAverageAssist(assistSum / singleHeroDetail.size());
+            } catch (OpenDotaApiException e) {
+                e.printStackTrace();
+            }
+
             asideHeroRequestDTO.setName(heroRepository.getHeroLocalizedNameById(id));
             asideHeroRequestDTO.setImage(heroRepository.getHeroImageById(id));
             asideHeroRequestDTO.setMatchPlayed(hero.path("games").asInt());
             asideHeroRequestDTO.setWinRate(Calculator.winRateCalculator(hero.path("win").asInt(),
                     (hero.path("games").asInt()) - (hero.path("win").asInt())));
-            asideHeroRequestDTO.setAverageKill(99);
-            asideHeroRequestDTO.setAverageDeath(99);
-            asideHeroRequestDTO.setAverageAssist(99);
+
             asideHeroRequestDTOList.add(asideHeroRequestDTO);
         });
 
