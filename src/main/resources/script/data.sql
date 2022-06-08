@@ -64,7 +64,7 @@ values ('Support');
 insert ignore into heroes_roles (name)
 values ('Pusher');
 
-insert ignore into players_map_roles (player_id, role_id)
+/*insert ignore into players_map_roles (player_id, role_id)
 values (1, 1);
 insert ignore into players_map_roles (player_id, role_id)
 values (2, 2);
@@ -81,4 +81,4 @@ values (7, 2);
 insert ignore into players_map_roles (player_id, role_id)
 values (8, 2);
 insert ignore into players_map_roles (player_id, role_id)
-values (9, 2);
+values (9, 2);*/

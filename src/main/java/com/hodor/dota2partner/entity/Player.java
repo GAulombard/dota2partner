@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -73,10 +74,10 @@ public class Player implements UserDetails {
     private String countryCode;
 
     @Column(name = "creation_date")
-    private Instant creationDate;
+    private ZonedDateTime creationDate;
 
     @Column(name = "last_login")
-    private Instant lastLogin;
+    private ZonedDateTime lastLogin;
 
 /*    @ManyToMany
     @JoinTable(

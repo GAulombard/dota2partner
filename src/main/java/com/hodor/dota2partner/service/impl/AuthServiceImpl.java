@@ -27,6 +27,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.*;
 
 @Service
@@ -66,7 +69,7 @@ public class AuthServiceImpl implements AuthService {
 
             log.debug("Creating new player - steamId32: " + steamId32);
             player.setSteamId32(steamId32);
-            player.setCreationDate(Instant.now());
+            player.setCreationDate(ZonedDateTime.now(ZoneId.of("Europe/Paris")).plusHours(2));
             player.setContributor(false);
             player.setEnabled(false);
             player.setDeleted(false);
@@ -130,7 +133,7 @@ public class AuthServiceImpl implements AuthService {
         VerificationToken verificationToken = new VerificationToken();
         verificationToken.setToken(token);
         verificationToken.setPlayer(player);
-        verificationToken.setExpiryDate(Instant.now().plusSeconds(3600));
+        verificationToken.setExpiryDate(ZonedDateTime.now(ZoneId.of("Europe/Paris")).plusHours(3));
 
         verificationTokenRepository.save(verificationToken);
 

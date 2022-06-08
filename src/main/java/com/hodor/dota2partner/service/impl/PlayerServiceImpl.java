@@ -16,7 +16,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
+import java.time.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,7 +55,7 @@ public class PlayerServiceImpl implements PlayerService {
         player.setWin(winLossCount.path("win").asInt());
         player.setLoss(winLossCount.path("lose").asInt());
         player.setWinRate(Calculator.winRateCalculator(player.getWin(), player.getLoss()));
-        player.setLastLogin(Instant.now());
+        player.setLastLogin(ZonedDateTime.now(ZoneId.of("Europe/Paris")).plusHours(2));
         player.setDotaPlus(dataPlayer.path(profile).path("plus").asText().equals("true"));
         playerRepository.save(player);
 

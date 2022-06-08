@@ -7,6 +7,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 @Setter
 @Getter
@@ -23,5 +25,5 @@ public class VerificationToken {
     @OneToOne(fetch = FetchType.LAZY)
     private Player player;
     @Column(name = "expiry_date")
-    private Instant expiryDate;
+    private ZonedDateTime expiryDate;
 }
