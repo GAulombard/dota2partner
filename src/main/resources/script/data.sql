@@ -1,84 +1,168 @@
-insert ignore into players (steam_id_64, email, password, enabled, steam_id_32, contributor, deleted, dota_plus,
-                            creation_date, rank_tier, win, loss, win_rate)
-    value (76561198051430145, 'hodor@inbox.mailtrap.io', '$2a$10$L1C8X1bXjai9B2z92wxkXObIZydFIvwsD6PWRheTiMEa.Pz/447de',
-           true, 91164417, false, false, false, '2022-06-06 00:00:01', 0, 0, 0, 0);
-insert ignore into players (steam_id_64, email, password, enabled, steam_id_32, contributor, deleted, dota_plus,
-                            creation_date, rank_tier, win, loss, win_rate)
-    value (76561198094046059, 'zardoz@inbox.mailtrap.io',
-           '$2a$10$L1C8X1bXjai9B2z92wxkXObIZydFIvwsD6PWRheTiMEa.Pz/447de', true, 133780331, false, false, false,
-           '2022-06-06 00:00:01', 0, 0, 0, 0);
-insert ignore into players (steam_id_64, email, password, enabled, steam_id_32, contributor, deleted, dota_plus,
-                            creation_date, rank_tier, win, loss, win_rate)
-    value (76561198014463037, 'sambrun@inbox.mailtrap.io',
-           '$2a$10$L1C8X1bXjai9B2z92wxkXObIZydFIvwsD6PWRheTiMEa.Pz/447de', true, 54197309, false, false, false,
-           '2022-06-06 00:00:01', 0, 0, 0, 0);
-insert ignore into players (steam_id_64, email, password, enabled, steam_id_32, contributor, deleted, dota_plus,
-                            creation_date, rank_tier, win, loss, win_rate)
-    value (76561198030647714, 'brou@inbox.mailtrap.io', '$2a$10$L1C8X1bXjai9B2z92wxkXObIZydFIvwsD6PWRheTiMEa.Pz/447de',
-           true, 70381986, false, false, false, '2022-06-06 00:00:01', 0, 0, 0, 0);
-insert ignore into players (steam_id_64, email, password, enabled, steam_id_32, contributor, deleted, dota_plus,
-                            creation_date, rank_tier, win, loss, win_rate)
-    value (76561198041834510, 'zilto@inbox.mailtrap.io', '$2a$10$L1C8X1bXjai9B2z92wxkXObIZydFIvwsD6PWRheTiMEa.Pz/447de',
-           true, 81568782, false, false, false, '2022-06-06 00:00:01', 0, 0, 0, 0);
-insert ignore into players (steam_id_64, email, password, enabled, steam_id_32, contributor, deleted, dota_plus,
-                            creation_date, rank_tier, win, loss, win_rate)
-    value (76561197964805074, 'framboisier@inbox.mailtrap.io',
-           '$2a$10$L1C8X1bXjai9B2z92wxkXObIZydFIvwsD6PWRheTiMEa.Pz/447de', false, 4539346, false, false, false,
-           '2022-06-06 00:00:01', 0, 0, 0, 0);
-insert ignore into players (steam_id_64, email, password, enabled, steam_id_32, contributor, deleted, dota_plus,
-                            creation_date, rank_tier, win, loss, win_rate)
-    value (76561197996437422, 'willou@inbox.mailtrap.io',
-           '$2a$10$L1C8X1bXjai9B2z92wxkXObIZydFIvwsD6PWRheTiMEa.Pz/447de', true, 36171694, false, false, false,
-           '2022-06-06 00:00:01', 0, 0, 0, 0);
-insert ignore into players (steam_id_64, email, password, enabled, steam_id_32, contributor, deleted, dota_plus,
-                            creation_date, rank_tier, win, loss, win_rate)
-    value (76561198047282072, 'snoop@inbox.mailtrap.io', '$2a$10$L1C8X1bXjai9B2z92wxkXObIZydFIvwsD6PWRheTiMEa.Pz/447de',
-           true, 87016344, false, false, false, '2022-06-06 00:00:01', 0, 0, 0, 0);
-insert ignore into players (steam_id_64, email, password, enabled, steam_id_32, contributor, deleted, dota_plus,
-                            creation_date, rank_tier, win, loss, win_rate)
-    value (76561198088420271, 'savini@inbox.mailtrap.io',
-           '$2a$10$L1C8X1bXjai9B2z92wxkXObIZydFIvwsD6PWRheTiMEa.Pz/447de', true, 128154543, false, false, false,
-           '2022-06-06 00:00:01', 0, 0, 0, 0);
+create table heroes
+(
+    id                int          not null,
+    name              varchar(200) null,
+    localized_name    varchar(200) null,
+    primary_attr      varchar(200) null,
+    attack_type       varchar(200) null,
+    img               varchar(500) null,
+    icon              varchar(500) null,
+    base_health       decimal      null,
+    base_health_regen decimal      null,
+    base_mana         decimal      null,
+    base_mana_regen   decimal      null,
+    base_armor        decimal      null,
+    base_mr           decimal      null,
+    base_attack_min   decimal      null,
+    base_attack_max   decimal      null,
+    base_str          decimal      null,
+    base_agi          decimal      null,
+    base_int          decimal      null,
+    str_gain          decimal      null,
+    agi_gain          decimal      null,
+    int_gain          decimal      null,
+    attack_range      decimal      null,
+    projectile_speed  decimal      null,
+    attack_rate       decimal      null,
+    move_speed        decimal      null,
+    turn_rate         decimal      null,
+    cm_enabled        tinyint(1)   null,
+    legs              int          null,
+    constraint heroes_id_uindex
+        unique (id)
+);
 
-insert ignore into roles (name)
-values ('ROLE_ADMIN');
-insert ignore into roles (name)
-values ('ROLE_USER');
+alter table heroes
+    add primary key (id);
 
-insert ignore into heroes_roles (name)
-values ('Carry');
-insert ignore into heroes_roles (name)
-values ('Escape');
-insert ignore into heroes_roles (name)
-values ('Nuker');
-insert ignore into heroes_roles (name)
-values ('Initiator');
-insert ignore into heroes_roles (name)
-values ('Durable');
-insert ignore into heroes_roles (name)
-values ('Disabler');
-insert ignore into heroes_roles (name)
-values ('Jungler');
-insert ignore into heroes_roles (name)
-values ('Support');
-insert ignore into heroes_roles (name)
-values ('Pusher');
+create table heroes_roles
+(
+    role_id int auto_increment,
+    name    varchar(200) not null,
+    constraint heroes_roles_name_uindex
+        unique (name),
+    constraint heroes_roles_role_id_uindex
+        unique (role_id)
+);
 
-/*insert ignore into players_map_roles (player_id, role_id)
-values (1, 1);
-insert ignore into players_map_roles (player_id, role_id)
-values (2, 2);
-insert ignore into players_map_roles (player_id, role_id)
-values (3, 2);
-insert ignore into players_map_roles (player_id, role_id)
-values (4, 2);
-insert ignore into players_map_roles (player_id, role_id)
-values (5, 2);
-insert ignore into players_map_roles (player_id, role_id)
-values (6, 2);
-insert ignore into players_map_roles (player_id, role_id)
-values (7, 2);
-insert ignore into players_map_roles (player_id, role_id)
-values (8, 2);
-insert ignore into players_map_roles (player_id, role_id)
-values (9, 2);*/
+alter table heroes_roles
+    add primary key (role_id);
+
+create table heroes_map_roles
+(
+    hero_id int not null,
+    role_id int not null,
+    constraint hero_fk
+        foreign key (hero_id) references heroes (id),
+    constraint hero_role_fk
+        foreign key (role_id) references heroes_roles (role_id)
+);
+
+create index heroe_fk_idx
+    on heroes_map_roles (hero_id);
+
+create index heroe_role_fk_idx
+    on heroes_map_roles (role_id);
+
+create table players
+(
+    player_id     bigint auto_increment,
+    steam_id_64   bigint       null,
+    steam_id_32   bigint       null,
+    persona_name  varchar(50)  null,
+    email         varchar(125) not null,
+    password      varchar(100) null,
+    creation_date datetime     null,
+    last_login    datetime     null,
+    country_code  varchar(5)   null,
+    dota_plus     tinyint(1)   null,
+    contributor   tinyint(1)   null,
+    enabled       tinyint(1)   null,
+    deleted       tinyint(1)   null,
+    avatar        varchar(200) null,
+    avatar_full   varchar(200) null,
+    avatar_medium varchar(200) null,
+    profile_url   varchar(200) null,
+    rank_tier     int          null,
+    win           int          null,
+    loss          int          null,
+    win_rate      double       null,
+    constraint players_e_mail_uindex
+        unique (email),
+    constraint players_id_uindex
+        unique (player_id),
+    constraint players_steam_id_32_uindex
+        unique (steam_id_32),
+    constraint players_steam_id_64_uindex
+        unique (steam_id_64)
+);
+
+alter table players
+    add primary key (player_id);
+
+create table profile
+(
+    id                       int auto_increment,
+    teaser_text              varchar(800)         null,
+    age                      int        default 0 null,
+    main_position            int        default 0 null,
+    worst_position           int        default 0 null,
+    looking_for_team         tinyint(1) default 0 null,
+    looking_for_partners     tinyint(1) default 0 null,
+    looking_for_partner      tinyint(1) default 0 null,
+    looking_for_coach        tinyint(1) default 0 null,
+    looking_for_strategist   tinyint(1) default 0 null,
+    looking_for_short_caller tinyint(1) default 0 null,
+    coaching_experience      tinyint(1) default 0 null,
+    short_calling_aptitude   tinyint(1) default 0 null,
+    strategy_aptitude        tinyint(1) default 0 null,
+    average_week_game        int        default 0 null,
+    constraint profile_id_uindex
+        unique (id)
+);
+
+alter table profile
+    add primary key (id);
+
+create table roles
+(
+    role_id int auto_increment,
+    name    varchar(50) not null,
+    constraint roles_name_uindex
+        unique (name),
+    constraint roles_role_id_uindex
+        unique (role_id)
+);
+
+alter table roles
+    add primary key (role_id);
+
+create table players_map_roles
+(
+    player_id bigint not null,
+    role_id   int    not null,
+    constraint player_fk
+        foreign key (player_id) references players (player_id),
+    constraint role_fk
+        foreign key (role_id) references roles (role_id)
+);
+
+create index player_fk_idx
+    on players_map_roles (player_id);
+
+create index role_fk_idx
+    on players_map_roles (role_id);
+
+create table token
+(
+    id               bigint auto_increment,
+    token            varchar(500) null,
+    player_player_id int          null,
+    expiry_date      datetime     null,
+    constraint token_id_uindex
+        unique (id)
+);
+
+alter table token
+    add primary key (id);
+

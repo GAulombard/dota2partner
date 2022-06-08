@@ -12,7 +12,6 @@ import javax.persistence.*;
 @Table(name = "profile")
 public class Profile {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
