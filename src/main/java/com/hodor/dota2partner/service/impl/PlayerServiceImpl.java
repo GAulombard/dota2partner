@@ -87,7 +87,6 @@ public class PlayerServiceImpl implements PlayerService {
 
         ArrayNode data = oDPlayerService.getHeroes(steamId32, "date=180&having=20");
 
-
         data.iterator().forEachRemaining(hero -> {
             AsideHeroRequestDTO asideHeroRequestDTO = new AsideHeroRequestDTO();
             int id = hero.path("hero_id").asInt();

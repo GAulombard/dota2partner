@@ -100,6 +100,30 @@ create table players
 alter table players
     add primary key (player_id);
 
+create table profile
+(
+    id                       int auto_increment,
+    teaser_text              varchar(800)         null,
+    age                      int        default 0 null,
+    main_position            int        default 0 null,
+    worst_position           int        default 0 null,
+    looking_for_team         tinyint(1) default 0 null,
+    looking_for_partners     tinyint(1) default 0 null,
+    looking_for_partner      tinyint(1) default 0 null,
+    looking_for_coach        tinyint(1) default 0 null,
+    looking_for_strategist   tinyint(1) default 0 null,
+    looking_for_short_caller tinyint(1) default 0 null,
+    coaching_experience      tinyint(1) default 0 null,
+    short_calling_aptitude   tinyint(1) default 0 null,
+    strategy_aptitude        tinyint(1) default 0 null,
+    average_week_game        int        default 0 null,
+    constraint profile_id_uindex
+        unique (id)
+);
+
+alter table profile
+    add primary key (id);
+
 create table roles
 (
     role_id int auto_increment,

@@ -33,8 +33,8 @@ public class Profile {
     @Column(name = "looking_for_team")
     private Boolean lookingForTeam;
 
-    @Column(name = "looking_for_partners")
-    private Boolean lookingForPartners;
+    @Column(name = "looking_for_partner")
+    private Boolean lookingForPartner;
 
     @Column(name = "looking_for_coach")
     private Boolean lookingForCoach;
