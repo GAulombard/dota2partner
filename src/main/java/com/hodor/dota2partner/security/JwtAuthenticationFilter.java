@@ -35,6 +35,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         log.debug("todo: debug comment");
 
         String jwt = getJwtFromRequest(request);
+        //log.info("JWT: "+jwt);
 
         if (StringUtils.hasText(jwt) && jwtProvider.validateToken(jwt)) {
             String userEmail = jwtProvider.getUserEmailFromJwt(jwt);

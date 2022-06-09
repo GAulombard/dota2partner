@@ -431,10 +431,12 @@
                     <div class="flex-column-around partner-infos">
                         <p th:text="${partner.personaName}"></p>
                         <div class="flex-row-around">
-                            <div class="partner-mp hint--bottom" data-hint="Matches played with">
+                            <div class="partner-mp hint--bottom"
+                                 th:attr="data-hint=${'Matches played with '+partner.personaName}">
                                 <p th:text="${partner.matchPlayedWith}+' MP'"></p>
                             </div>
-                            <div class="partner-wr hint--bottom" data-hint="Win rate with">
+                            <div class="partner-wr hint--bottom"
+                                 th:attr="data-hint=${'Win rate with '+partner.personaName}">
                                 <p th:text="${partner.winRateWith+'% WR'}"></p>
                             </div>
                         </div>
