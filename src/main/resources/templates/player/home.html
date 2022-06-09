@@ -425,8 +425,9 @@
             <div class="flex-column-around partner-list">
                 <div class="flex-row-around partner-container" th:each="partner: ${partnerList}">
                     <div class="partner-avatar-sm">
-                        <img class="partner-avatar-sm"
-                             th:src="${partner.avatarFull}">
+                        <a th:href="@{/api/player/profile/}+${partner.steamId32}">
+                            <img class="partner-avatar-sm" th:src="${partner.avatarFull}">
+                        </a>
                     </div>
                     <div class="flex-column-around partner-infos">
                         <p th:text="${partner.personaName}"></p>

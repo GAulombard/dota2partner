@@ -14,6 +14,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -109,21 +110,21 @@ public class PlayerController {
 
     @RolesAllowed({"USER", "ADMIN"})
     @GetMapping("/profile/{id}")
-    public String getPlayerProfile(@AuthenticationPrincipal Player principal, Model model, HttpServletRequest servletRequest, @RequestParam("id") Long id) throws PlayerNotFoundException, OpenDotaApiException {
+    public String getPlayerProfile(@AuthenticationPrincipal Player principal, Model model, HttpServletRequest servletRequest, @PathVariable("id") Long id) throws PlayerNotFoundException, OpenDotaApiException {
         log.info("HTTP " + servletRequest.getMethod() +
                 " request received at " + servletRequest.getRequestURI() +
                 " - [" + (servletRequest.getRemoteUser() == null ? "anonymous user" : servletRequest.getRemoteUser()) + "]");
 
-/*        playerService.refreshPlayerData(principal.getSteamId32());
+        playerService.refreshPlayerData(id);
         //todo:make a PlayerDTO instead of sending entity information
-        Player player = playerService.getPlayer(principal.getSteamId32());
+        Player player = playerService.getPlayer(id);
 
         //todo: do this directly inside the DTO converter or service layer
         String rankIcon = MedalUtil.getRankIconFromRankTier(player.getRankTier());
         String rankStar = MedalUtil.getRankStarFromRankTier(player.getRankTier());
 
         //todo: do this in service layer instead ?
-        List<AsideHeroRequestDTO> asideHeroList = playerService.getAsideHeroList(principal.getSteamId32())
+        List<AsideHeroRequestDTO> asideHeroList = playerService.getAsideHeroList(id)
                 .stream()
                 .limit(5)
                 .collect(Collectors.toList());
@@ -131,9 +132,9 @@ public class PlayerController {
         model.addAttribute("player", player);
         model.addAttribute("rankIcon", rankIcon);
         model.addAttribute("rankStar", rankStar);
-        model.addAttribute("asideHeroList", asideHeroList);*/
+        model.addAttribute("asideHeroList", asideHeroList);
 
-        return "/player/profile";
+        return "/player/playerProfile";
     }
 
 }
