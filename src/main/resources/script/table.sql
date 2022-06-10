@@ -116,6 +116,7 @@ create table profile
     coaching_experience      tinyint(1) default 0 null,
     short_calling_aptitude   tinyint(1) default 0 null,
     strategy_aptitude        tinyint(1) default 0 null,
+    theory_craft_aptitude    tinyint(1) default 0 null,
     average_week_game        int        default 0 null,
     constraint profile_id_uindex
         unique (id)

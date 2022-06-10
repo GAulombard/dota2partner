@@ -53,6 +53,9 @@ public class Profile {
     @Column(name = "strategy_aptitude")
     private Boolean strategyAptitude;
 
+    @Column(name = "theory_craft_aptitude")
+    private boolean theoryCraftAptitude;
+
     @Column(name = "average_week_game")
     private Integer averageWeekGame;
 
